@@ -6,7 +6,9 @@ import { sequence } from '@sveltejs/kit/hooks';
 async function authorizationHandle({ event, resolve}) {
     // Protect any routes under /authenticated
     const session = await event.locals.auth();
-    if (!session && !(event.url.pathname == '/' || event.url.pathname == undefined)) {
+    if (!session
+        && event.url.pathname.startsWith("/projects")
+    ) {
         throw redirect(303, '/');
     }
 
