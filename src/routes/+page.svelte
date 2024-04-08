@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { signIn, signOut } from "@auth/sveltekit/client"
+	import { signIn, signOut } from "@auth/sveltekit/client";
+	import { page } from "$app/stores";
 	import logo from '$lib/images/logo.svg';
-
-	let password = "";
 </script>
 
 <svelte:head>
@@ -17,10 +16,14 @@
 		</picture>
 	</h1>
 
+	<div class="space"></div>
+
 	<div class="actions">
-		<div class="wrapper-form">
+		{#if $page.data.session}
+			<button on:click={() => signOut()}>Sign Out</button>
+		{:else}
 			<button on:click={() => signIn()}>Sign In </button>
-		</div>
+		{/if}
 	</div>
 </section>
 
@@ -47,5 +50,25 @@
 		height: 100%;
 		top: 0;
 		display: block;
+	}
+
+	.space {
+		height: 10rem;
+	}
+
+	.actions {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	button {
+		background-color: #858585;
+		border: none;
+		border-radius: 0.5rem;
+		padding: 0.5rem 1rem;
+		font-size: 1rem;
+		cursor: pointer;
+		color: white;
 	}
 </style>
