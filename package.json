@@ -31,5 +31,9 @@
 		"vitest": "^0.25.8",
 		"web-vitals": "^3.5.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@auth/core": "^0.29.0",
+		"@auth/sveltekit": "^0.15.0"
+	}
 }
