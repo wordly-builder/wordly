@@ -7,8 +7,6 @@ import { FORCE_LOGIN } from "$env/static/private"
 async function authorizationHandle({ event, resolve}) {
     const session = FORCE_LOGIN == 'true' ? {} : await event.locals.auth();
 
-    console.log("session", session);
-
     if (!session
         && event.url.pathname.startsWith("/universes")
     ) {
