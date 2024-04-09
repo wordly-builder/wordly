@@ -11,6 +11,6 @@ export const connection = client;
 
 
 // @ts-ignore
-await migrate(db, { migrationsFolder: '.drizzle' });
+await migrate(db, { migrationsFolder: '.drizzle', migrationsSchema: 'drizzle' });
 // @ts-ignore
 await connection.end();

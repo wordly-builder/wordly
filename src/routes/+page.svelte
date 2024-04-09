@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../styles.css">
 <script>
 	import { signIn, signOut } from "@auth/sveltekit/client";
 	import { page } from "$app/stores";
@@ -52,9 +51,7 @@
 	<canvas id="canvas" class="canvas" width="100%" height="100%"></canvas>
 
 	<h1>
-		<picture>
-			<img src={logo} alt="Logo" />
-		</picture>
+		<img src={logo} alt="Logo" />
 	</h1>
 
 	<div class="space"></div>
@@ -78,19 +75,15 @@
 	}
 
 	h1 {
-		display: block;
-		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+		height: 5em;
 	}
 
 	h1 img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+		width: 15em;
 		z-index: 1;
 	}
 
