@@ -5,7 +5,14 @@ import { FORCE_LOGIN } from "$env/static/private"
 
 // @ts-ignore
 async function authorizationHandle({ event, resolve}) {
-    const session = FORCE_LOGIN == 'true' ? {} : await event.locals.auth();
+    const session = FORCE_LOGIN == 'true' ? {
+        user: {
+            name: 'Pebloop',
+            email: 'kabondev@gmail.com',
+            image: 'https://lh3.googleusercontent.com/a/ACg8ocL54sG1icp9u4dmVGB4d79k3jC-yLVUKwGls1AOnlZNig5EIy0s=s96-c'
+        },
+        expires: '2050-05-09T10:11:43.666Z'
+    } : await event.locals.auth();
 
     if (!session
         && event.url.pathname.startsWith("/universes")
