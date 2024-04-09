@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 export default {
     schema: "./src/lib/database/schemas",
-    out: "./src/lib/database/migration",
+    out: ".drizzle",
     driver: "pg",
     dbCredentials: {
         connectionString: process.env.SUPABASE_URL || "",
