@@ -3,7 +3,7 @@
     import {browser} from "$app/environment";
 
     if (browser) {
-        const session = event.locals.auth();
+        const session = event
 
         console.log(session);
     }
