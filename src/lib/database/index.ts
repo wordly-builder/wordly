@@ -7,5 +7,5 @@ const client = postgres(DATABASE_URL, { prepare: false, ssl: { rejectUnauthorize
 
 export const db = drizzle(client);
 
-await migrate(db, { migrationsFolder: ".drizzle" });
+await migrate(db, { migrationsFolder: "migration" });
 
