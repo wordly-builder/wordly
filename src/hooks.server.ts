@@ -1,17 +1,20 @@
 import { redirect, type Handle } from '@sveltejs/kit';
 import { handle as authenticationHandle } from './auth';
 import { sequence } from '@sveltejs/kit/hooks';
+import { FORCE_LOGIN } from "$env/static/private"
 
 // @ts-ignore
 async function authorizationHandle({ event, resolve}) {
-    const session = await event.locals.auth();
+    const session = FORCE_LOGIN == 'true' ? {} : await event.locals.auth();
+
+    console.log("session", session);
+
     if (!session
         && event.url.pathname.startsWith("/universes")
     ) {
         throw redirect(303, '/');
     }
 
-    console.log(event.url.pathname);
     if (session
         && (event.url.pathname == "/"
             || event.url.pathname == ""
