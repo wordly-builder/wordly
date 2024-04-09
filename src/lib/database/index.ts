@@ -9,4 +9,5 @@ const client = postgres(SUPABASE_URL, { onnotice: () => null });
 
 export const db = drizzle(client);
 
-await migrate(db, { migrationsFolder: "db/migrations" });
+await migrate(db, { migrationsFolder: ".drizzle" });
+
