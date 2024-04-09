@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1712668169592,
+      "tag": "0000_windy_agent_zero",
+      "breakpoints": true
+    }
+  ]
+}
