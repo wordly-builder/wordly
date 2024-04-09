@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 <script>
 	import { signIn, signOut } from "@auth/sveltekit/client";
 	import { page } from "$app/stores";

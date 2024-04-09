@@ -1,7 +1,12 @@
 <script>
-    const session =  event.locals.auth();
 
-    console.log(session);
+    import {browser} from "$app/environment";
+
+    if (browser) {
+        const session = event.locals.auth();
+
+        console.log(session);
+    }
 
 </script>
 
