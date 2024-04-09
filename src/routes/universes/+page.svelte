@@ -1,7 +1,7 @@
 <script>
-    export var data;
+    const session =  event.locals.auth();
 
-    console.log(data);
+    console.log(session);
 
 </script>
 
