@@ -3,7 +3,7 @@ import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
 import { SUPABASE_URL } from "$env/static/private"
 
-const client = postgres(SUPABASE_URL, { onnotice: () => null });
+const client = postgres(SUPABASE_URL, { prepare: false });
 
 export const db = drizzle(client);
 

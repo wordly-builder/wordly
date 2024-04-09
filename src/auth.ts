@@ -1,7 +1,6 @@
 import { SvelteKitAuth } from "@auth/sveltekit"
 import Google from "@auth/core/providers/google"
-import { GOOGLE_ID, GOOGLE_SECRET, SUPABASE_API_URL, SUPABASE_SECRET } from "$env/static/private"
-import {SupabaseAdapter} from "@auth/supabase-adapter";
+import { GOOGLE_ID, GOOGLE_SECRET} from "$env/static/private"
 import {DrizzleAdapter} from "@auth/drizzle-adapter";
 import {db} from "./lib/database";
 
