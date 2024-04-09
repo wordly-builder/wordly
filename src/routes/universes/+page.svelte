@@ -1,12 +1,6 @@
 <script>
 
-    import {browser} from "$app/environment";
 
-    if (browser) {
-        const session = event
-
-        console.log(session);
-    }
 
 </script>
 
