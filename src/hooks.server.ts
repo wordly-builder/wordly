@@ -6,7 +6,7 @@ import { sequence } from '@sveltejs/kit/hooks';
 async function authorizationHandle({ event, resolve}) {
     const session = await event.locals.auth();
     if (!session
-        && event.url.pathname.startsWith("/projects")
+        && event.url.pathname.startsWith("/universes")
     ) {
         throw redirect(303, '/');
     }
@@ -18,7 +18,7 @@ async function authorizationHandle({ event, resolve}) {
             || event.url.pathname == undefined
         )
     ) {
-        throw redirect(303, '/projects');
+        throw redirect(303, '/universes');
     }
 
     return resolve(event);
