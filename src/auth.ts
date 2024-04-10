@@ -3,7 +3,7 @@ import Google from "@auth/core/providers/google"
 import { GOOGLE_ID, GOOGLE_SECRET} from "$env/static/private"
 import {DrizzleAdapter} from "@auth/drizzle-adapter";
 import {db} from "./lib/database";
-import {database} from "./lib/db";
+import {database} from "./lib/database/db";
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
     providers: [Google({ clientId: GOOGLE_ID, clientSecret: GOOGLE_SECRET })],
@@ -20,7 +20,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
                     return true;
                 }
 
-                await database.profiles.createProfile({
+                await database.profiles.create({
                     googleId: account.providerAccountId,
                     name: user.name ? user.name : "unknown",
                     email: user.email ? user.email : "unknown",

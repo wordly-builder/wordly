@@ -25,7 +25,7 @@ nav {
     }
 
     nav img {
-        width: 100px;
+        height: 40px;
         padding: 0 10px;
     }
 

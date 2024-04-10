@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS "profile" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "universe" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"name" text,
 	"owner" serial NOT NULL
 );
