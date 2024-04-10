@@ -10,6 +10,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     adapter: DrizzleAdapter(db),
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
+            console.log(account);
             if (!account)
                 return false;
 
