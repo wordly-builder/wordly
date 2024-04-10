@@ -34,6 +34,26 @@ CREATE TABLE IF NOT EXISTS "verificationToken" (
 	CONSTRAINT "verificationToken_identifier_token_pk" PRIMARY KEY("identifier","token")
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "characters_panel" (
+	"id" serial PRIMARY KEY NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "character" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" text,
+	"panel_id" integer NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "maps_panel" (
+	"id" serial PRIMARY KEY NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "map" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" text,
+	"panel_id" integer NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "profile" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"googleId" text,
@@ -46,7 +66,9 @@ CREATE TABLE IF NOT EXISTS "profile" (
 CREATE TABLE IF NOT EXISTS "universe" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text,
-	"owner" serial NOT NULL
+	"owner" serial NOT NULL,
+	"characters_panel" serial NOT NULL,
+	"maps_panel" serial NOT NULL
 );
 --> statement-breakpoint
 DO $$ BEGIN
@@ -63,6 +85,18 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "universe" ADD CONSTRAINT "universe_owner_profile_id_fk" FOREIGN KEY ("owner") REFERENCES "profile"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "universe" ADD CONSTRAINT "universe_characters_panel_characters_panel_id_fk" FOREIGN KEY ("characters_panel") REFERENCES "characters_panel"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "universe" ADD CONSTRAINT "universe_maps_panel_maps_panel_id_fk" FOREIGN KEY ("maps_panel") REFERENCES "maps_panel"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

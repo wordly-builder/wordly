@@ -22,9 +22,7 @@ export const load: PageServerLoad = async (event) => {
         return returnValue;
     }
 
-    console.log(event.params.id);
     const universe = await database.universes.getById(+event.params.id);
-    console.log(universe);
 
     if (universe.length === 0) {
         return returnValue;

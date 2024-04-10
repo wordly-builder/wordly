@@ -1,5 +1,5 @@
 {
-  "id": "40c38079-079f-4841-8955-919cda154942",
+  "id": "7f537f0a-6a91-4923-bbc0-2f4bd67e28d9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -220,6 +220,94 @@
       },
       "uniqueConstraints": {}
     },
+    "characters_panel": {
+      "name": "characters_panel",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "character": {
+      "name": "character",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "panel_id": {
+          "name": "panel_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "maps_panel": {
+      "name": "maps_panel",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "map": {
+      "name": "map",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "panel_id": {
+          "name": "panel_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "profile": {
       "name": "profile",
       "schema": "",
@@ -287,6 +375,18 @@
           "type": "serial",
           "primaryKey": false,
           "notNull": true
+        },
+        "characters_panel": {
+          "name": "characters_panel",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "maps_panel": {
+          "name": "maps_panel",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -297,6 +397,32 @@
           "tableTo": "profile",
           "columnsFrom": [
             "owner"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "universe_characters_panel_characters_panel_id_fk": {
+          "name": "universe_characters_panel_characters_panel_id_fk",
+          "tableFrom": "universe",
+          "tableTo": "characters_panel",
+          "columnsFrom": [
+            "characters_panel"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "universe_maps_panel_maps_panel_id_fk": {
+          "name": "universe_maps_panel_maps_panel_id_fk",
+          "tableFrom": "universe",
+          "tableTo": "maps_panel",
+          "columnsFrom": [
+            "maps_panel"
           ],
           "columnsTo": [
             "id"
