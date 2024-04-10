@@ -21,7 +21,8 @@ export async function POST({ request }: { request: Request }) {
         throw error(401, 'Unauthorized');
     }
 
-    await database.universes.create({name, owners: profile[0].id});
+    const createdUniverse = await database.universes.create({name, owners: profile[0].id});
+    console.log('created universe', createdUniverse);
 
-    return json({success: true});
+    return json({id: createdUniverse});
 }

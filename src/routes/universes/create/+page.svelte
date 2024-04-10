@@ -15,11 +15,12 @@ async function createUniverse() {
         },
         body: JSON.stringify({name, session})
     });
-    console.log(response);
     if (response.ok) {
-        console.log("Universe created");
+        // redirect to the new universe
+        const {id} = await response.json();
+        window.location.href = `/universes/${id}`;
     } else {
-        console.log("Error creating universe");
+        // TODO handle error
     }
 }
 
