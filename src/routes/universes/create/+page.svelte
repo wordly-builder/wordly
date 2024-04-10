@@ -17,8 +17,8 @@ async function createUniverse() {
     });
     if (response.ok) {
         // redirect to the new universe
-        const {id} = await response.json();
-        window.location.href = `/universes/${id}`;
+        const {universe} = await response.json();
+        window.location.href = `/universes/${universe.id}`;
     } else {
         // TODO handle error
     }
