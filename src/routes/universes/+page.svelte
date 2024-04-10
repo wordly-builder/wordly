@@ -11,7 +11,7 @@
     {#if universes && universes.length > 0}
         <ul>
             {#each universes as universe}
-                <li>{universe.name}</li>
+                <li><a href="universes/{universe.id}">{universe.name}</a></li>
             {/each}
         </ul>
     {:else}
