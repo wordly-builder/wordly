@@ -28,6 +28,5 @@ export async function POST({ request }: { request: Request }) {
     }
 
     const createdUniverse = await database.universes.create({name, owners: profile[0].id});
-    console.log('created universe', createdUniverse);
     return json({universe: createdUniverse[0]});
 }

@@ -9,6 +9,6 @@ export const universes = pgTable("universe", {
     id: serial("id").notNull().primaryKey(),
     name: text("name"),
     owners: serial("owner").notNull().references(() => profiles.id),
-    charactersPanel: serial("characters_panel").references(() => charactersPanels.id),
-    mapsPanel: serial("maps_panel").references(() => mapsPanels.id),
+    charactersPanel: serial("characters_panel").references(() => charactersPanels.id).default(sql`NULL`),
+    mapsPanel: serial("maps_panel").references(() => mapsPanels.id).default(sql`NULL`)
 });
