@@ -1,12 +1,13 @@
-<script>
+<script lang="ts">
     export let label = "Label";
     export let value = "Value";
-    export let onChange = () => {};
+    export let onChange: (e: any) => void = (e: any) => {};
+    export  let error = false;
 </script>
 
 <div>
-    <label>{label}</label>
-    <input type="text" bind:value={value} on:change={onChange} />
+    <label class={error ? "error" : ""}>{label}</label>
+    <input type="text" bind:value={value} on:change={onChange} class={error ? "error" : ""}  />
 </div>
 
 <style>
@@ -24,5 +25,10 @@
         padding: 0.5rem;
         border: 1px solid #ccc;
         border-radius: 0.25rem;
+    }
+
+    .error {
+        border-color: red;
+        color: red;
     }
 </style>

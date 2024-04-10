@@ -2,8 +2,6 @@
     import Header from "$lib/components/Header.svelte";
 
     export let data;
-
-    console.log(data);
     const universes = data.universes;
 </script>
 

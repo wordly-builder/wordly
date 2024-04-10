@@ -4,7 +4,9 @@
 </script>
 
 <nav>
-    <img src={logo} alt="Logo" />
+    <a href="/universes">
+        <img src={logo} alt="Logo" />
+    </a>
     <ul>
 
     </ul>

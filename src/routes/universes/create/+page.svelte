@@ -1,13 +1,28 @@
-<script>
+<script lang="ts">
 import Header from "$lib/components/Header.svelte";
-import TextField from "$lib/components/forms/TextField.svelte";
-import TextButton from "$lib/components/forms/TextButton.svelte";
+import TextField from "$lib/components/generics/forms/TextField.svelte";
+import TextButton from "$lib/components/generics/forms/TextButton.svelte";
+import {showSnackbar} from "$lib/components/generics/snackbar";
+
 
 let name = "";
+let errorName = false;
+
 export let data;
 const {session} = data;
 
+function onNameChange(event: any) {
+    name = event.target.value;
+    errorName = false;
+}
+
 async function createUniverse() {
+    if (name === "") {
+        errorName = true;
+        showSnackbar("Please fill in the name field");
+        return;
+    }
+
     const response = await fetch('/api/universes', {
         method: 'POST',
         headers: {
@@ -18,10 +33,9 @@ async function createUniverse() {
     if (response.ok) {
         // redirect to the new universe
         const {universe} = await response.json();
-        console.log(universe);
         window.location.href = `/universes/${universe.id}`;
     } else {
-        // TODO handle error
+        showSnackbar("An error occurred while creating the universe");
     }
 }
 
@@ -34,9 +48,9 @@ async function createUniverse() {
     </h1>
     <div class="page">
         <form>
-            <TextField label="Name" bind:value={name} onChange={createUniverse} />
+            <TextField label="Name*" bind:value={name} onChange={onNameChange} error={errorName}/>
             <div class="width-1">
-                <TextButton label="Create"/>
+                <TextButton label="Create" onClick={createUniverse}/>
             </div>
         </form>
     </div>
@@ -61,7 +75,6 @@ async function createUniverse() {
     .page {
         display: flex;
         justify-content: center;
-        height: 100vh;
     }
 </style>
 
