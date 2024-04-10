@@ -2,11 +2,9 @@ import { json, error } from '@sveltejs/kit';
 import {database} from "../../../lib/database/db";
 
 export async function POST({ request }: { request: Request }) {
-    //const {name, session} = await request.json();
-    const body = await request.json();
-    console.log(body);
+    const {name, session} = await request.json();
 
-    /*if (!session || !session.user || !session.user.id) {
+    if (!session || !session.user || !session.user.id) {
         console.log('no session');
         throw error(401, 'Unauthorized');
     }
@@ -23,7 +21,7 @@ export async function POST({ request }: { request: Request }) {
         throw error(401, 'Unauthorized');
     }
 
-    await database.universes.create({name, owners: profile[0].id});*/
+    await database.universes.create({name, owners: profile[0].id});
 
     return json({success: true});
 }
