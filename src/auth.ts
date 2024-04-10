@@ -10,13 +10,13 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     adapter: DrizzleAdapter(db),
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-            console.log(account);
             if (!account)
                 return false;
 
             if (account.provider === "google") {
                 const existingProfile = await database.profiles.getByGoogleId(account.providerAccountId);
 
+                console.log(existingProfile)
                 if (existingProfile) {
                     return true;
                 }
