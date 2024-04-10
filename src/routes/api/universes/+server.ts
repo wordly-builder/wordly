@@ -1,0 +1,24 @@
+import { json, error } from '@sveltejs/kit';
+import {database} from "../../../lib/database/db";
+
+export async function POST({ request }: { request: Request }) {
+    const {name, session} = await request.json();
+
+    if (!session || !session.user || !session.user.id) {
+        throw error(401, 'Unauthorized');
+    }
+
+    const account = await database.auth.getAccountByUserId(session.user.id);
+    if (account.length === 0) {
+        throw error(401, 'Unauthorized');
+    }
+
+    const profile = await database.profiles.getByGoogleId(account[0].providerAccountId);
+    if (profile.length === 0) {
+        throw error(401, 'Unauthorized');
+    }
+
+    await database.universes.create({name, owners: profile[0].id});
+
+    return json({success: true});
+}

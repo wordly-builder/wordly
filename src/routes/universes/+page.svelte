@@ -49,7 +49,7 @@
         right: 20px;
         padding: 10px 20px;
         border-radius: 5px;
-        background-color: #007bff;
+        background-color: #3d3d3d;
         color: white;
         border: none;
         cursor: pointer;
