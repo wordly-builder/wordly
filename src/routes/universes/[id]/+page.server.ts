@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import {database} from "../../lib/database/db";
+import {database} from "../../../lib/database/db";
 
 export const load: PageServerLoad = async (event) => {
     let returnValue : { universe: any} = {
@@ -23,11 +23,14 @@ export const load: PageServerLoad = async (event) => {
     }
 
     console.log(event.params.id);
-    const universe = await database.universes.getById(event.params.id);
+    const universe = await database.universes.getById(+event.params.id);
     console.log(universe);
 
-    // check if the user is the owner of the universe
-    if (universe.owner !== profile[0].id) {
+    if (universe.length === 0) {
+        return returnValue;
+    }
+
+    if (universe[0].id !== profile[0].id) {
         return returnValue;
     }
 
