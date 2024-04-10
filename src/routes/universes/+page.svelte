@@ -10,7 +10,7 @@
 
 <Header />
 <div class="page">
-    {#if universes}
+    {#if universes && universes.length > 0}
         <ul>
             {#each universes as universe}
                 <li>{universe.name}</li>
