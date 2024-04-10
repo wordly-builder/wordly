@@ -9,6 +9,16 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     providers: [Google({ clientId: GOOGLE_ID, clientSecret: GOOGLE_SECRET })],
     adapter: DrizzleAdapter(db),
     callbacks: {
+        async session({ session, user }) {
+            session.user = {
+                emailVerified: user.emailVerified,
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                image: user.image
+            }
+            return session;
+        },
         async signIn({ user, account, profile, email, credentials }) {
             if (!account)
                 return false;
