@@ -5,8 +5,8 @@ import TextButton from "$lib/components/forms/TextButton.svelte";
 
 let name = "";
 export let data;
-console.log(data);
 const {session} = data;
+console.log(session);
 
 async function createUniverse() {
     const response = await fetch('/api/universes', {
