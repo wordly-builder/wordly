@@ -16,8 +16,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
             if (account.provider === "google") {
                 const existingProfile = await database.profiles.getByGoogleId(account.providerAccountId);
 
-                console.log(existingProfile)
-                if (existingProfile) {
+                if (existingProfile.length > 0) {
                     return true;
                 }
 
