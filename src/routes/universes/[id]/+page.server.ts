@@ -11,27 +11,32 @@ export const load: PageServerLoad = async (event) => {
     if (!session || !session.user || !session.user.id) {
         return returnValue;
     }
+    console.log("no session");
 
     const account = await database.auth.getAccountByUserId(session.user.id);
     if (account.length === 0) {
         return returnValue;
     }
+    console.log("no account");
 
     const profile = await database.profiles.getByGoogleId(account[0].providerAccountId);
     if (profile.length === 0) {
         return returnValue;
     }
+    console.log("no profile");
 
     const universe = await database.universes.getById(+event.params.id);
 
     if (universe.length === 0) {
         return returnValue;
     }
+    console.log("test");
 
-    if (universe[0].id !== profile[0].id) {
+    if (universe[0].owners !== profile[0].id) {
         return returnValue;
     }
 
+    console.log(universe[0]);
     returnValue.universe = universe;
     return returnValue;
 };
