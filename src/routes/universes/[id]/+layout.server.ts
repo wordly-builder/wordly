@@ -1,10 +1,22 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import {database} from "../../../lib/database/db";
+import { PROFILE_ID, FORCE_LOGIN } from "$env/static/private"
 
-export const load: PageServerLoad = async (event) => {
+export const load: LayoutServerLoad = async (event) => {
     let returnValue : { universe: any} = {
         universe: null
     }
+
+    // override profile id if FORCE_LOGIN is true
+    if (FORCE_LOGIN == 'true') {
+        const universe = await database.universes.getById(+event.params.id);
+        if (universe.length === 0 || universe[0].owners !== +PROFILE_ID) {
+            return returnValue;
+        }
+        returnValue.universe = universe[0];
+        return returnValue;
+    }
+
 
     const session = await event.locals.auth();
     if (!session || !session.user || !session.user.id) {

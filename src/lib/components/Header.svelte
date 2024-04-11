@@ -7,9 +7,7 @@
     <a href="/universes">
         <img src={logo} alt="Logo" />
     </a>
-    <ul>
-
-    </ul>
+    <slot/>
     <div class="end">
         <button on:click={() => signOut()}>Sign Out</button>>
     </div>
@@ -63,4 +61,5 @@ nav {
         align-items: center;
         padding-right: 10px;
     }
+
 </style>

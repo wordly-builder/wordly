@@ -5,5 +5,4 @@ import { DATABASE_URL } from "$env/static/private"
 const client = postgres(DATABASE_URL, { prepare: false, ssl: { rejectUnauthorized: false } });
 
 export const db = drizzle(client);
-export const connection = client;
 

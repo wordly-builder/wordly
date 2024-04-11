@@ -14,7 +14,6 @@
 
 </script>
 
-<Header />
 <div>
     {#if universe}
         <h1>{universe.name}</h1>
@@ -28,7 +27,9 @@
                 {/if}
             </div>
         {:else}
-            <p>Please integrate a panel to start creating your universe.</p>
+            <div class="center">
+                <p>Please integrate a panel to start creating your universe.</p>
+            </div>
         {/if}
     {:else}
         <div class="center">
@@ -48,5 +49,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: absolute;
+        top: 50%;
+        width: 100%;
     }
 </style>

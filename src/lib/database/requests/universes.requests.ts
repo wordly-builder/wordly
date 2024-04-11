@@ -15,7 +15,7 @@ export async function getUniversesByOwner(owner: number) {
 }
 
 export async function createUniverse({name, owners}: {name: string, owners: number }) {
-    return db.insert(universes).values({name, owners }).returning()
+    return db.insert(universes).values({name, owners }).returning();
 }
 
 export async function updateUniverse(id: number, {name, owners}: {name: string, owners: number }) {
