@@ -14,6 +14,7 @@
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
+		"@iconify-json/mdi": "^1.1.66",
 		"@neoconfetti/svelte": "^1.0.0",
 		"@playwright/test": "^1.43.0",
 		"@sveltejs/adapter-vercel": "^3.1.0",
@@ -30,6 +31,7 @@
 		"svelte": "^3.59.2",
 		"svelte-check": "^3.6.9",
 		"typescript": "^5.4.5",
+		"unplugin-icons": "^0.18.5",
 		"vite": "^4.5.3",
 		"vitest": "^0.25.8",
 		"web-vitals": "^3.5.2"

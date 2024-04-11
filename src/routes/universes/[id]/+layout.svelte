@@ -32,6 +32,6 @@
 
 <style>
     .spacer {
-        flex-grow: 0.5;
+        flex-grow: 0.8;
     }
 </style>

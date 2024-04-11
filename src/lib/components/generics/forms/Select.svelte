@@ -23,8 +23,11 @@
         width: 100%;
         padding: 0.5rem;
         margin: 0.5rem 0;
-        border: 1px solid #ccc;
-        border-radius: 0.25rem;
+        border-radius: 10px;
+        border: none;
+        background-color: #525252;
+        color: white;
+        min-width: 8rem;
     }
 
 

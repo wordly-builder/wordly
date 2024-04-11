@@ -9,11 +9,13 @@
 <Header />
 <div class="page">
     {#if universes && universes.length > 0}
-        <ul>
-            {#each universes as universe}
-                <li><a href="universes/{universe.id}">{universe.name}</a></li>
+        <h1>Universes</h1>
+        <div class="projects-container">
+            <div class="project">Name</div>
+            {#each universes as universe, i}
+                <a href="universes/{universe.id}"><div class={"project " + (i % 2 === 0 ? "even" : "odd")}>{universe.name}</div></a>
             {/each}
-        </ul>
+        </div>
     {:else}
         <div class="no-project">
             <p>You don't seem to have an universe yet.<br/>
@@ -25,11 +27,15 @@
 </div>
 
 <style>
+    h1 {
+        text-align: left;
+        padding: 0;
+    }
+
     .page {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        margin: 0 30px;
     }
 
     .no-project {
@@ -51,5 +57,38 @@
         color: white;
         border: none;
         cursor: pointer;
+    }
+
+    .projects-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .project {
+        padding: 20px;
+        border-radius: 5px;
+        color: black;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .even {
+        background-color: #afafaf;
+    }
+
+    .even:hover {
+        background-color: #c0c0c0;
+    }
+
+    .odd {
+        background-color: #e0e0e0;
+    }
+
+    .odd:hover {
+        background-color: #f0f0f0;
     }
 </style>
