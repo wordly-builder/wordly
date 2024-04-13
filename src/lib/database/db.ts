@@ -8,7 +8,7 @@ import {
     createUniverse, deleteUniverse,
     getAllUniverses,
     getUniverseById,
-    getUniversesByOwner, updateUniverse
+    getUniversesByOwner, linkCharactersPanel, linkMapsPanel, updateUniverse
 } from "./requests/universes.requests";
 import {getAccountByUserId} from "./requests/auth.requests";
 import {
@@ -42,6 +42,8 @@ export const database = {
         create: createUniverse,
         update: updateUniverse,
         delete: deleteUniverse,
+        linkCharactersPanel: linkCharactersPanel,
+        linkMapsPanel: linkMapsPanel
     },
     panels: {
         characters: {

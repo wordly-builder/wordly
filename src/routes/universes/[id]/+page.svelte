@@ -1,31 +1,23 @@
 <script lang="ts">
     import Header from "$lib/components/Header.svelte";
     import FloatingButton from "$lib/components/generics/FloatingButton.svelte";
+    import {getActivePanels} from "$lib/data/panels/panels";
+    import PanelButton from "$lib/components/PanelButton.svelte";
 
     export let data;
     let {universe} = data;
-
-    function hasPanel() {
-        if (universe.charactersPanel)
-            return true;
-        if (universe.mapsPanel)
-            return true;
-        return false;
-    }
+    const activePanels = getActivePanels(universe);
 
 </script>
 
 <div>
     {#if universe}
         <h1>{universe.name}</h1>
-        {#if hasPanel()}
+        {#if activePanels.length > 0}
             <div class="panel">
-                {#if universe.charactersPanel}
-                    <a href="/universe/{universe.id}/characters">Characters</a>
-                {/if}
-                {#if universe.mapsPanel}
-                    <a href="/universe/{universe.id}/maps">Maps</a>
-                {/if}
+                {#each activePanels as panel}
+                    <PanelButton panel={panel} onClick={() => window.location.href = `/universes/${universe.id}/${panel.url}`} />
+                {/each}
             </div>
         {:else}
             <div class="center">
@@ -44,6 +36,8 @@
 <style>
     .panel {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 1rem;
     }
 

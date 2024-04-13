@@ -1,12 +1,17 @@
 <script lang="ts">
-    import {getInactivePanels} from '$lib/data/panels';
+    import {getInactivePanels} from '$lib/data/panels/panels';
+    import type {Panel} from "$lib/data/panels/panel";
     export let data;
-    let {universe} = data;
+    let {universe, session} = data;
     let panels = getInactivePanels(universe);
 
-    function addPanel(panel: any) {
-        console.log(panel);
-        window.location.href = `/universes/${universe.id}`;
+    function addPanel(panel: Panel) {
+
+        panel.create(universe.id, session).then(() => {
+            window.location.href = `/universes/${universe.id}/${panel.url}`;
+        }).catch((error) => {
+            console.error(error);
+        });
     }
 
 
