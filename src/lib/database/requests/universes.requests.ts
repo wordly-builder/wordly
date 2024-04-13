@@ -25,3 +25,11 @@ export async function updateUniverse(id: number, {name, owners}: {name: string, 
 export async function deleteUniverse(id: number) {
     return db.delete(universes).where(eq(universes.id, id))
 }
+
+export async function linkCharactersPanel(universeId: number, panelId: number) {
+    return db.update(universes).set({charactersPanel: panelId}).where(eq(universes.id, universeId))
+}
+
+export async function linkMapsPanel(universeId: number, panelId: number) {
+    return db.update(universes).set({mapsPanel: panelId}).where(eq(universes.id, universeId))
+}

@@ -1,5 +1,6 @@
 <script lang="ts">
     import Header from "$lib/components/Header.svelte";
+    import FloatingButton from "$lib/components/generics/FloatingButton.svelte";
 
     export let data;
     let {universe} = data;
@@ -31,6 +32,7 @@
                 <p>Please integrate a panel to start creating your universe.</p>
             </div>
         {/if}
+        <FloatingButton onClick={() => window.location.href = `/universes/${universe.id}/add`}>Add Panel</FloatingButton>
     {:else}
         <div class="center">
             <h1>404</h1>
