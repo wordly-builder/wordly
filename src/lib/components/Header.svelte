@@ -22,6 +22,7 @@ nav {
         align-items: center;
         padding: 10px 0;
         background: #2a2a2a;
+        z-index: 5;
     }
 
     nav img {

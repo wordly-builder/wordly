@@ -8,7 +8,7 @@
     function addPanel(panel: Panel) {
 
         panel.create(universe.id, session).then(() => {
-            window.location.href = `/universes/${universe.id}/${panel.url}`;
+            window.location.href = `/universes/${universe.id}/panels/${panel.url}`;
         }).catch((error) => {
             console.error(error);
         });

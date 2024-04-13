@@ -16,7 +16,7 @@
         {#if activePanels.length > 0}
             <div class="panel">
                 {#each activePanels as panel}
-                    <PanelButton panel={panel} onClick={() => window.location.href = `/universes/${universe.id}/${panel.url}`} />
+                    <PanelButton panel={panel} onClick={() => window.location.href = `/universes/${universe.id}/panels/${panel.url}`} />
                 {/each}
             </div>
         {:else}

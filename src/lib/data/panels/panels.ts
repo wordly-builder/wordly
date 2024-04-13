@@ -1,7 +1,6 @@
-import GroupsIcon from 'virtual:icons/mdi/account-group';
-import MapIcon from 'virtual:icons/mdi/map';
 import charactersPanel from './characters.panel';
 import mapsPanel from './maps.panel';
+import type {Panel} from "./panel";
 
 export const panels = [
     charactersPanel,
@@ -9,7 +8,11 @@ export const panels = [
 ]
 
 export function getInactivePanels(universe: Universe) {
-    let inactivePanels = [];
+    let inactivePanels: Panel[] = [];
+
+    if (!universe) {
+        return inactivePanels;
+    }
 
     for (const panel of panels) {
         if (!panel.isActive(universe)) {
@@ -21,7 +24,11 @@ export function getInactivePanels(universe: Universe) {
 }
 
 export function getActivePanels(universe: Universe) {
-    let activePanels = [];
+    let activePanels: Panel[] = [];
+
+    if (!universe) {
+        return activePanels;
+    }
 
     for (const panel of panels) {
         if (panel.isActive(universe)) {
