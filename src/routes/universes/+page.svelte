@@ -1,8 +1,63 @@
-<script>
+<script lang="ts">
     import Header from "$lib/components/Header.svelte";
+    import MoreVertIcon from "virtual:icons/mdi/more-vert";
 
     export let data;
     const universes = data.universes;
+    let selectedUniverse: any = null;
+
+    function openOptions(universe: any) {
+        return function _openOptions(event: any) {
+            event.stopPropagation();
+            const options = document.getElementById("options");
+            if (!options) {
+                return;
+            }
+            if (options.style.display === "block") {
+                options.style.display = "none";
+                selectedUniverse = null;
+            } else {
+                options.style.display = "block";
+                // update position
+                const rect = event.target.getBoundingClientRect();
+                options.style.top = rect.bottom + "px";
+                options.style.left = rect.left + "px";
+
+                // if position is outside of the window, move it inside
+                if (options.getBoundingClientRect().right > window.innerWidth) {
+                    options.style.left = (window.innerWidth - options.getBoundingClientRect().width) + "px";
+                }
+
+                // close options when clicking outside
+                window.addEventListener("click", (e: any) => {
+                    if (!options.contains(e.target)) {
+                        options.style.display = "none";
+                        selectedUniverse = null;
+                    }
+                });
+
+                // set selected universe
+                selectedUniverse = universe
+            }
+
+        }
+    }
+
+
+    function deleteUniverse() {
+        const options = document.getElementById("options");
+        if (options) {
+            options.style.display = "none";
+        }
+
+        if (selectedUniverse) {
+            fetch(`/api/universes?id=${selectedUniverse.id}`, {
+                method: "DELETE",
+            }).then(() => {
+                window.location.reload();
+            });
+        }
+    }
 </script>
 
 
@@ -11,9 +66,18 @@
     {#if universes && universes.length > 0}
         <h1>Universes</h1>
         <div class="projects-container">
-            <div class="project">Name</div>
+            <div class="project-desc">Name</div>
             {#each universes as universe, i}
-                <a href="universes/{universe.id}"><div class={"project " + (i % 2 === 0 ? "even" : "odd")}>{universe.name}</div></a>
+                <button class="project-button" on:click={() => {
+                    window.location.href = `universes/${universe.id}`;
+                }}>
+                    <div class={"project " + (i % 2 === 0 ? "even" : "odd")}>
+                        {universe.name}
+                        <button class="button" on:click={openOptions(universe)}>
+                            <MoreVertIcon style="width: 20px; height: 20px;"/>
+                        </button>
+                    </div>
+                </button>
             {/each}
         </div>
     {:else}
@@ -24,6 +88,9 @@
     {/if}
 
     <a class="floating-button" href="universes/create">Create Universe</a>
+    <ul id="options" class="options">
+        <li><button on:click={deleteUniverse}>Delete</button></li>
+    </ul>
 </div>
 
 <style>
@@ -70,6 +137,39 @@
         padding: 20px;
         border-radius: 5px;
         color: black;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .project-button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        align-items: start;
+        padding: 0;
+    }
+
+    .project-desc {
+        font-weight: bold;
+        padding: 20px;
+    }
+
+    .button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 5px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .button:hover {
+        background-color: #f0f0f0;
     }
 
     a:hover {
@@ -90,5 +190,35 @@
 
     .odd:hover {
         background-color: #f0f0f0;
+    }
+
+    .options {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 0;
+        margin: 0;
+        z-index: 1;
+    }
+
+    .options li {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .options button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .options button:hover {
+        background-color: #ffffff;
     }
 </style>
