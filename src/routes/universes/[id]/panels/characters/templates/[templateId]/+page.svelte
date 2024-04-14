@@ -9,7 +9,16 @@
     let {template, templateFields} = data as {template: any, templateFields: CharactersTemplatesFieldsSelect[]}
 
     let activeField: CharactersTemplatesFieldsSelect | null = null
+    let dragAndDropField: CharactersTemplatesFieldsSelect | null = null
+    let isDragging = null
+    let isClick = false
 
+    function click(field: CharactersTemplatesFieldsSelect) {
+        if (activeField === field)
+            activeField = null
+        else
+            activeField = field
+    }
 
     function displayTemplate() {
         let nb_rows = 0;
@@ -59,6 +68,7 @@
 
             const container = document.createElement('button')
             container.className = 'field'
+            container.id = `field`
             container.style.display = 'flex'
             container.style.justifyContent = 'center'
             container.style.alignItems = 'center'
@@ -69,19 +79,22 @@
             container.style.cursor = 'pointer'
 
             // Add drag and drop
-            container.draggable = true
+            container.addEventListener('mousedown', (e) => {
+                // set dragging
+                isDragging = {x: e.clientX, y: e.clientY}
+                dragAndDropField = field
+                isClick = true
 
-            // Add click event
-            container.addEventListener('click', () => {
-                if (activeField === field)
-                    activeField = null
-                else
-                    activeField = field
+                // set timout to check if drag or click
+                setTimeout(() => {
+                    isClick = false
+                }, 200)
             })
 
             fieldElement.appendChild(container)
 
             const text = document.createElement('p')
+            text.id='field-text'
             text.textContent = field.name
             text.style.margin = '10px'
             text.style.color = 'white'
@@ -106,14 +119,7 @@
         }
     }
 
-    function resizeField(row: number, column: number) {
-        if (row < 1 || column < 1 || activeField === null)
-            return
-
-        const grow_row = activeField.rowSize !== row
-        activeField = {...activeField, rowSize: row, columnSize: column}
-        updateField();
-
+    function computeFieldsSize(grow_row: boolean = false) {
         // control overlaps by moving other fields
         // if overlap by row push down
         templateFields = templateFields.sort((a, b) => {
@@ -151,12 +157,125 @@
 
             }
         }
-        console.log(templateFields)
+    }
+
+    function resizeField(row: number, column: number) {
+        if (row < 1 || column < 1 || activeField === null)
+            return
+
+        const grow_row = activeField.rowSize !== row
+        activeField = {...activeField, rowSize: row, columnSize: column}
+        updateField();
+
+        computeFieldsSize(grow_row)
+        displayTemplate()
+    }
+
+    function onDragOver(e: any) {
+        e.preventDefault()
+        // only start drag if mouse move
+        if (isDragging === null || isClick=== true)
+            return
+        if (isDragging.x - e.clientX < 5 && isDragging.y - e.clientY < 5)
+            return
+
+        // delete all occurence of the draaged field
+        templateFields = templateFields.filter((f) => f.id !== dragAndDropField?.id)
+
+        // get template body start position
+        const templateBody = document.getElementById('template-body')
+        if (templateBody === null)
+            return
+        const startX = templateBody.getBoundingClientRect().left
+        const startY = templateBody.getBoundingClientRect().top
+        const sizeX = templateBody.getBoundingClientRect().width
+        const sizeY = templateBody.getBoundingClientRect().height
+
+        let nb_rows = 0;
+        let nb_columns = 0;
+        for (const fieldIndex in templateFields) {
+            const field = templateFields[fieldIndex]
+
+            // check max row
+            const maxRow = field.row + field.rowSize - 1;
+            if (nb_rows < maxRow)
+                nb_rows = maxRow
+
+            // check max column
+            const maxColumn = field.column + field.columnSize - 1;
+            if (nb_columns < maxColumn)
+                nb_columns = maxColumn
+        }
+
+        const cellSizeX = sizeX / nb_columns
+        const cellSizeY = sizeY / nb_rows
+
+        const pointerRow = Math.floor((e.clientY - startY) / cellSizeY) + 1
+        const pointerColumn = Math.floor((e.clientX - startX) / cellSizeX) + 1
+
+        // add a new field at the cursor position
+        if (dragAndDropField === null)
+            return
+        const newField = {
+            templateId: dragAndDropField.templateId,
+            id: dragAndDropField.id,
+            name: dragAndDropField.name,
+            type: dragAndDropField.type,
+            row: pointerRow,
+            column: pointerColumn,
+            rowSize: dragAndDropField.rowSize,
+            columnSize: dragAndDropField.columnSize
+        }
+        if (newField.row < 1)
+            newField.row = 1
+        if (newField.column < 1)
+            newField.column = 1
+        templateFields.push(newField)
+        computeFieldsSize(true)
         displayTemplate()
     }
 
     onMount(() => {
         displayTemplate()
+
+        // add onmouve event to drag and drop element
+        const dragAndDropElement = document.getElementById('drag-and-drop-element')
+        if (dragAndDropElement === null)
+            return
+
+        window.addEventListener('mousemove', (e) => {
+            dragAndDropElement.style.left = `${e.clientX}px`
+            dragAndDropElement.style.top = `${e.clientY}px`
+        })
+
+        window.onmouseup = (e) => {
+            dragAndDropElement.style.display = 'none'
+
+            // check if drag or click
+            if (isClick && dragAndDropField !== null) {
+                isClick = false
+                click(dragAndDropField);
+                return
+            }
+
+            if (dragAndDropField === null)
+                return
+
+            // check if an occurence of the field already exist
+            if (templateFields.find((f) => f.id === dragAndDropField?.id) === undefined) {
+                templateFields.push(dragAndDropField)
+            }
+
+            dragAndDropField = null
+            displayTemplate()
+
+        }
+
+        const templateBody = document.getElementById('template-body')
+        if (templateBody === null)
+            return
+
+        templateBody.addEventListener('mousemove', onDragOver)
     })
 </script>
 
@@ -209,6 +328,10 @@
             </div>
         </div>
     {/if}
+</div>
+
+<div class="drag-and-drop-element" id="drag-and-drop-element">
+    <p>text</p>
 </div>
 
 <style>
@@ -275,6 +398,15 @@
     .row-editor input, .column-editor input {
         border-radius: 5px;
         width: 3em
+    }
+
+    .drag-and-drop-element {
+        display: none;
+        position: absolute;
+        background: #707070;
+        border-radius: 20px;
+        padding: 10px;
+        color: white;
     }
 
 
