@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1712785425160,
-      "tag": "0000_sparkling_gertrude_yorkes",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1712788173921,
-      "tag": "0001_woozy_ink",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1713061718532,
-      "tag": "0002_orange_sunspot",
+      "when": 1713109495204,
+      "tag": "0000_fair_tomas",
       "breakpoints": true
     }
   ]

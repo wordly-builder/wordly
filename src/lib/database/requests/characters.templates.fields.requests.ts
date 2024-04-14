@@ -14,12 +14,12 @@ export async function getCharactersTemplatesFieldsByTemplate(templateId: number)
     return db.select().from(charactersTemplatesFields).where(eq(charactersTemplatesFields.templateId, templateId));
 }
 
-export async function createCharactersTemplatesField({templateId, name, type, columns, rows}: {templateId: number, name: string, type: string, columns: string, rows: string}) {
-    return db.insert(charactersTemplatesFields).values({templateId, name, type, columns, rows}).returning();
+export async function createCharactersTemplatesField({templateId, name, type, column, row, columnSize, rowSize}: {templateId: number, name: string, type: string, column: number, row: number, columnSize: number, rowSize: number}) {
+    return db.insert(charactersTemplatesFields).values({templateId, name, type, column, row, columnSize, rowSize}).returning();
 }
 
-export async function updateCharactersTemplatesField(id: number, {templateId, name, type, columns, rows}: {templateId: number, name: string, type: string, columns: string, rows: string}) {
-    return db.update(charactersTemplatesFields).set({templateId, name, type, columns, rows}).where(eq(charactersTemplatesFields.id, id));
+export async function updateCharactersTemplatesField(id: number, {templateId, name, type, column, row, columnSize, rowSize}: {templateId: number, name: string, type: string, column: number, row: number, columnSize: number, rowSize: number}) {
+    return db.update(charactersTemplatesFields).set({templateId, name, type, column, row, columnSize, rowSize}).where(eq(charactersTemplatesFields.id, id)).returning();
 }
 
 export async function deleteCharactersTemplatesField(id: number) {

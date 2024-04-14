@@ -27,10 +27,10 @@ export async function POST(req: any) {
     }
 
     // create the default fields for the template
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "profile-picture", type: "image", columns: "1", rows: "1,2" });
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "name", type: "text", columns: "2", rows: "1" });
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "age", type: "text", columns: "2", rows: "2" });
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "description", type: "text", columns: "1,2", rows: "3" });
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "profile-picture", type: "image", column: 1, row: 1, columnSize: 1, rowSize: 2});
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "name", type: "text", column: 2, row: 1, columnSize: 1, rowSize: 1});
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "age", type: "text", column: 2, row: 2, columnSize: 1, rowSize: 1});
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "description", type: "text", column: 1, row: 3, columnSize: 2, rowSize: 1});
 
     return json({template: createdTemplate[0]});
 }

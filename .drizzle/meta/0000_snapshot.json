@@ -1,5 +1,5 @@
 {
-  "id": "7f537f0a-6a91-4923-bbc0-2f4bd67e28d9",
+  "id": "12dfdb51-8291-47d3-a5a2-082a82c1a9b5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -236,6 +236,126 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "characters_templates_field": {
+      "name": "characters_templates_field",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "template_id": {
+          "name": "template_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'text'"
+        },
+        "column": {
+          "name": "column",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "row": {
+          "name": "row",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "column_size": {
+          "name": "column_size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "row_size": {
+          "name": "row_size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "characters_templates_field_template_id_characters_template_id_fk": {
+          "name": "characters_templates_field_template_id_characters_template_id_fk",
+          "tableFrom": "characters_templates_field",
+          "tableTo": "characters_template",
+          "columnsFrom": [
+            "template_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "characters_template": {
+      "name": "characters_template",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "panel_id": {
+          "name": "panel_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "characters_template_panel_id_characters_panel_id_fk": {
+          "name": "characters_template_panel_id_characters_panel_id_fk",
+          "tableFrom": "characters_template",
+          "tableTo": "characters_panel",
+          "columnsFrom": [
+            "panel_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "character": {
       "name": "character",
       "schema": "",
@@ -260,7 +380,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "character_panel_id_characters_panel_id_fk": {
+          "name": "character_panel_id_characters_panel_id_fk",
+          "tableFrom": "character",
+          "tableTo": "characters_panel",
+          "columnsFrom": [
+            "panel_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -304,7 +438,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "map_panel_id_maps_panel_id_fk": {
+          "name": "map_panel_id_maps_panel_id_fk",
+          "tableFrom": "map",
+          "tableTo": "maps_panel",
+          "columnsFrom": [
+            "panel_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -380,13 +528,15 @@
           "name": "characters_panel",
           "type": "serial",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "NULL"
         },
         "maps_panel": {
           "name": "maps_panel",
           "type": "serial",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "NULL"
         }
       },
       "indexes": {},

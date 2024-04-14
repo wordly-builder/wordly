@@ -7,11 +7,13 @@
     ]
     export let selected: string = "1"
     export let onChange: (value: string) => void
+    export let labelStyle: string = ""
+    export let style: string = ""
 </script>
 
 <div>
-<label>{label}</label>
-    <select bind:value={selected} on:change={() => onChange(selected)}>
+<label style={labelStyle}>{label}</label>
+    <select bind:value={selected} on:change={() => onChange(selected)} style={style}>
         {#each values as option}
             <option value={option.key}>{option.value}</option>
         {/each}

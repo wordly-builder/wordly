@@ -3,11 +3,13 @@
     export let value = "Value";
     export let onChange: (e: any) => void = (e: any) => {};
     export  let error = false;
+    export let style = "";
+    export let labelStyle = "";
 </script>
 
 <div>
-    <label class={error ? "error" : ""}>{label}</label>
-    <input type="text" bind:value={value} on:change={onChange} class={error ? "error" : ""}  />
+    <label class={error ? "error" : ""} style="{labelStyle}">{label}</label>
+    <input type="text" bind:value={value} on:change={onChange} class={error ? "error" : ""} style={style} />
 </div>
 
 <style>

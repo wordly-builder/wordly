@@ -21,9 +21,6 @@
 		<slot />
 	</main>
 
-	<footer>
-
-	</footer>
 </div>
 
 <style>
@@ -40,14 +37,6 @@
 		flex-direction: column;
 		width: 100%;
 		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
 	}
 
 
