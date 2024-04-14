@@ -26,5 +26,11 @@ export async function POST(req: any) {
         throw error(500, 'Failed to create template');
     }
 
+    // create the default fields for the template
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "profile-picture", type: "image", columns: "1", rows: "1,2" });
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "name", type: "text", columns: "2", rows: "1" });
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "age", type: "text", columns: "2", rows: "2" });
+    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "description", type: "text", columns: "1,2", rows: "3" });
+
     return json({template: createdTemplate[0]});
 }

@@ -103,10 +103,10 @@
 <div>
     <h1>Characters</h1>
     <div class="panel-container">
-        <div class="characters-container">
+        <div class="characters-container container">
             <h2>Characters</h2>
             <ul >
-                {#each characters as character}
+                {#each characters as character, i}
                     <li>
                         <a href="characters/characters/{character.id}">
                             {character.name}
@@ -115,12 +115,12 @@
                 {/each}
             </ul>
         </div>
-        <div class="templates-container">
+        <div class="templates-container container">
             <h2>Templates</h2>
             <ul >
-                {#each charactersTemplates as template}
+                {#each charactersTemplates as template, i}
                     <li>
-                        <a href="characters/templates/{template.id}">
+                        <a href="characters/templates/{template.id}" class="{i % 2 === 0 ? 'odd' : 'even'}">
                             {template.name}
                         </a>
                     </li>
@@ -177,23 +177,50 @@
         margin: 5px;
     }
 
+
+
     .templates-container {
         flex-grow: 0.2;
         list-style-type: none;
-        padding: 0;
     }
 
-    .templates-container h2 {
+    .container h2 {
         margin: 0;
     }
 
-    .templates-container ul {
-        border-left: 1px solid black;
+    .container ul {
+        padding: 0 20px 0 0;
     }
 
-    .templates-container ul li {
-        margin: 5px;
+    .container ul li {
         list-style-type: none;
+    }
+
+    .container ul li a {
+        color: black;
+        display: flex;
+        padding: 5px 5px 5px 10px;
+        border-radius: 5px;
+    }
+
+    .templates-container ul li a:hover {
+        text-decoration: none;
+    }
+
+    .odd {
+        background: rgba(63, 60, 60, 0.1);
+    }
+
+    .even {
+        background: rgba(63, 60, 60, 0.2);
+    }
+
+    .odd:hover {
+        background: rgba(63, 60, 60, 0.2);
+    }
+
+    .even:hover {
+        background: rgba(63, 60, 60, 0.3);
     }
 
     .panel-container {

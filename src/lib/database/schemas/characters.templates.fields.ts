@@ -9,3 +9,6 @@ export const charactersTemplatesFields = pgTable("characters_templates_field", {
     columns: text("columns").notNull().default("1"),
     rows: text("rows").notNull().default("1"),
 });
+
+export type CharactersTemplatesFieldsSelect = typeof charactersTemplatesFields.$inferSelect
+export type CharactersTemplatesFieldsInsert = typeof charactersTemplatesFields.$inferInsert
