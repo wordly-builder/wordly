@@ -25,3 +25,7 @@ export async function updateMap(id: number, {name, panelId}: {name: string, pane
 export async function deleteMap(id: number) {
     return db.delete(maps).where(eq(maps.id, id))
 }
+
+export async function deleteMapsByPanel(panelId: number) {
+    return db.delete(maps).where(eq(maps.panelId, panelId))
+}

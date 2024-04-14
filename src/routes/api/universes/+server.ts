@@ -18,7 +18,7 @@ export async function POST({ request }: { request: Request }) {
 
 // DELETE /api/universes/
 // Delete a universe
-export async function DELETE(req) {
+export async function DELETE(req: any) {
     // get params
     const universeId = req.url.searchParams.get('id')
     const session = await req.locals.auth();
@@ -36,9 +36,11 @@ export async function DELETE(req) {
     // Delete linked panels
     if (universe[0].charactersPanel) {
         await database.panels.characters.delete(universe[0].charactersPanel);
+        await database.characters.deleteByPanel(universe[0].charactersPanel);
     }
     if (universe[0].mapsPanel) {
         await database.panels.maps.delete(universe[0].mapsPanel);
+        await database.maps.deleteByPanel(universe[0].mapsPanel);
     }
 
     await database.universes.delete(universeId);

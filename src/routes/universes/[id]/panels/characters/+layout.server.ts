@@ -1,11 +1,12 @@
-import {LayoutServerLoad} from "../../../../../../.svelte-kit/types/src/routes/$types";
+import type {LayoutServerLoad} from "../../../../../../.svelte-kit/types/src/routes/$types";
 import {getProfileFromSession} from "../../../../../lib/helpers/getProfileFromSession";
 import {database} from "../../../../../lib/database/db";
 
 export const load: LayoutServerLoad = async (event) => {
-    let returnValue : {charactersPanel: any, characters: any} = {
+    let returnValue : {charactersPanel: any, characters: any, charactersTemplates: any} = {
         charactersPanel: null,
-        characters: null
+        characters: null,
+        charactersTemplates: null
     }
 
     const {session, universe} = await event.parent() as {session: any, universe: any};
@@ -20,8 +21,10 @@ export const load: LayoutServerLoad = async (event) => {
     }
 
     const characters = await database.characters.getByPanel(charactersPanel[0].id);
+    const charactersTemplates = await database.charactersTemplates.getByPanel(charactersPanel[0].id);
 
     returnValue.charactersPanel = charactersPanel[0];
     returnValue.characters = characters;
+    returnValue.charactersTemplates = charactersTemplates;
     return returnValue;
 }

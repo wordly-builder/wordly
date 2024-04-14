@@ -1,8 +1,10 @@
 <script lang="ts">
-    export let onClick = () => {};
+    export let onClick = (event: any) => {};
+    export let style = '';
+    export let id = '';
 </script>
 
-<button class="floating-button" on:click={onClick}><slot /></button>
+<button class="floating-button" on:click={onClick} style={style} id={id}><slot /></button>
 
 <style>
     .floating-button {

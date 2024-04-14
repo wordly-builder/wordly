@@ -25,3 +25,7 @@ export async function updateCharacter(id: number, {name, panelId}: {name: string
 export async function deleteCharacter(id: number) {
     return db.delete(characters).where(eq(characters.id, id))
 }
+
+export async function deleteCharactersByPanel(panelId: number) {
+    return db.delete(characters).where(eq(characters.panelId, panelId))
+}

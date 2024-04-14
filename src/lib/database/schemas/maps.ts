@@ -5,7 +5,7 @@ import {mapsPanels} from "./maps.panels";
 export const maps = pgTable("map", {
     id: serial("id").notNull().primaryKey(),
     name: text("name"),
-    panelId: integer("panel_id").notNull(),
+    panelId: integer("panel_id").notNull().references(() => mapsPanels.id),
 });
 
 export const mapsMapsPanelsRelations = relations(maps, ({one}) => ({

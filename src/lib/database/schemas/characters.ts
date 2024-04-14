@@ -5,7 +5,7 @@ import {charactersPanels} from "./characters.panels";
 export const characters = pgTable("character", {
     id: serial("id").notNull().primaryKey(),
     name: text("name"),
-    panelId: integer("panel_id").notNull(),
+    panelId: integer("panel_id").notNull().references(() => charactersPanels.id),
 });
 
 export const charactersCharactersPanelsRelations = relations(characters, ({one}) => ({
