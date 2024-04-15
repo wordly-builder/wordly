@@ -33,16 +33,6 @@ export async function DELETE(req: any) {
         throw error(403, 'Forbidden');
     }
 
-    // Delete linked panels
-    if (universe[0].charactersPanel) {
-        await database.panels.characters.delete(universe[0].charactersPanel);
-        await database.characters.deleteByPanel(universe[0].charactersPanel);
-    }
-    if (universe[0].mapsPanel) {
-        await database.panels.maps.delete(universe[0].mapsPanel);
-        await database.maps.deleteByPanel(universe[0].mapsPanel);
-    }
-
     await database.universes.delete(universeId);
     return json({success: true});
 }

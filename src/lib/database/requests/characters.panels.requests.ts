@@ -1,6 +1,8 @@
 import {db} from "../index";
 import {charactersPanels, charactersPanelsCharactersRelations} from "../schemas/characters.panels";
 import {eq} from "drizzle-orm";
+import {deleteCharactersByPanel} from "./characters.requests";
+import {deleteCharactersTemplatesByPanel} from "./characters.templates.requets";
 
 export async function getAllCharactersPanels() {
     return db.select().from(charactersPanels);
@@ -15,5 +17,10 @@ export async function createCharactersPanel() {
 }
 
 export async function deleteCharactersPanel(id: number) {
+    // delete all characters
+    await deleteCharactersByPanel(id);
+    // delete all templates
+    await deleteCharactersTemplatesByPanel(id);
+
     return db.delete(charactersPanels).where(eq(charactersPanels.id, id))
 }

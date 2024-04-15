@@ -1,9 +1,9 @@
-// POST /api/panels/characters/templates/
-// Create a new character template
 import {getProfileFromSession} from "../../../../../lib/helpers/getProfileFromSession";
 import {database} from "../../../../../lib/database/db";
 import {error, json} from "@sveltejs/kit";
 
+// POST /api/panels/characters/templates/
+// Create a new character template
 export async function POST(req: any) {
     const {panelId} = await req.request.json();
     const session = await req.locals.auth();

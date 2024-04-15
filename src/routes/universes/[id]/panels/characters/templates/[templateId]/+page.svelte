@@ -3,6 +3,9 @@
     import {onMount} from "svelte";
     import TextField from "$lib/components/generics/forms/TextField.svelte";
     import Select from "$lib/components/generics/forms/Select.svelte";
+    import TextButton from "$lib/components/generics/forms/TextButton.svelte";
+    import FloatingButton from "$lib/components/generics/FloatingButton.svelte";
+    import {showSnackbar} from "$lib/components/generics/snackbar";
 
     export let data;
 
@@ -10,8 +13,50 @@
 
     let activeField: CharactersTemplatesFieldsSelect | null = null
     let dragAndDropField: CharactersTemplatesFieldsSelect | null = null
-    let isDragging = null
     let isClick = false
+    let lastEdited: Date | null = null
+    const timeBeforeSave = 5000
+    $: saveStatus = lastEdited === null ? 'Saved' : 'Saving...'
+
+    async function save() {
+        if (templateFields === null)
+            return
+        console.log(templateFields)
+        const res = await fetch(`/api/panels/characters/templates/fields`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: template.id,
+                name: template.name,
+                fields: templateFields
+            })
+        })
+
+        if (res.status === 200) {
+            lastEdited = null
+            templateFields = await res.json()
+            console.log(templateFields)
+        } else {
+            showSnackbar('Error while saving', 'error');
+        }
+
+    }
+
+    function setLastEdited() {
+        lastEdited = new Date()
+
+        setTimeout(() => {
+            if (lastEdited === null)
+                return
+            const now = new Date()
+            if (now.getTime() - lastEdited.getTime() > timeBeforeSave) {
+                lastEdited = null
+                save()
+            }
+        }, timeBeforeSave)
+    }
 
     function click(field: CharactersTemplatesFieldsSelect) {
         if (activeField === field)
@@ -81,7 +126,6 @@
             // Add drag and drop
             container.addEventListener('mousedown', (e) => {
                 // set dragging
-                isDragging = {x: e.clientX, y: e.clientY}
                 dragAndDropField = field
                 isClick = true
 
@@ -174,9 +218,7 @@
     function onDragOver(e: any) {
         e.preventDefault()
         // only start drag if mouse move
-        if (isDragging === null || isClick=== true)
-            return
-        if (isDragging.x - e.clientX < 5 && isDragging.y - e.clientY < 5)
+        if (isClick === true)
             return
 
         // delete all occurence of the draaged field
@@ -238,18 +280,7 @@
     onMount(() => {
         displayTemplate()
 
-        // add onmouve event to drag and drop element
-        const dragAndDropElement = document.getElementById('drag-and-drop-element')
-        if (dragAndDropElement === null)
-            return
-
-        window.addEventListener('mousemove', (e) => {
-            dragAndDropElement.style.left = `${e.clientX}px`
-            dragAndDropElement.style.top = `${e.clientY}px`
-        })
-
         window.onmouseup = (e) => {
-            dragAndDropElement.style.display = 'none'
 
             // check if drag or click
             if (isClick && dragAndDropField !== null) {
@@ -267,7 +298,8 @@
             }
 
             dragAndDropField = null
-            displayTemplate()
+            displayTemplate();
+            setLastEdited();
 
         }
 
@@ -277,10 +309,55 @@
 
         templateBody.addEventListener('mousemove', onDragOver)
     })
+
+    function resizeRow(e: any) {
+        if (activeField === null)
+            return
+
+        resizeField(+e.target.value, activeField.columnSize);
+        setLastEdited();
+    }
+
+    function resizeColumn(e: any) {
+        if (activeField === null)
+            return
+
+        resizeField(activeField.rowSize, +e.target.value);
+        setLastEdited();
+    }
+
+    function changeType(e: any) {
+        if (activeField === null)
+            return
+
+        activeField = {...activeField, type: e}
+        displayTemplate()
+        setLastEdited();
+    }
+
+    function changeName(e: any) {
+        if (activeField === null)
+            return
+
+        activeField = {...activeField, name: e.target.value}
+        displayTemplate()
+        setLastEdited();
+    }
+
+    function deleteField() {
+        if (activeField === null)
+            return
+
+        templateFields = templateFields.filter((f) => f.id !== activeField.id)
+        activeField = null
+        displayTemplate()
+        setLastEdited()
+    }
 </script>
 
 <div class="template-editor-header">
     <h1>{template.name}</h1>
+    <p>{saveStatus}</p>
 </div>
 
 <div class="body">
@@ -293,12 +370,7 @@
                         label="Name"
                         labelStyle="color: white;"
                         value={activeField.name}
-                        onChange={(e) => {
-                            if (activeField === null)
-                                return
-                            activeField = {...activeField, name: e.target.value}
-                            displayTemplate()
-                        }}
+                        onChange={changeName}
                     />
                     <Select
                         label="Type"
@@ -308,30 +380,54 @@
                             {key: 'text', value: 'Text'},
                             {key: 'image', value: 'Image'},
                         ]}
-                        onChange={(e) => {
-                            if (activeField === null)
-                                return
-                            activeField = {...activeField, type: e}
-                            displayTemplate()
-                        }}
+                        onChange={changeType}
                     />
                     <div class="gris-editor">
                         <div class="row-editor">
                             <label style="color: white">Row size</label>
-                            <input type="number" value={activeField.rowSize} on:change={(e) => resizeField(+e.target.value, activeField.columnSize)} />
+                            <input type="number" value={activeField.rowSize} on:change={resizeRow} />
                         </div>
                         <div class="column-editor">
                             <label style="color: white">Column size</label>
-                            <input type="number" value={activeField.columnSize} on:change={(e) => resizeField(activeField.rowSize, +e.target.value)} />
+                            <input type="number" value={activeField.columnSize} on:change={resizeColumn} />
                         </div>
                     </div>
             </div>
+            <div class="footer">
+                <TextButton
+                    label="Delete"
+                    style="background: #ff6b6b;"
+                    onClick={deleteField}
+                />
+            </div>
         </div>
     {/if}
-</div>
+    <FloatingButton
+        style="position: absolute; right: {activeField === null ? '20px' : '21%'}; bottom: 20px;"
+        onClick={() => {
+            let lastRow = 0
+            for (const fieldIndex in templateFields) {
+                if (templateFields[fieldIndex].row + templateFields[fieldIndex].rowSize > lastRow)
+                    lastRow = templateFields[fieldIndex].row
+            }
 
-<div class="drag-and-drop-element" id="drag-and-drop-element">
-    <p>text</p>
+            const newField = {
+                id: -1,
+                templateId: template.id,
+                name: 'New field',
+                type: 'text',
+                row: lastRow + 1,
+                column: 1,
+                rowSize: 1,
+                columnSize: 1,
+            }
+            templateFields.push(newField)
+            displayTemplate()
+            setLastEdited()
+        }}
+    >
+        Add field
+    </FloatingButton>
 </div>
 
 <style>
@@ -346,6 +442,12 @@
         background: #464646;
         display: flex;
         align-items: start;
+        justify-content: space-between;
+    }
+
+    p {
+        margin: 10px;
+        color: white;
     }
 
     .template-body {
@@ -373,6 +475,7 @@
         overflow: hidden;
         border-top: 1px solid #b4b4b4;
         position: sticky;
+        justify-content: space-between;
     }
 
     .form {
@@ -400,13 +503,10 @@
         width: 3em
     }
 
-    .drag-and-drop-element {
-        display: none;
-        position: absolute;
-        background: #707070;
-        border-radius: 20px;
+    .footer {
+        display: flex;
         padding: 10px;
-        color: white;
+        justify-content: end;
     }
 
 

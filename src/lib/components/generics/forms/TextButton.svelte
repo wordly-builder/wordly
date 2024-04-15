@@ -5,9 +5,10 @@
 
     export let label = 'Button';
     export let type: "submit" | "button" | "reset" | null | undefined = 'submit';
+    export let style = '';
 </script>
 
-<button type={type} on:click={onClick}>{label}</button>
+<button type={type} on:click={onClick} style={style}>{label}</button>
 
 <style>
     button {

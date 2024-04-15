@@ -1,6 +1,7 @@
 import {charactersTemplates} from "../schemas/characters.templates";
 import {db} from "../index";
 import {eq} from "drizzle-orm";
+import {deleteCharactersTemplatesFieldsByTemplate} from "./characters.templates.fields.requests";
 
 export async function getAllCharactersTemplates() {
     return db.select().from(charactersTemplates);
@@ -23,9 +24,17 @@ export async function updateCharactersTemplate(id: number, {panelId, name}: {pan
 }
 
 export async function deleteCharactersTemplate(id: number) {
+    // delete fields
+    deleteCharactersTemplatesFieldsByTemplate(id);
+
     return db.delete(charactersTemplates).where(eq(charactersTemplates.id, id));
 }
 
 export async function deleteCharactersTemplatesByPanel(panelId: number) {
+    const templates = await getCharactersTemplatesByPanel(panelId);
+    for (const template of templates) {
+        await deleteCharactersTemplatesFieldsByTemplate(template.id);
+    }
+
     return db.delete(charactersTemplates).where(eq(charactersTemplates.panelId, panelId));
 }
