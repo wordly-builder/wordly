@@ -20,7 +20,7 @@ export async function createCharactersTemplate({panelId, name}: {panelId: number
 }
 
 export async function updateCharactersTemplate(id: number, {panelId, name}: {panelId: number, name: string}) {
-    return db.update(charactersTemplates).set({panelId, name}).where(eq(charactersTemplates.id, id));
+    return db.update(charactersTemplates).set({panelId, name}).where(eq(charactersTemplates.id, id)).returning();
 }
 
 export async function deleteCharactersTemplate(id: number) {

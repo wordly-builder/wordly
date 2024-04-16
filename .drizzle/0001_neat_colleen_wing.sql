@@ -1,0 +1,2 @@
+ALTER TABLE "characters_templates_field" ADD COLUMN "is_main_picture" boolean DEFAULT false NOT NULL;--> statement-breakpoint
+ALTER TABLE "characters_templates_field" ADD COLUMN "is_main_name" boolean DEFAULT false NOT NULL;

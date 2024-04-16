@@ -1,6 +1,7 @@
 <script lang="ts">
     import FloatingButton from "$lib/components/generics/FloatingButton.svelte";
     import {onMount} from "svelte";
+    import {showSnackbar} from "$lib/components/generics/snackbar";
 
     export let data;
     const {characters, charactersTemplates, charactersPanel} = data;
@@ -73,8 +74,21 @@
         }
     }
 
-    function createCharacter() {
-        window.location.href = "characters/add/character";
+    async function createCharacter() {
+        const response = await fetch('/api/panels/characters/characters/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({panelId: charactersPanel.id}),
+        });
+
+        if (response.ok) {
+            const newCharacter = await response.json();
+            window.location.href = "characters/characters/" + newCharacter.id;
+        } else {
+            showSnackbar('Failed to create character', 'error')
+        }
     }
 
     async function createTemplate() {
@@ -90,7 +104,7 @@
             const newTemplate = await response.json();
             window.location.href = "characters/templates/" + newTemplate.template.id;
         } else {
-            console.error('Failed to create template');
+            showSnackbar('Failed to create template', 'error')
         }
     }
 

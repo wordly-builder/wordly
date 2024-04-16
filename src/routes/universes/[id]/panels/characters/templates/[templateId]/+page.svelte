@@ -19,24 +19,42 @@
     $: saveStatus = lastEdited === null ? 'Saved' : 'Saving...'
 
     async function save() {
-        if (templateFields === null)
+        if (template === null || templateFields === null)
             return
-        console.log(templateFields)
-        const res = await fetch(`/api/panels/characters/templates/fields`, {
+
+        // update template
+        const templateRes = await fetch(`/api/panels/characters/templates`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                template: template
+            })
+        })
+
+        if (templateRes.status === 200) {
+            template = await templateRes.json()
+        } else {
+            showSnackbar('Error while saving', 'error');
+            return;
+        }
+
+        // update fields
+        const fieldsRes = await fetch(`/api/panels/characters/templates/fields`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 id: template.id,
-                name: template.name,
                 fields: templateFields
             })
         })
 
-        if (res.status === 200) {
+        if (fieldsRes.status === 200) {
             lastEdited = null
-            templateFields = await res.json()
+            templateFields = await fieldsRes.json()
             console.log(templateFields)
         } else {
             showSnackbar('Error while saving', 'error');
@@ -356,7 +374,10 @@
 </script>
 
 <div class="template-editor-header">
-    <h1>{template.name}</h1>
+    <TextField label="Name" style="margin-left: 10px" labelStyle="display:none;" value={template.name} onChange={(e) => {
+        template = {...template, name: e.target.value}
+        setLastEdited()
+    }} />
     <p>{saveStatus}</p>
 </div>
 
@@ -392,6 +413,39 @@
                             <input type="number" value={activeField.columnSize} on:change={resizeColumn} />
                         </div>
                     </div>
+                    <div class="primary-editor">
+                        {#if activeField.type === 'text'}
+                            <label style="color: white">Is Name</label>
+                            <input type="checkbox" name="is-name" value="is-name" checked={activeField.isMainName} on:change={() => {
+                                if (activeField === null)
+                                    return
+                                activeField = {...activeField, isMainName: !activeField.isMainName};
+                                // remove all other isMainName
+                                for (const fieldIndex in templateFields) {
+                                    if (templateFields[fieldIndex].id !== activeField.id)
+                                        templateFields[fieldIndex].isMainName = false
+                                }
+                                updateField();
+                                setLastEdited();
+                            }} />
+                        {:else if activeField.type === 'image'}
+                            <label style="color: white">profile picture</label>
+                            <input type="checkbox" name="is-profile-picture" value="is-profile-picture" checked={activeField.isMainPicture} on:change={() => {
+                                if (activeField === null)
+                                    return
+                                activeField = {...activeField, isMainPicture: !activeField.isMainPicture};
+                                // remove all other isMainPicture
+                                for (const fieldIndex in templateFields) {
+                                    if (templateFields[fieldIndex].id !== activeField.id)
+                                        templateFields[fieldIndex].isMainPicture = false
+                                }
+                                updateField();
+                                setLastEdited();
+                            }}
+                            />
+                        {/if}
+                    </div>
+
             </div>
             <div class="footer">
                 <TextButton
@@ -441,7 +495,7 @@
         width: 100%;
         background: #464646;
         display: flex;
-        align-items: start;
+        align-items: center;
         justify-content: space-between;
     }
 

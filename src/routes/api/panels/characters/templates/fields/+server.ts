@@ -5,7 +5,7 @@ import {getProfileFromSession} from "../../../../../../lib/helpers/getProfileFro
 // UPDATE /api/panels/characters/templates/fields
 // Update a character template fields
 export async function PUT(req: any) {
-    const {id, name, fields} = await req.request.json();
+    const {id, fields} = await req.request.json();
     const session = await req.locals.auth();
     const profile = await getProfileFromSession(session);
 
@@ -43,7 +43,9 @@ export async function PUT(req: any) {
                 column: field.column,
                 row: field.row,
                 columnSize: field.columnSize,
-                rowSize: field.rowSize
+                rowSize: field.rowSize,
+                isMainPicture: field.isMainPicture,
+                isMainName: field.isMainName
             });
             console.log(newField);
         } else {
@@ -54,9 +56,45 @@ export async function PUT(req: any) {
                 column: field.column,
                 row: field.row,
                 columnSize: field.columnSize,
-                rowSize: field.rowSize
+                rowSize: field.rowSize,
+                isMainPicture: field.isMainPicture,
+                isMainName: field.isMainName
             });
         }
+    }
+
+    const updatedFields = await database.charactersTemplates.fields.getByTemplate(id);
+    // Check if there is only one main picture
+    const mainPictures = updatedFields.filter((field: any) => field.isMainPicture);
+    if (mainPictures.length > 1) {
+        // only keep the first one
+        for (let i = 1; i < mainPictures.length; i++) {
+            await database.charactersTemplates.fields.update(mainPictures[i].id, {
+                ...mainPictures[i],
+                isMainPicture: false
+            });
+        }
+    }
+
+    // check if there is only one main name
+    const mainNames = updatedFields.filter((field: any) => field.isMainName);
+    if (mainNames.length > 1) {
+        // only keep the first one
+        for (let i = 1; i < mainNames.length; i++) {
+            await database.charactersTemplates.fields.update(mainNames[i].id, {
+                ...mainNames[i],
+                isMainName: false
+            });
+        }
+    }
+
+    // update the fields in db
+    for (const field of mainPictures) {
+        await database.charactersTemplates.fields.update(field.id, {...field});
+    }
+
+    for (const field of mainNames) {
+        await database.charactersTemplates.fields.update(field.id, {...field});
     }
 
     return json(await database.charactersTemplates.fields.getByTemplate(id));

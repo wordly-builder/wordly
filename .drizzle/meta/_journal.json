@@ -8,6 +8,27 @@
       "when": 1713109495204,
       "tag": "0000_fair_tomas",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1713251889812,
+      "tag": "0001_neat_colleen_wing",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1713266259027,
+      "tag": "0002_mighty_princess_powerful",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1713267181838,
+      "tag": "0003_gigantic_dagger",
+      "breakpoints": true
     }
   ]
 }

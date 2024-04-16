@@ -1,4 +1,4 @@
-import {integer, pgTable, serial, text} from "drizzle-orm/pg-core";
+import {boolean, integer, pgTable, serial, text} from "drizzle-orm/pg-core";
 import {charactersTemplates} from "./characters.templates";
 
 export const charactersTemplatesFields = pgTable("characters_templates_field", {
@@ -10,6 +10,8 @@ export const charactersTemplatesFields = pgTable("characters_templates_field", {
     row: integer("row").notNull().default(1),
     columnSize: integer("column_size").notNull().default(1),
     rowSize: integer("row_size").notNull().default(1),
+    isMainPicture: boolean("is_main_picture").notNull().default(false),
+    isMainName: boolean("is_main_name").notNull().default(false),
 });
 
 export type CharactersTemplatesFieldsSelect = typeof charactersTemplatesFields.$inferSelect
