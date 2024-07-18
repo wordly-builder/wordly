@@ -1,8 +1,9 @@
 <script>
+
+	import "../app.css";
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { webVitals } from '$lib/vitals';
-	import '../styles.css';
 
 	/** @type {import('./$types').LayoutServerData} */
 	export let data;
@@ -23,7 +24,8 @@
 
 </div>
 
-<style>
+<style lang="postcss">
+
 	.app {
 		display: flex;
 		flex-direction: column;

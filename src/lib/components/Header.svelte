@@ -1,34 +1,21 @@
 <script>
     import { signOut } from "@auth/sveltekit/client";
     import logo from '$lib/images/logo_no_slogan.svg';
+    import ProfileIcon from "$lib/components/ProfileIcon.svelte";
 </script>
 
-<nav>
+<nav class="w-full flex justify-between p-2 bg-gray-950 z-10">
     <a href="/universes">
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" class="h-11 ps-1"/>
     </a>
     <slot/>
     <div class="end">
-        <button on:click={() => signOut()}>Sign Out</button>>
+
+        <ProfileIcon/>
     </div>
 </nav>
 
 <style>
-
-nav {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 0;
-        background: #2a2a2a;
-        z-index: 5;
-    }
-
-    nav img {
-        height: 40px;
-        padding: 0 10px;
-    }
 
     nav ul {
         display: flex;

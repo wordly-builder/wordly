@@ -1,9 +1,45 @@
 <script lang="ts">
     import Header from "$lib/components/Header.svelte";
     import MoreVertIcon from "virtual:icons/mdi/more-vert";
+    import anime from "animejs";
+    import {onMount} from "svelte";
+    import {randomColorList} from "$lib/data/random.color.list";
+
+    onMount(() => {
+
+        const universesButtons = document.querySelectorAll(".project-button");
+        const universesButtonsArray = Array.from(universesButtons);
+        for (let i = 0; i < universesButtonsArray.length; i++) {
+            universesButtonsArray[i].addEventListener("mouseenter", () => {
+                anime({
+                    targets: universesButtonsArray[i],
+                    scale: 1.02,
+                    duration: 200,
+                });
+                anime({
+                    targets: universesButtonsArray[i].firstChild,
+                    backgroundColor: randomColorList[Math.floor(Math.random() * randomColorList.length)],
+                    duration: 200,
+                });
+            });
+            universesButtonsArray[i].addEventListener("mouseleave", () => {
+                anime({
+                    targets: universesButtonsArray[i],
+                    scale: 1,
+                    duration: 200,
+                });
+                anime({
+                    targets: universesButtonsArray[i].firstChild,
+                    backgroundColor: i % 2 === 0 ? "#afafaf" : "#e0e0e0",
+                    duration: 200,
+                });
+            });
+        }
+    });
 
     export let data;
     const universes = data.universes;
+    console.log(data);
     let selectedUniverse: any = null;
 
     function openOptions(universe: any) {
@@ -68,7 +104,10 @@
         <div class="projects-container">
             <div class="project-desc">Name</div>
             {#each universes as universe, i}
-                <button class="project-button" on:click={() => {
+                <button class="project-button pb-{i}" on:click={async (test) => {
+                    const pButtons = document.querySelectorAll(".project-button");
+                    const pButtonsArray = Array.from(pButtons).filter((button) => !button.classList.contains(`pb-${i}`));
+                    const selectedButton = document.querySelector(`.pb-${i}`);
                     window.location.href = `universes/${universe.id}`;
                 }}>
                     <div class={"project " + (i % 2 === 0 ? "even" : "odd")}>
@@ -180,16 +219,8 @@
         background-color: #afafaf;
     }
 
-    .even:hover {
-        background-color: #c0c0c0;
-    }
-
     .odd {
         background-color: #e0e0e0;
-    }
-
-    .odd:hover {
-        background-color: #f0f0f0;
     }
 
     .options {

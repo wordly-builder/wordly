@@ -2,6 +2,7 @@
 // Create a new character
 import {getProfileFromSession} from "../../../../../lib/helpers/getProfileFromSession";
 import {database} from "../../../../../lib/database/db";
+
 import {error, json} from "@sveltejs/kit";
 
 export async function POST(req: any) {

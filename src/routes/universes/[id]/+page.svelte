@@ -3,7 +3,13 @@
     import FloatingButton from "$lib/components/generics/FloatingButton.svelte";
     import {getActivePanels} from "$lib/data/panels/panels";
     import PanelButton from "$lib/components/PanelButton.svelte";
+    import anime from "animejs";
+    import {onMount} from "svelte";
+    import {browser} from "$app/environment";
 
+    onMount(() => {
+
+    })
     export let data;
     let {universe} = data;
     const activePanels = getActivePanels(universe);
@@ -49,4 +55,5 @@
         top: 50%;
         width: 100%;
     }
+
 </style>
