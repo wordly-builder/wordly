@@ -34,6 +34,12 @@ CREATE TABLE IF NOT EXISTS "verificationToken" (
 	CONSTRAINT "verificationToken_identifier_token_pk" PRIMARY KEY("identifier","token")
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "character_fields" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"character_id" serial NOT NULL,
+	"data" text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "characters_panel" (
 	"id" serial PRIMARY KEY NOT NULL
 );
@@ -46,7 +52,9 @@ CREATE TABLE IF NOT EXISTS "characters_templates_field" (
 	"column" integer DEFAULT 1 NOT NULL,
 	"row" integer DEFAULT 1 NOT NULL,
 	"column_size" integer DEFAULT 1 NOT NULL,
-	"row_size" integer DEFAULT 1 NOT NULL
+	"row_size" integer DEFAULT 1 NOT NULL,
+	"is_main_picture" boolean DEFAULT false NOT NULL,
+	"is_main_name" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "characters_template" (
@@ -57,8 +65,8 @@ CREATE TABLE IF NOT EXISTS "characters_template" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "character" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"name" text,
-	"panel_id" integer NOT NULL
+	"panel_id" integer NOT NULL,
+	"template_id" serial NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "maps_panel" (
@@ -84,8 +92,8 @@ CREATE TABLE IF NOT EXISTS "universe" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text,
 	"owner" serial NOT NULL,
-	"characters_panel" serial DEFAULT NULL NOT NULL,
-	"maps_panel" serial DEFAULT NULL NOT NULL
+	"characters_panel" integer DEFAULT NULL,
+	"maps_panel" integer DEFAULT NULL
 );
 --> statement-breakpoint
 DO $$ BEGIN
@@ -96,6 +104,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "session" ADD CONSTRAINT "session_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "character_fields" ADD CONSTRAINT "character_fields_character_id_character_id_fk" FOREIGN KEY ("character_id") REFERENCES "character"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -114,6 +128,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "character" ADD CONSTRAINT "character_panel_id_characters_panel_id_fk" FOREIGN KEY ("panel_id") REFERENCES "characters_panel"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "character" ADD CONSTRAINT "character_template_id_characters_template_id_fk" FOREIGN KEY ("template_id") REFERENCES "characters_template"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

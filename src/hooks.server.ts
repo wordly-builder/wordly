@@ -5,6 +5,7 @@ import { FORCE_LOGIN } from "$env/static/private"
 
 // @ts-ignore
 async function authorizationHandle({ event, resolve}) {
+
     const session = FORCE_LOGIN == 'true' ? {
         user: {
             name: 'Pebloop',

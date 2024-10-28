@@ -21,6 +21,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
             return session;
         },
         async signIn({ user, account, profile, email, credentials }) {
+
             if (!account)
                 return false;
 

@@ -1,9 +1,9 @@
 import {integer, pgTable, serial, text} from "drizzle-orm/pg-core";
-import {relations} from "drizzle-orm";
+import {relations, sql} from "drizzle-orm";
 import {characters} from "./characters";
 
 export const charactersPanels = pgTable("characters_panel", {
-    id: serial("id").notNull().primaryKey(),
+    id: serial("id").primaryKey(),
 });
 
 export const charactersPanelsCharactersRelations = relations(charactersPanels, ({many}) => ({

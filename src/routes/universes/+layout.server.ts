@@ -7,7 +7,20 @@ export const load: LayoutServerLoad = async (event) => {
     let returnValue : { universes: any} = {
         universes: null
     }
+
     const {session} = await event.parent();
+
+    if (FORCE_LOGIN) {
+        const force_profile = await getProfileFromSession(session)
+        if (force_profile == null) {
+            await database.profiles.create({
+                googleId: "none",
+                name: "admin",
+                email: "admin@outlook.com",
+                image: "https://i.imgur.com/eh3WREx.png",
+            });
+        }
+    }
 
     const profile = await getProfileFromSession(session);
     if (!profile) {

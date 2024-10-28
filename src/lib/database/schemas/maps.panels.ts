@@ -1,9 +1,9 @@
 import {integer, pgTable, serial, text} from "drizzle-orm/pg-core";
-import {relations} from "drizzle-orm";
+import {relations, sql} from "drizzle-orm";
 import {maps} from "./maps";
 
 export const mapsPanels = pgTable("maps_panel", {
-    id: serial("id").notNull().primaryKey(),
+    id: serial("id").primaryKey(),
 
 });
 

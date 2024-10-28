@@ -114,11 +114,11 @@
     });
 </script>
 
-<div>
-    <h1>Characters</h1>
-    <div class="panel-container">
+<div class="p-2 pl-6">
+    <h1 class="text-4xl">Characters</h1>
+    <div class="panel-container p-2">
         <div class="characters-container container">
-            <h2>Characters</h2>
+            <h2 class="text-xl">Characters</h2>
             <ul >
                 {#each characters as character, i}
                     <li>
@@ -130,7 +130,7 @@
             </ul>
         </div>
         <div class="templates-container container">
-            <h2>Templates</h2>
+            <h2 class="text-xl">Templates</h2>
             <ul >
                 {#each charactersTemplates as template, i}
                     <li>
