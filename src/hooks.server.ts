@@ -1,7 +1,7 @@
 import { redirect, type Handle } from '@sveltejs/kit';
 import { handle as authenticationHandle } from './auth';
 import { sequence } from '@sveltejs/kit/hooks';
-import { FORCE_LOGIN } from "$env/static/private"
+import { FORCE_LOGIN, DATABASE_URL } from "$env/static/private"
 
 // @ts-ignore
 async function authorizationHandle({ event, resolve}) {

@@ -89,14 +89,21 @@
         drawFields(canvas, ctx);
     }
 
-    // no need for now
-    /*function drawToolbar(canvas, ctx) {
-        let toolbarColor = '#3f3f3f';
-        ctx.fillStyle = toolbarColor;
-        ctx.beginPath();
-        ctx.roundRect(25, 25, 50, canvas.height - 50, 15);
-        ctx.fill();
-    }*/
+    function saveTemplate() {
+        isSaving = true
+        fetch(`/api/characters/templates/${template.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: template.name,
+                fields: templateFields
+            })
+        }).then((res) => {
+            isSaving = false
+        })
+    }
 
     onMount(() => {
         let body = document.getElementById('body');

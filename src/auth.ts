@@ -6,6 +6,7 @@ import {db} from "./lib/database";
 import {database} from "./lib/database/db";
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
+    trustHost: true,
     providers: [Google({ clientId: GOOGLE_ID, clientSecret: GOOGLE_SECRET })],
     adapter: DrizzleAdapter(db),
     callbacks: {

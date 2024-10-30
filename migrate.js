@@ -11,6 +11,6 @@ const connection = client;
 
 
 // @ts-ignore
-await migrate(db, {migrationsFolder: '.drizzle', migrationsSchema: 'wordly'});
+await migrate(db, {migrationsFolder: '.drizzle', migrationsSchema: 'public'});
 // @ts-ignore
 await connection.end();
