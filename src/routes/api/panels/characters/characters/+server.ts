@@ -28,12 +28,6 @@ export async function POST(req: any) {
         throw error(403, 'Forbidden');
     }
 
-    const createdTemplate = await mongodb.charactersTemplates.create("new template", panelId);
-
-    if (!createdTemplate) {
-        throw error(500, 'Failed to create template');
-    }
-
     // create the default fields for the template
     const createdCharacter = await mongodb.characters.create("new character", panelId);
 
@@ -41,5 +35,5 @@ export async function POST(req: any) {
         throw error(500, 'Failed to create character');
     }
 
-    return json(createdCharacter[0]);
+    return json(createdCharacter);
 }

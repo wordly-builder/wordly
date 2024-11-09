@@ -49,7 +49,7 @@ export async function getCharactersByOwner(owner: string) {
     return characters;
 }
 
-export async function createCharacter(name: string, owner: string) {
+export async function createCharacter(name: string, owner: string, template: string) {
     const client = await connectToCluster();
 
     if (!client) {

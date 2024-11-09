@@ -33,7 +33,7 @@ async function createUniverse() {
     if (response.ok) {
         // redirect to the new universe
         const {universe} = await response.json();
-        window.location.href = `/universes/${universe.id}`;
+        window.location.href = `/universes/${universe._id}`;
     } else {
         showSnackbar("An error occurred while creating the universe");
     }
