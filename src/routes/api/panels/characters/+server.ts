@@ -1,37 +1,34 @@
 import {getProfileFromSession} from "../../../../lib/helpers/getProfileFromSession";
+import {mongodb} from "../../../../lib/database/mongodb/db";
 import {error, json} from "@sveltejs/kit";
-import {database} from "../../../../lib/database/db";
 
-// POST /api/panels/characters/
-// Create a new character panel
 export async function POST({ request }: { request: Request }) {
     const {universeId, session} = await request.json();
     const profile = await getProfileFromSession(session);
-    const universe = await database.universes.getById(universeId);
+    const universe = await mongodb.universe.getById(universeId);
 
     if (!profile) {
         throw error(401, 'Unauthorized');
     }
 
-    if (universe.length === 0) {
+    if (universe === null) {
         throw error(404, 'Universe not found');
     }
 
-    if (universe[0].owners !== profile.id) {
+    if (universe.owner !== profile.id) {
         throw error(401, 'Unauthorized');
     }
 
-    if (universe[0].charactersPanel !== null) {
+    const charactersPanel = await mongodb.charactersPanel.getByOwner(universeId);
+    if (charactersPanel.length > 0) {
         throw error(400, 'Characters panel already exists');
     }
 
-    const createdPanel = await database.panels.characters.create();
+    const createdPanel = await mongodb.charactersPanel.create(universeId);
 
     if (!createdPanel) {
         throw error(500, 'Failed to create panel');
     }
 
-    await database.universes.linkCharactersPanel(universeId, createdPanel[0].id);
-
-    return json({panel: createdPanel[0]});
+    return json({panel: createdPanel});
 }

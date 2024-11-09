@@ -2,8 +2,8 @@ import { SvelteKitAuth } from "@auth/sveltekit"
 import Google from "@auth/core/providers/google"
 import { GOOGLE_ID, GOOGLE_SECRET} from "$env/static/private"
 import {DrizzleAdapter} from "@auth/drizzle-adapter";
-import {db} from "./lib/database";
-import {database} from "./lib/database/db";
+import {db} from "./lib/database/postgres";
+import {postgres} from "./lib/database/postgres/db";
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
     trustHost: true,
@@ -27,13 +27,13 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
                 return false;
 
             if (account.provider === "google") {
-                const existingProfile = await database.profiles.getByGoogleId(account.providerAccountId);
+                const existingProfile = await postgres.profiles.getByGoogleId(account.providerAccountId);
 
                 if (existingProfile.length > 0) {
                     return true;
                 }
 
-                await database.profiles.create({
+                await postgres.profiles.create({
                     googleId: account.providerAccountId,
                     name: user.name ? user.name : "unknown",
                     email: user.email ? user.email : "unknown",

@@ -1,14 +1,15 @@
 <script lang="ts">
-    import {getInactivePanels} from '$lib/data/panels/panels';
-    import type {Panel} from "$lib/data/panels/panel";
+
+    import {getPanelsByName} from "../../../../lib/data/panels/panels";
+
     export let data;
-    let {universe, session} = data;
-    let panels = getInactivePanels(universe);
+    let {universe, session, inactivePanels} = data;
+    const inactivePanelsFull = getPanelsByName(inactivePanels);
 
-    function addPanel(panel: Panel) {
+    function addPanel(panel: any) {
 
-        panel.create(universe.id, session).then(() => {
-            window.location.href = `/universes/${universe.id}/panels/${panel.url}`;
+        panel.create(universe._id, session).then(() => {
+            window.location.href = `/universes/${universe._id}/panels/${panel.url}`;
         }).catch((error) => {
             console.error(error);
         });
@@ -21,7 +22,7 @@
     {#if universe}
         <h1>Add panel</h1>
         <div class="flex">
-            {#each panels as panel}
+            {#each inactivePanelsFull as panel}
                 <button class="panel" on:click={() => addPanel(panel)}>
                     <svelte:component this={panel.icon} style="font-size:4em"/>
                     <h2>{panel.name}</h2>

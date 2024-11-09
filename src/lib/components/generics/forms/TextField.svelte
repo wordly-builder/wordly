@@ -8,8 +8,8 @@
 </script>
 
 <div>
-    <label class={error ? "error" : ""} style="{labelStyle}">{label}</label>
-    <input type="text" bind:value={value} on:change={onChange} class={error ? "error" : ""} style={style} />
+    <label class={error ? "error" : ""} style="{labelStyle}" for="input">{label}</label>
+    <input id="input" type="text" bind:value={value} on:change={onChange} class={error ? "error" : ""} style={style} />
 </div>
 
 <style>

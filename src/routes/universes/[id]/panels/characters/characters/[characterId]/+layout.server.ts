@@ -1,5 +1,5 @@
 import type {LayoutServerLoad} from "../../../../../../../../.svelte-kit/types/src/routes/$types";
-import {database} from "../../../../../../../lib/database/db";
+import {postgres} from "../../../../../../../lib/database/postgres/db";
 
 export const load: LayoutServerLoad = async (event) => {
     let returnValue: { character: any} = {
@@ -16,7 +16,7 @@ export const load: LayoutServerLoad = async (event) => {
     }
 
 
-    const character = await database.characters.getById(+characterId);
+    const character = await postgres.characters.getById(+characterId);
 
     if (character.length === 0 || character[0].panelId !== charactersPanel.id) {
         return returnValue;

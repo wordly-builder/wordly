@@ -12,8 +12,8 @@
 </script>
 
 <div>
-<label style={labelStyle}>{label}</label>
-    <select bind:value={selected} on:change={() => onChange(selected)} style={style}>
+<label style={labelStyle} for="select">{label}</label>
+    <select id="select" bind:value={selected} on:change={() => onChange(selected)} style={style}>
         {#each values as option}
             <option value={option.key}>{option.value}</option>
         {/each}

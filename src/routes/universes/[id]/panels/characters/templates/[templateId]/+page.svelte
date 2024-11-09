@@ -1,11 +1,12 @@
 <script lang="ts" xmlns="http://www.w3.org/1999/html">
-    import type {CharactersTemplatesFieldsSelect} from "$lib/database/schemas/characters.templates.fields";
     import TextField from "$lib/components/generics/forms/TextField.svelte";
     import {onMount} from "svelte";
 
+    let isSaving = false
+
     export let data;
-    let {template, templateFields} = data as { template: any, templateFields: CharactersTemplatesFieldsSelect[] }
-    let isSaving: boolean = false
+    let {template} = data as { template: any }
+    let templateFields = template.fields || [];
 
     let offset = {
         x: 50,
@@ -91,14 +92,16 @@
 
     function saveTemplate() {
         isSaving = true
-        fetch(`/api/characters/templates/${template.id}`, {
+
+        template.fields = templateFields || [];
+        console.log(template)
+        fetch(`/api/panels/characters/templates`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: template.name,
-                fields: templateFields
+                template: template,
             })
         }).then((res) => {
             isSaving = false
@@ -165,7 +168,6 @@
                         const fieldProperty = document.querySelector('.field-property');
                         fieldProperty.style.visibility = 'visible';
                         isField = true;
-                        console.log(selectedField)
                     }
                 })
 
@@ -203,6 +205,9 @@
                 }
             }
 
+            if (pressedField) {
+                saveTemplate();
+            }
             timeMouseDown = 0;
             pressedField = null;
         }
@@ -383,7 +388,7 @@
     <TextField label="Name" style="margin-left: 10px" labelStyle="display:none;" value={template.name} onChange={(e) => {
         template = {...template, name: e.target.value}
     }}/>
-    <p>{isSaving}</p>
+    <p>{isSaving ? "Saving...": "Saved"}</p>
 </div>
 
 <div class="body" id="body">
@@ -398,7 +403,8 @@
                     type="text"
                     value={selectedField ? selectedField.name : ""}
                     on:change={(e) => {
-                    selectedField = {...selectedField, name: e.target.value}
+                    selectedField.name = e.target.value;
+                    saveTemplate();
                 }}
             />
         </div>
@@ -411,7 +417,8 @@
                     class="type"
                     value={selectedField ? selectedField.type : ""}
                     on:change={(e) => {
-                    selectedField = {...selectedField, type: e.target.value}
+                    selectedField.type = e.target.value;
+                    saveTemplate();
                 }}
             >
                 <option value="text">Text</option>
@@ -429,6 +436,7 @@
             render(canvas, canvas.getContext('2d'));
             const fieldProperty = document.querySelector('.field-property');
             fieldProperty.style.visibility = 'hidden';
+            saveTemplate();
         }}>Delete</button>
 
 

@@ -1,5 +1,4 @@
 <script>
-    import { signOut } from "@auth/sveltekit/client";
     import logo from '$lib/images/logo_no_slogan.svg';
     import ProfileIcon from "$lib/components/ProfileIcon.svelte";
 </script>
@@ -17,31 +16,9 @@
 
 <style>
 
-    nav ul {
-        display: flex;
-        list-style: none;
-    }
-
-    nav ul li {
-        margin-right: 10px;
-    }
-
     nav ul li a {
         color: white;
         text-decoration: none;
-    }
-
-    nav button {
-        color: white;
-        text-decoration: none;
-        padding: 10px 20px;
-        background: #333;
-        border-radius: 5px;
-        border: none;
-    }
-
-    nav button:hover {
-        background: #555;
     }
 
     nav .end {

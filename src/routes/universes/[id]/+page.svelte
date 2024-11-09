@@ -1,28 +1,25 @@
 <script lang="ts">
-    import Header from "$lib/components/Header.svelte";
     import FloatingButton from "$lib/components/generics/FloatingButton.svelte";
-    import {getActivePanels} from "$lib/data/panels/panels";
     import PanelButton from "$lib/components/PanelButton.svelte";
-    import anime from "animejs";
     import {onMount} from "svelte";
-    import {browser} from "$app/environment";
+    import {getPanelsByName} from "../../../lib/data/panels/panels";
 
     onMount(() => {
 
     })
     export let data;
-    let {universe} = data;
-    const activePanels = getActivePanels(universe);
+    let {universe, activatedPanels} = data;
+    const panels = getPanelsByName(activatedPanels);
 
 </script>
 
 <div>
     {#if universe}
         <h1>{universe.name}</h1>
-        {#if activePanels.length > 0}
+        {#if panels.length > 0}
             <div class="panel">
-                {#each activePanels as panel}
-                    <PanelButton panel={panel} onClick={() => window.location.href = `/universes/${universe.id}/panels/${panel.url}`} />
+                {#each panels as panel}
+                    <PanelButton panel={panel} onClick={() => window.location.href = `/universes/${universe._id}/panels/${panel.url}`} />
                 {/each}
             </div>
         {:else}
@@ -30,7 +27,7 @@
                 <p>Please integrate a panel to start creating your universe.</p>
             </div>
         {/if}
-        <FloatingButton onClick={() => window.location.href = `/universes/${universe.id}/add`}>Add Panel</FloatingButton>
+        <FloatingButton onClick={() => window.location.href = `/universes/${universe._id}/add`}>Add Panel</FloatingButton>
     {:else}
         <div class="center">
             <h1>404</h1>

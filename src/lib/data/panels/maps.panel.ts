@@ -4,8 +4,7 @@ import MapIcon from "virtual:icons/mdi/map";
 const panel : Panel = {
     name: 'maps',
     icon: MapIcon,
-    isActive: (universe: Universe) => universe.mapsPanel !== null,
-    create: async (universeId: number, session: any) => {
+    create: async (universeId: string, session: any) => {
         const response = await fetch('/api/panels/maps', {
             method: 'POST',
             headers: {

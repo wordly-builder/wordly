@@ -4,8 +4,7 @@ import type {Panel} from "./panel";
 const panel: Panel = {
     name: 'characters',
     icon: GroupsIcon,
-    isActive: (universe: Universe) => universe.charactersPanel !== null,
-    create: async (universeId: number, session: any) => {
+    create: async (universeId: string, session: any) => {
         const response = await fetch('/api/panels/characters', {
             method: 'POST',
             headers: {

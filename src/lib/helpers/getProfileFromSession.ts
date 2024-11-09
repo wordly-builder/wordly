@@ -1,12 +1,13 @@
-import {database} from "../database/db";
+"use server";
+
+import {postgres} from "../database/postgres/db";
 import { PROFILE_ID, FORCE_LOGIN } from "$env/static/private"
-import type {ProfileSelect} from "../database/schemas/profiles";
-import {text} from "drizzle-orm/pg-core/index";
+import type {ProfileSelect} from "../database/postgres/schemas/profiles";
 
 export async function getProfileFromSession(session: any) : Promise<ProfileSelect | null> {
     if (FORCE_LOGIN == 'true') {
         if (PROFILE_ID != null) {
-            const profiles = await database.profiles.getById(+PROFILE_ID);
+            const profiles = await postgres.profiles.getById(+PROFILE_ID);
             if (profiles.length === 0) {
                 return null;
             }
@@ -18,12 +19,12 @@ export async function getProfileFromSession(session: any) : Promise<ProfileSelec
         return null;
     }
 
-    const account = await database.auth.getAccountByUserId(session.user.id);
+    const account = await postgres.auth.getAccountByUserId(session.user.id);
     if (account.length === 0) {
         return null;
     }
 
-    const profiles = await database.profiles.getByGoogleId(account[0].providerAccountId);
+    const profiles = await postgres.profiles.getByGoogleId(account[0].providerAccountId);
     if (profiles.length === 0) {
         return null;
     }

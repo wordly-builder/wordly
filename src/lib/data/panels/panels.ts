@@ -1,40 +1,15 @@
-import charactersPanel from './characters.panel';
-import mapsPanel from './maps.panel';
-import type {Panel} from "./panel";
+import charactersPanel from "./characters.panel";
+import mapsPanel from "./maps.panel";
 
 export const panels = [
     charactersPanel,
-    mapsPanel,
-]
+    mapsPanel
+    ]
 
-export function getInactivePanels(universe: Universe) {
-    let inactivePanels: Panel[] = [];
-
-    if (!universe) {
-        return inactivePanels;
-    }
-
-    for (const panel of panels) {
-        if (!panel.isActive(universe)) {
-            inactivePanels.push(panel);
-        }
-    }
-
-    return inactivePanels;
+export function getPanelByName(name: string) {
+    return panels.find((panel) => panel.name === name);
 }
 
-export function getActivePanels(universe: Universe) {
-    let activePanels: Panel[] = [];
-
-    if (!universe) {
-        return activePanels;
-    }
-
-    for (const panel of panels) {
-        if (panel.isActive(universe)) {
-            activePanels.push(panel);
-        }
-    }
-
-    return activePanels;
+export function getPanelsByName(names: string[]) {
+    return panels.filter((panel) => names.includes(panel.name));
 }

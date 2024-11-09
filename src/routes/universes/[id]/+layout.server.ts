@@ -1,11 +1,11 @@
 import type { LayoutServerLoad } from './$types';
-import {database} from "../../../lib/database/db";
-import { PROFILE_ID, FORCE_LOGIN } from "$env/static/private"
 import {getProfileFromSession} from "../../../lib/helpers/getProfileFromSession";
+import {mongodb} from "../../../lib/database/mongodb/db";
 
 export const load: LayoutServerLoad = async (event) => {
-    let returnValue : { universe: any} = {
-        universe: null
+    let returnValue : { universe: any, activatedPanels: any} = {
+        universe: null,
+        activatedPanels: [],
     }
 
     const session = await event.locals.auth();
@@ -14,16 +14,27 @@ export const load: LayoutServerLoad = async (event) => {
         return returnValue;
     }
 
-    const universe = await database.universes.getById(+event.params.id);
+    const universe = await mongodb.universe.getById(event.params.id);
 
-    if (universe.length === 0) {
+    if (universe == null) {
         return returnValue;
     }
 
-    if (universe[0].owners !== profile.id) {
+    const universeId = universe._id.toString();
+
+
+    if (universe.owner !== profile.id) {
         return returnValue;
     }
 
-    returnValue.universe = universe[0];
+    returnValue.universe = {
+        ...universe,
+        _id: universeId,
+    }
+
+    const activatedPanels = await mongodb.universe.activePanels(universeId);
+    returnValue.activatedPanels = activatedPanels;
+
+
     return returnValue;
 };

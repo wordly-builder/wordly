@@ -39,7 +39,6 @@
 
     export let data;
     const universes = data.universes;
-    console.log(data);
     let selectedUniverse: any = null;
 
     function openOptions(universe: any) {
@@ -108,7 +107,7 @@
                     const pButtons = document.querySelectorAll(".project-button");
                     const pButtonsArray = Array.from(pButtons).filter((button) => !button.classList.contains(`pb-${i}`));
                     const selectedButton = document.querySelector(`.pb-${i}`);
-                    window.location.href = `universes/${universe.id}`;
+                    window.location.href = `universes/${universe._id}`;
                 }}>
                     <div class={"project " + (i % 2 === 0 ? "even" : "odd")}>
                         {universe.name}

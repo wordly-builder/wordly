@@ -1,7 +1,8 @@
 import type { LayoutServerLoad } from './$types';
-import {database} from "../../lib/database/db";
-import { PROFILE_ID, FORCE_LOGIN } from "$env/static/private"
+import {postgres} from "../../lib/database/postgres/db";
+import { FORCE_LOGIN } from "$env/static/private"
 import {getProfileFromSession} from "../../lib/helpers/getProfileFromSession";
+import {mongodb} from "../../lib/database/mongodb/db";
 
 export const load: LayoutServerLoad = async (event) => {
     let returnValue : { universes: any} = {
@@ -13,7 +14,7 @@ export const load: LayoutServerLoad = async (event) => {
     if (FORCE_LOGIN) {
         const force_profile = await getProfileFromSession(session)
         if (force_profile == null) {
-            await database.profiles.create({
+            await postgres.profiles.create({
                 googleId: "none",
                 name: "admin",
                 email: "admin@outlook.com",
@@ -27,6 +28,16 @@ export const load: LayoutServerLoad = async (event) => {
         return returnValue;
     }
 
-    returnValue.universes = await database.universes.getByOwner(profile.id);
+    const universes = await mongodb.universe.getByOwner(profile.id);
+
+    returnValue.universes = [];
+    for (let universe of universes) {
+        const universeId = universe._id.toString();
+        returnValue.universes.push({
+            ...universe,
+            _id: universeId,
+        });
+    }
+
     return returnValue;
 };

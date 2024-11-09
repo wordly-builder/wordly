@@ -1,7 +1,7 @@
+import type {ObjectId} from "mongodb";
+
 interface Universe {
-    id: number;
+    _id: ObjectId;
     name: string;
-    owners: number;
-    charactersPanel: number | null;
-    mapsPanel: number | null;
+    owner: string;
 }

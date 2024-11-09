@@ -1,22 +1,22 @@
 <script lang="ts">
     import Header from "$lib/components/Header.svelte";
     import Select from "$lib/components/generics/forms/Select.svelte";
-    import {getActivePanels} from "$lib/data/panels/panels";
+    import {getPanelsByName} from "../../../lib/data/panels/panels";
 
     export let data;
     const universe = data.universe;
     const universes = data.universes;
+    const activatedPanels = data.activatedPanels;
+    const panels = getPanelsByName(activatedPanels);
 
-    let selectedUniverse = universe ? universe.id : -1;
+    let selectedUniverse = universe ? universe._id.toString() : -1;
 
     const universesList = universes.map((u: any) => {
         return {
-            key: u.id,
+            key: u._id.toString(),
             value: u.name
         };
     });
-
-    const activatedPanels = getActivePanels(universe);
 
     function onChange(event: any) {
         selectedUniverse = event;
@@ -30,8 +30,8 @@
     <Header>
         <Select label="" values={universesList} bind:selected={selectedUniverse} onChange={onChange}/>
         <div class="spacer">
-            {#each activatedPanels as panel}
-                <a href="/universes/{universe.id}/panels/{panel.url}" class="panel">
+            {#each panels as panel}
+                <a href="/universes/{universe._id}/panels/{panel.url}" class="panel">
                     <svelte:component this={panel.icon} style="width: 40px; height: 40px; color: white;"/>
                 </a>
             {/each}

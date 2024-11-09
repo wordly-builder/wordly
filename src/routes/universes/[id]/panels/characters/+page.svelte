@@ -80,12 +80,12 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({panelId: charactersPanel.id}),
+            body: JSON.stringify({panelId: charactersPanel._id}),
         });
 
         if (response.ok) {
             const newCharacter = await response.json();
-            window.location.href = "characters/characters/" + newCharacter.id;
+            window.location.href = "characters/characters/" + newCharacter._id;
         } else {
             showSnackbar('Failed to create character', 'error')
         }
@@ -97,12 +97,12 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({panelId: charactersPanel.id}),
+            body: JSON.stringify({panelId: charactersPanel._id}),
         });
 
         if (response.ok) {
             const newTemplate = await response.json();
-            window.location.href = "characters/templates/" + newTemplate.template.id;
+            window.location.href = "characters/templates/" + newTemplate.template._id;
         } else {
             showSnackbar('Failed to create template', 'error')
         }
@@ -122,7 +122,7 @@
             <ul >
                 {#each characters as character, i}
                     <li>
-                        <a href="characters/characters/{character.id}">
+                        <a href="characters/characters/{character._id}">
                             {character.name}
                         </a>
                     </li>
@@ -134,7 +134,7 @@
             <ul >
                 {#each charactersTemplates as template, i}
                     <li>
-                        <a href="characters/templates/{template.id}" class="{i % 2 === 0 ? 'odd' : 'even'}">
+                        <a href="characters/templates/{template._id}" class="{i % 2 === 0 ? 'odd' : 'even'}">
                             {template.name}
                         </a>
                     </li>

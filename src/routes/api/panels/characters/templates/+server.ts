@@ -1,6 +1,8 @@
 import {getProfileFromSession} from "../../../../../lib/helpers/getProfileFromSession";
-import {database} from "../../../../../lib/database/db";
+import {postgres} from "../../../../../lib/database/postgres/db";
 import {error, json} from "@sveltejs/kit";
+import {mongodb} from "../../../../../lib/database/mongodb/db";
+import {ObjectId} from "mongodb";
 
 // POST /api/panels/characters/templates/
 // Create a new character template
@@ -12,27 +14,32 @@ export async function POST(req: any) {
     if (!profile) {
         throw error(401, 'Unauthorized');
     }
+    const currentPanel = await mongodb.charactersPanel.getById(panelId);
 
-    const universes = await database.universes.getByOwner(profile.id);
-    const currentUniverse = universes.find((universe: any) => universe.charactersPanel === panelId);
+    if (!currentPanel) {
+        throw error(404, 'Panel not found');
+    }
 
-    if (!currentUniverse) {
+    const universes = await mongodb.universe.getByOwner(profile.id);
+    const currentUniverse = await mongodb.universe.getById(currentPanel.owner.toString());
+
+    if (!currentUniverse || !universes.find((universe: any) => universe._id.toString() === currentUniverse._id.toString())) {
         throw error(403, 'Forbidden');
     }
 
-    const createdTemplate = await database.charactersTemplates.create({panelId, name: "new template"});
+    const createdTemplate = await mongodb.charactersTemplates.create("new template", panelId);
 
     if (!createdTemplate) {
         throw error(500, 'Failed to create template');
     }
 
     // create the default fields for the template
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "profile-picture", type: "image", column: 1, row: 1, columnSize: 1, rowSize: 2, isMainName: false, isMainPicture: true});
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "name", type: "text", column: 2, row: 1, columnSize: 1, rowSize: 1, isMainName: true, isMainPicture: false});
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "age", type: "text", column: 2, row: 2, columnSize: 1, rowSize: 1, isMainName: false, isMainPicture: false});
-    await database.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "description", type: "text", column: 1, row: 3, columnSize: 2, rowSize: 1, isMainName: false, isMainPicture: false});
+    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "profile-picture", type: "image", column: 1, row: 1, columnSize: 1, rowSize: 2, isMainName: false, isMainPicture: true});
+    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "name", type: "text", column: 2, row: 1, columnSize: 1, rowSize: 1, isMainName: true, isMainPicture: false});
+    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "age", type: "text", column: 2, row: 2, columnSize: 1, rowSize: 1, isMainName: false, isMainPicture: false});
+    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "description", type: "text", column: 1, row: 3, columnSize: 2, rowSize: 1, isMainName: false, isMainPicture: false});
 
-    return json({template: createdTemplate[0]});
+    return json({template: createdTemplate});
 }
 
 // PUT /api/panels/characters/templates/
@@ -46,18 +53,29 @@ export async function PUT(req: any) {
         throw error(401, 'Unauthorized');
     }
 
-    const universes = await database.universes.getByOwner(profile.id);
-    const currentUniverse = universes.find((universe: any) => universe.charactersPanel === template.panelId);
+    const currentPanel = await mongodb.charactersPanel.getById(template.owner.toString());
+    if (!currentPanel) {
+        throw error(404, 'Panel not found');
+    }
 
-    if (!currentUniverse) {
+    const universes = await mongodb.universe.getByOwner(profile.id);
+
+    const currentUniverse = await mongodb.universe.getById(currentPanel.owner.toString());
+
+    if (!currentUniverse || !universes.find((universe: any) => universe._id.toString() === currentUniverse._id.toString())) {
         throw error(403, 'Forbidden');
     }
 
     // create the default fields for the template
-    const updatedTemplate = await database.charactersTemplates.update(template.id, {name: template.name, panelId: template.panelId});
+    let templateWithId = {
+        ...template,
+        _id: new ObjectId(template._id),
+        owner: new ObjectId(template.owner),
+    };
+    const isTemplateUpdated = await mongodb.charactersTemplates.update(templateWithId);
 
-    if (!updatedTemplate) {
+    if (!isTemplateUpdated) {
         throw error(500, 'Failed to update template');
     }
-    return json(updatedTemplate[0]);
+    return json(true);
 }
