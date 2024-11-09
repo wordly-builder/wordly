@@ -23,7 +23,7 @@ import {
     deleteCharacter,
     getCharacterById,
     getCharacters,
-    getCharactersByOwner
+    getCharactersByOwner, updateCharacter
 } from "./requests/character.request";
 import {
     createCharacterRenderer, deleteCharacterRenderer,
@@ -66,6 +66,7 @@ export const mongodb = {
         getByOwner: getCharactersByOwner,
         create: createCharacter,
         delete: deleteCharacter,
+        update: updateCharacter,
     },
     charactersRenderers: {
         getAll: getCharactersRenderers,

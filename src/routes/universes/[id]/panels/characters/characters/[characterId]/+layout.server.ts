@@ -1,5 +1,7 @@
 import type {LayoutServerLoad} from "../../../../../../../../.svelte-kit/types/src/routes/$types";
 import {postgres} from "../../../../../../../lib/database/postgres/db";
+import {mongodb} from "../../../../../../../lib/database/mongodb/db";
+import {ObjectId} from "mongodb";
 
 export const load: LayoutServerLoad = async (event) => {
     let returnValue: { character: any} = {
@@ -16,12 +18,17 @@ export const load: LayoutServerLoad = async (event) => {
     }
 
 
-    const character = await postgres.characters.getById(+characterId);
+    const character = await mongodb.characters.getById(characterId);
 
-    if (character.length === 0 || character[0].panelId !== charactersPanel.id) {
+    if (!character || character.owner.toString() !== charactersPanel._id.toString()) {
         return returnValue;
     }
 
-    returnValue.character = character[0];
+    returnValue.character = {
+        ...character,
+        _id: character._id.toString(),
+        owner: character.owner.toString(),
+        template: character.template.toString(),
+    }
     return returnValue;
 }

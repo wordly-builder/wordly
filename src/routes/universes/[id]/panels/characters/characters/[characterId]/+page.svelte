@@ -1,1 +1,1 @@
-<div>cahracter page</div>
+<div>character page</div>

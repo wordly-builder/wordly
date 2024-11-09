@@ -5,8 +5,10 @@ import {postgres} from "../../../../../lib/database/postgres/db";
 
 import {error, json} from "@sveltejs/kit";
 import {mongodb} from "../../../../../lib/database/mongodb/db";
+import type {Character, NewCharacter} from "../../../../../lib/database/mongodb/models/character.model";
+import {newCharacter} from "../../../../../lib/database/mongodb/models/character.model";
 
-export async function POST(req: any) {
+export async function POST(req: any): Promise<Response> {
     const {panelId} = await req.request.json();
     const session = await req.locals.auth();
     const profile = await getProfileFromSession(session);
@@ -28,8 +30,18 @@ export async function POST(req: any) {
         throw error(403, 'Forbidden');
     }
 
+    // get first character template
+    const templates = await mongodb.charactersTemplates.getByOwner(currentPanel._id.toString());
+    const firstTemplate = templates[0];
+
+    if (!firstTemplate) {
+        throw error(404, 'Template not found');
+    }
+
+    const newChar = newCharacter(currentPanel._id.toString(), firstTemplate._id.toString());
+
     // create the default fields for the template
-    const createdCharacter = await mongodb.characters.create("new character", panelId);
+    const createdCharacter = await mongodb.characters.create(newChar);
 
     if (!createdCharacter) {
         throw error(500, 'Failed to create character');

@@ -30,7 +30,8 @@ export const load: LayoutServerLoad = async (event) => {
         return {
             ...character,
             _id: character._id.toString(),
-            owner: character.owner.toString()
+            owner: character.owner.toString(),
+            template: character.template.toString()
         }
     });
 

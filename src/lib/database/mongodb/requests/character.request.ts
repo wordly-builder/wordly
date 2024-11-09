@@ -2,8 +2,13 @@
 
 import {connectToCluster, getCharactersCollection} from "../utils";
 import {ObjectId} from "mongodb";
+import type {Character, NewCharacter} from "../models/character.model";
 
-export async function getCharacters() {
+/**
+ * Get all characters
+ * @returns All characters
+ */
+export async function getCharacters(): Promise<Character[]> {
     const client = await connectToCluster();
 
     if (!client) {
@@ -15,10 +20,15 @@ export async function getCharacters() {
 
     await client.close();
 
-    return characters;
+    return characters as Character[];
 }
 
-export async function getCharacterById(id: string) {
+/**
+ * Get a character by ID
+ * @param id The ID of the character
+ * @returns The character
+ */
+export async function getCharacterById(id: string): Promise<Character | null> {
     const client = await connectToCluster();
 
     if (!client) {
@@ -31,10 +41,19 @@ export async function getCharacterById(id: string) {
 
     await client.close();
 
-    return character;
+    if (!character) {
+        return null;
+    }
+
+    return character as Character;
 }
 
-export async function getCharactersByOwner(owner: string) {
+/**
+ * Get characters by owner
+ * @param owner The ID of the owner
+ * @returns The characters
+ */
+export async function getCharactersByOwner(owner: string): Promise<Character[]> {
     const client = await connectToCluster();
 
     if (!client) {
@@ -46,10 +65,15 @@ export async function getCharactersByOwner(owner: string) {
 
     await client.close();
 
-    return characters;
+    return characters as Character[];
 }
 
-export async function createCharacter(name: string, owner: string, template: string) {
+/**
+ * Create a new character
+ * @param newCharacter The new character
+ * @returns The new character
+ */
+export async function createCharacter(newCharacter: NewCharacter): Promise<Character | null> {
     const client = await connectToCluster();
 
     if (!client) {
@@ -57,30 +81,46 @@ export async function createCharacter(name: string, owner: string, template: str
     }
 
     const charactersCollection = await getCharactersCollection(client);
-    const character = await charactersCollection.insertOne({name, owner: new ObjectId(owner) });
+    const character = await charactersCollection.insertOne(newCharacter);
 
     await client.close();
+    return {
+        _id: character.insertedId,
+        ...newCharacter
+    }
 }
 
-export async function updateCharacter(id: string, name: string) {
+/** Update a character
+ *
+ * @param updatedCharacter The updated character
+ * @returns Whether the character was updated or not
+ */
+export async function updateCharacter(updatedCharacter: Partial<Character>): Promise<boolean> {
     const client = await connectToCluster();
 
     if (!client) {
-        return null;
+        return false;
     }
 
     const charactersCollection = await getCharactersCollection(client);
-    const _id = new ObjectId(id);
-    const character = await charactersCollection.updateOne({_id}, {$set: {name}});
+    const _id = new ObjectId(updatedCharacter._id);
+    let character = updatedCharacter;
+    delete character._id;
+    const response = await charactersCollection.updateOne({_id}, {$set: character});
 
     await client.close();
+    return response.modifiedCount > 0;
 }
 
-export async function deleteCharacter(id: string) {
+/** Delete a character
+ *
+ * @param id The ID of the character
+ */
+export async function deleteCharacter(id: string): Promise<boolean> {
     const client = await connectToCluster();
 
     if (!client) {
-        return null;
+        return false;
     }
 
     const charactersCollection = await getCharactersCollection(client);
@@ -88,4 +128,5 @@ export async function deleteCharacter(id: string) {
     const character = await charactersCollection.deleteOne({_id});
 
     await client.close();
+    return character.deletedCount > 0;
 }
