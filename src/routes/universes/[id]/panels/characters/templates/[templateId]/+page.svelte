@@ -94,7 +94,6 @@
         isSaving = true
 
         template.fields = templateFields || [];
-        console.log(template)
         fetch(`/api/panels/characters/templates`, {
             method: 'PUT',
             headers: {

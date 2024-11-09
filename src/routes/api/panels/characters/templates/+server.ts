@@ -33,12 +33,6 @@ export async function POST(req: any) {
         throw error(500, 'Failed to create template');
     }
 
-    // create the default fields for the template
-    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "profile-picture", type: "image", column: 1, row: 1, columnSize: 1, rowSize: 2, isMainName: false, isMainPicture: true});
-    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "name", type: "text", column: 2, row: 1, columnSize: 1, rowSize: 1, isMainName: true, isMainPicture: false});
-    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "age", type: "text", column: 2, row: 2, columnSize: 1, rowSize: 1, isMainName: false, isMainPicture: false});
-    //await postgres.charactersTemplates.fields.create({templateId: createdTemplate[0].id, name: "description", type: "text", column: 1, row: 3, columnSize: 2, rowSize: 1, isMainName: false, isMainPicture: false});
-
     return json({template: createdTemplate});
 }
 
