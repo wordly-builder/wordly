@@ -53,6 +53,7 @@
 		"animejs": "^3.2.2",
 		"dotenv": "^16.4.5",
 		"drizzle-orm": "^0.30.7",
+		"minio": "^8.0.2",
 		"mongodb": "^6.10.0",
 		"pnpm": "^9.10.0",
 		"postgres": "^3.4.4",

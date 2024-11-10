@@ -1,11 +1,10 @@
 import type {LayoutServerLoad} from "../../../../../../../../.svelte-kit/types/src/routes/$types";
-import {postgres} from "../../../../../../../lib/database/postgres/db";
 import {mongodb} from "../../../../../../../lib/database/mongodb/db";
-import {ObjectId} from "mongodb";
 
 export const load: LayoutServerLoad = async (event) => {
-    let returnValue: { character: any} = {
+    let returnValue: { character: any, template: any} = {
         character: null,
+        template: null
     }
     const characterId = event.params.characterId;
     if (!characterId) {
@@ -24,11 +23,21 @@ export const load: LayoutServerLoad = async (event) => {
         return returnValue;
     }
 
+    const template = await mongodb.charactersTemplates.getById(character.template.toString());
+    if (!template || template.owner.toString() !== charactersPanel._id.toString()) {
+        return returnValue;
+    }
+
     returnValue.character = {
         ...character,
         _id: character._id.toString(),
         owner: character.owner.toString(),
         template: character.template.toString(),
+    }
+    returnValue.template = {
+        ...template,
+        _id: template._id.toString(),
+        owner: template.owner.toString()
     }
     return returnValue;
 }
