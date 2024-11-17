@@ -19,5 +19,5 @@ export async function getProfileByGithubId(githubId: string) {
 }
 
 export async function createProfile({googleId, githubId, name, email, image}: { googleId: string | null, githubId: string | null, name: string, email: string, image: string }) {
-    return db.insert(profiles).values({ googleId, name, email, image, createdAt: new Date().toISOString() })
+    return db.insert(profiles).values({ googleId, githubId, name, email, image, createdAt: new Date().toISOString() })
 }
