@@ -47,12 +47,13 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
                 }
 
                 const newProfile = {
-                    googleId: account.provider == "google" ? account.providerAccountId : null,
-                    githubId: account.provider == "github" ? account.providerAccountId : null,
+                    googleId: account.provider === "google" ? account.providerAccountId : null,
+                    githubId: account.provider === "github" ? account.providerAccountId : null,
                     name: user.name ? user.name : "unknown",
                     email: user.email ? user.email : "unknown",
                     image: user.image ? user.image : "",
                 }
+                console.log(newProfile);
 
                 await postgres.profiles.create(newProfile);
             }
