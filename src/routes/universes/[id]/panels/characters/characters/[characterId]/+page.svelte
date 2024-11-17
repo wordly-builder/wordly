@@ -1,5 +1,6 @@
 <script>
     import Select from "$lib/components/generics/forms/Select.svelte";
+    import {onMount} from "svelte";
 
     const widthCells = 16;
 
@@ -9,6 +10,26 @@
     let isSaving = false;
 
     let fields = template.fields
+
+    function placeField(fieldID, field) {
+        let cell = document.querySelector(`#field-${fieldID}`);
+        console.log(cell);
+        if (cell) {
+            console.log("Placing field", field);
+            cell.innerHTML = field.name;
+            cell.style.position = "absolute";
+            cell.style.top = `${field.column * 2}rem`;
+            cell.style.left = `${field.row * 2}rem`;
+            cell.style.width = `${field.rowSize * 2}rem`;
+            cell.style.height = `${field.columnSize * 2}rem`;
+        }
+    }
+
+    onMount(() => {
+        for (let i = 0; i < fields.length; i++) {
+            placeField(i, fields[i]);
+        }
+    });
 
 </script>
 
@@ -20,13 +41,13 @@
         <p>{isSaving ? "Saving..." : "Saved"}</p>
     </div>
     <div class="template-editor-body">
-        <div class="template-editor-body-row">
-            {#each fields as field}
+        <div class="template-editor-body-row relative">
+            {#each fields as field, i}
                 {#if field.type === "text"}
-                    <input type="text" placeholder={field.label} />
+                    <input type="text" placeholder={field.name} id={"field-" + i} />
                 {/if}
                 {#if field.type === "image"}
-                    <input type="file" />
+                    <input type="file" id={"field-" + i} />
                 {/if}
             {/each}
         </div>
