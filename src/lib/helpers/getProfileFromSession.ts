@@ -24,7 +24,14 @@ export async function getProfileFromSession(session: any) : Promise<ProfileSelec
         return null;
     }
 
-    const profiles = await postgres.profiles.getByGoogleId(account[0].providerAccountId);
+    let profiles: any[] = [];
+
+    if (account[0].provider === "google") {
+        profiles = await postgres.profiles.getByGoogleId(account[0].providerAccountId);
+    } else if (account[0].provider === "github") {
+        profiles = await postgres.profiles.getByGithubId(account[0].providerAccountId);
+    }
+
     if (profiles.length === 0) {
         return null;
     }
