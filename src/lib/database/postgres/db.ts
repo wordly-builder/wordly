@@ -1,6 +1,6 @@
 import {
     createProfile,
-    getAllProfiles,
+    getAllProfiles, getProfileByGithubId,
     getProfileByGoogleId,
     getProfileById
 } from "./requests/profiles.requests";
@@ -14,6 +14,7 @@ export const postgres = {
         getAll: getAllProfiles,
         getById: getProfileById,
         getByGoogleId: getProfileByGoogleId,
+        getByGithubId: getProfileByGithubId,
         create: createProfile,
     },
 }

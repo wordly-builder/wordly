@@ -14,6 +14,10 @@ export async function getProfileByGoogleId(googleId: string) {
     return db.select().from(profiles).where(eq(profiles.googleId, googleId))
 }
 
-export async function createProfile({googleId, name, email, image}: { googleId: string, name: string, email: string, image: string }) {
+export async function getProfileByGithubId(githubId: string) {
+    return db.select().from(profiles).where(eq(profiles.githubId, githubId))
+}
+
+export async function createProfile({googleId, githubId, name, email, image}: { googleId: string | null, githubId: string | null, name: string, email: string, image: string }) {
     return db.insert(profiles).values({ googleId, name, email, image, createdAt: new Date().toISOString() })
 }

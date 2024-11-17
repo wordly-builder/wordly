@@ -31,19 +31,30 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
             if (!account)
                 return false;
 
-            if (account.provider === "google") {
-                const existingProfile = await postgres.profiles.getByGoogleId(account.providerAccountId);
+            if (account.provider === "google" || account.provider === "github") {
+                let existingProfile = [];
+
+                if (account.provider === "google") {
+                    existingProfile = await postgres.profiles.getByGoogleId(account.providerAccountId);
+                }
+
+                if (account.provider === "github") {
+                    existingProfile = await postgres.profiles.getByGithubId(account.providerAccountId);
+                }
 
                 if (existingProfile.length > 0) {
                     return true;
                 }
 
-                await postgres.profiles.create({
-                    googleId: account.providerAccountId,
+                const newProfile = {
+                    googleId: account.provider == "google" ? account.providerAccountId : null,
+                    githubId: account.provider == "github" ? account.providerAccountId : null,
                     name: user.name ? user.name : "unknown",
                     email: user.email ? user.email : "unknown",
                     image: user.image ? user.image : "",
-                });
+                }
+
+                await postgres.profiles.create(newProfile);
             }
 
             return true;
