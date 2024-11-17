@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="94445ea3-4631-48f3-b8e4-4ce76812edd4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deno.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wordly.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wordly.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/universes/[id]/panels/characters/characters/[characterId]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/universes/[id]/panels/characters/characters/[characterId]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +31,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\prettier",
     "vue.rearranger.settings.migration": "true"
@@ -45,6 +48,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731809186197</updated>
       <workItem from="1731809190186" duration="56000" />
+      <workItem from="1731860846127" duration="1645000" />
     </task>
     <servers />
   </component>
