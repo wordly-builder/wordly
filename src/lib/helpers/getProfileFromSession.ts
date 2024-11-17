@@ -26,6 +26,7 @@ export async function getProfileFromSession(session: any) : Promise<ProfileSelec
 
     let profiles: any[] = [];
 
+    console.log(account[0].provider);
     if (account[0].provider === "google") {
         profiles = await postgres.profiles.getByGoogleId(account[0].providerAccountId);
     } else if (account[0].provider === "github") {
