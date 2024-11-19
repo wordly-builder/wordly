@@ -36,7 +36,5 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: create data directory
-        run: mkdir ~/data
       - name: deploy
         run: touch .env && echo "GOOGLE_ID=$GOOGLE_ID\nGOOGLE_SECRET=$GOOGLE_SECRET\n_GITHUB_ID=$_GITHUB_ID\n_GITHUB_SECRET=$_GITHUB_SECRET\nAUTH_SECRET=$AUTH_SECRET" > .env && docker-compose up -d
