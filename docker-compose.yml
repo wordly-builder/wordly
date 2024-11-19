@@ -19,7 +19,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=pass
     volumes:
       - type: bind
-        source: ./data
+        source: ~/data
         target: /data/db
     networks:
         - wordly-network
@@ -33,7 +33,7 @@ services:
       MINIO_ACCESS_KEY: ACCESSKEY
       MINIO_SECRET_KEY: SECRETKEY
     volumes:
-      - ./minio:/data
+      - ~/minio:/data
     command: server /data --console-address ":9001"
     networks:
       - wordly-network
