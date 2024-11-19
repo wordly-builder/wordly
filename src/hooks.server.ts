@@ -1,12 +1,12 @@
 import { redirect, type Handle } from '@sveltejs/kit';
 import { handle as authenticationHandle } from './auth';
 import { sequence } from '@sveltejs/kit/hooks';
-import { FORCE_LOGIN, DATABASE_URL } from "$env/static/private"
+import { env } from "$env/dynamic/private";
 
 // @ts-ignore
 async function authorizationHandle({ event, resolve}) {
 
-    const session = FORCE_LOGIN == 'true' ? {
+    const session = env.FORCE_LOGIN == 'true' ? {
         user: {
             name: 'Pebloop',
             email: 'kabondev@gmail.com',
