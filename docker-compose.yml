@@ -24,6 +24,42 @@ services:
     networks:
         - wordly-network
 
+  minio:
+    container_name: minio
+    image: minio/minio
+    environment:
+      MINIO_ROOT_USER: ROOTNAME
+      MINIO_ROOT_PASSWORD: CHANGEME123
+      MINIO_ACCESS_KEY: ACCESSKEY
+      MINIO_SECRET_KEY: SECRETKEY
+    volumes:
+      - ./minio:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - wordly-network
+
+  createcredentials:
+    image: minio/mc
+    depends_on:
+      - minio
+    volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh
+    entrypoint: >
+      sh -c "
+      chmod +x /wait-for-it.sh &&
+      /wait-for-it.sh minio:9000 --timeout=30 --strict &&
+      mc alias set myminio http://minio:9000 ROOTNAME CHANGEME123;
+      if mc admin user info myminio your_access_key >/dev/null 2>&1; then
+        echo 'User your_access_key already exists, skipping user creation';
+      else
+        mc admin user add myminio ACCESSKEY SECRETKEY;
+        mc admin policy attach myminio readwrite --user ACCESSKEY;
+      fi;
+      exit 0;
+      "
+    networks:
+        - wordly-network
+
   wordly:
     build:
       context: .
@@ -33,26 +69,15 @@ services:
     depends_on:
       - postgres
       - mongodb
+      - minio
+      - createcredentials
     env_file:
       - .env
     environment:
       - NODE_ENV=production
       - DATABASE_URL="postgresql://postgres:root@postgres/wordly"
-    networks:
-      - wordly-network
-
-  minio:
-    container_name: minio
-    image: minio/minio
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    environment:
-      MINIO_ROOT_USER: ROOTNAME
-      MINIO_ROOT_PASSWORD: CHANGEME123
-    volumes:
-      - ./minio:/data
-    command: server /data --console-address ":9001"
+      - MINIO_ACCESS_KEY="ACCESSKEY"
+      - MINIO_SECRET_KEY="SECRETKEY"
     networks:
       - wordly-network
 
