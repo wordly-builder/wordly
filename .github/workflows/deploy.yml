@@ -30,9 +30,17 @@ jobs:
       - name: create minio directory
         run: mkdir ~/minio
 
+  checkout:
+    name: Checkout code
+    runs-on: prod
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
   create-env-file:
     name: Create env file
     runs-on: prod
+    needs: checkout
     steps:
       - name: create env file
         run: touch .env
@@ -44,7 +52,5 @@ jobs:
     runs-on: prod
     needs: [setup-data-folder, setup-minio-folder, create-env-file]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: deploy
         run:  docker-compose up -d
