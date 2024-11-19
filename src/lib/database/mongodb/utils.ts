@@ -1,13 +1,13 @@
 "use server";
 
-import { MONGO_URL } from "$env/static/private"
+import { env } from '$env/dynamic/private';
 import {MongoClient} from "mongodb";
 
 export async function connectToCluster() {
     let mongoClient;
 
     try {
-        mongoClient = new MongoClient(MONGO_URL);
+        mongoClient = new MongoClient(env.MONGO_URL);
         await mongoClient.connect();
 
         return mongoClient;

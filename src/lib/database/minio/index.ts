@@ -1,12 +1,12 @@
 import * as Minio from 'minio'
-import { MINIO_URL, MINIO_ACCESS_KEY, MINIO_SECRET_KEY } from "$env/static/private"
+import { env } from '$env/dynamic/private';
 
 const minioClient = new Minio.Client({
-    endPoint: MINIO_URL,
+    endPoint: env.MINIO_URL,
     port: 9000,
     useSSL: false,
-    accessKey: MINIO_ACCESS_KEY,
-    secretKey: MINIO_SECRET_KEY
+    accessKey: env.MINIO_ACCESS_KEY,
+    secretKey: env.MINIO_SECRET_KEY
 })
 
 const minioBuckets = {

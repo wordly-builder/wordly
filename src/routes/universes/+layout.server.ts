@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from './$types';
 import {postgres} from "../../lib/database/postgres/db";
-import { FORCE_LOGIN } from "$env/static/private"
+import {env} from "$env/dynamic/private"
 import {getProfileFromSession} from "../../lib/helpers/getProfileFromSession";
 import {mongodb} from "../../lib/database/mongodb/db";
 
@@ -11,11 +11,12 @@ export const load: LayoutServerLoad = async (event) => {
 
     const {session} = await event.parent();
 
-    if (FORCE_LOGIN) {
+    if (env.FORCE_LOGIN) {
         const force_profile = await getProfileFromSession(session)
         if (force_profile == null) {
             await postgres.profiles.create({
                 googleId: "none",
+                githubId: "none",
                 name: "admin",
                 email: "admin@outlook.com",
                 image: "https://i.imgur.com/eh3WREx.png",

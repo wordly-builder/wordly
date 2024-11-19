@@ -1,17 +1,17 @@
 import { SvelteKitAuth } from "@auth/sveltekit";
 import Google from "@auth/core/providers/google";
 import GitHub from "@auth/core/providers/github"
-import { GOOGLE_ID, GOOGLE_SECRET, GITHUB_ID, GITHUB_SECRET, AUTH_SECRET} from "$env/static/private"
+import { env } from '$env/dynamic/private';
 import {DrizzleAdapter} from "@auth/drizzle-adapter";
 import {db} from "./lib/database/postgres";
 import {postgres} from "./lib/database/postgres/db";
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
     trustHost: true,
-    secret: AUTH_SECRET,
+    secret: env.AUTH_SECRET,
     providers: [
-        Google({ clientId: GOOGLE_ID, clientSecret: GOOGLE_SECRET }),
-        GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET})
+        Google({ clientId: env.GOOGLE_ID, clientSecret: env.GOOGLE_SECRET }),
+        GitHub({ clientId: env.GITHUB_ID, clientSecret: env.GITHUB_SECRET})
     ],
     adapter: DrizzleAdapter(db),
     callbacks: {
