@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - main
+
 env:
-  GOOGLE_ID:${{ secrets.GOOGLE_ID }}
-  GOOGLE_SECRET:${{ secrets.GOOGLE_SECRET }}
-  _GITHUB_ID:${{ secrets._GITHUB_ID }}
-  _GITHUB_SECRET:${{ secrets._GITHUB_SECRET }}
+  GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
+  GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
+  _GITHUB_ID: ${{ secrets._GITHUB_ID }}
+  _GITHUB_SECRET: ${{ secrets._GITHUB_SECRET }}
+
 jobs:
   deploy:
     name: Deploy app
