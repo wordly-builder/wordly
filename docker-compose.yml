@@ -78,6 +78,12 @@ services:
       - DATABASE_URL="postgresql://postgres:root@postgres/wordly"
       - MINIO_ACCESS_KEY="ACCESSKEY"
       - MINIO_SECRET_KEY="SECRETKEY"
+      - MINIO_URL="http://minio:9000"
+      - MONGO_URL="mongodb://user:pass@mongodb"
+      - MONGO_USER="user"
+      - MONGO_PASSWORD="pass"
+      - FORCE_LOGIN=false
+      - PROFILE_ID=0
     networks:
       - wordly-network
 
