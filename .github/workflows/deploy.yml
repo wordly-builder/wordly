@@ -25,6 +25,7 @@ jobs:
   setup-minio-folder:
     name: Setup minio folder
     runs-on: prod
+    continue-on-error: true
     steps:
       - name: create minio directory
         run: mkdir ~/minio
