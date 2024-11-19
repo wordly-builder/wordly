@@ -20,7 +20,7 @@ jobs:
       - name: create data directory
         run: mkdir ~/data
       - name: change permissions
-        run: chmod -R +wo ~/data
+        run: chmod -R go+w ~/data
 
   setup-minio-folder:
     name: Setup minio folder
