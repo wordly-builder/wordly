@@ -8,5 +8,4 @@ jobs:
     name: Deploy app
     runs-on: prod
     steps:
-      - uses: actions/checkout@v4
       - run: docker-compose up -d --build
