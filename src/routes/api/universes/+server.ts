@@ -8,12 +8,12 @@ import {mongodb} from "../../../lib/database/mongodb/db";
 export async function POST({ request }: { request: Request }) {
     const {name, session} = await request.json();
 
-    const profile = await getProfileFromSession(session);
-    if (!profile) {
+    const user = await getProfileFromSession(session);
+    if (!user) {
         throw error(401, 'Unauthorized');
     }
 
-    const createdUniverseResponse = await mongodb.universe.create(name, profile.id);
+    const createdUniverseResponse = await mongodb.universe.create(name, user.id);
 
     if (!createdUniverseResponse) {
         throw error(500, 'Failed to create universe');
@@ -30,16 +30,16 @@ export async function DELETE(req: any) {
     const universeId = req.url.searchParams.get('id')
     const session = await req.locals.auth();
 
-    const profile = await getProfileFromSession(session);
-    if (!profile) {
+    const user = await getProfileFromSession(session);
+    if (!user) {
         throw error(401, 'Unauthorized');
     }
 
-    const universe = await postgres.universes.getById(universeId);
-    if (universe.length === 0 || universe[0].owners !== profile.id) {
+    const universe = await mongodb.universe.getById(universeId);
+    if (!universe || universe.owner !== user.id) {
         throw error(403, 'Forbidden');
     }
 
-    await postgres.universes.delete(universeId);
+    await mongodb.universe.delete(universeId);
     return json({success: true});
 }

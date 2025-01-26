@@ -8,9 +8,9 @@ export const load: LayoutServerLoad = async (event) => {
         activatedPanels: [],
     }
 
-    const session = await event.locals.auth();
-    const profile = await getProfileFromSession(session);
-    if (!profile) {
+    const {session, user} = await event.parent();
+
+    if (!user || !session) {
         return returnValue;
     }
 
@@ -23,7 +23,7 @@ export const load: LayoutServerLoad = async (event) => {
     const universeId = universe._id.toString();
 
 
-    if (universe.owner !== profile.id) {
+    if (universe.owner !== user.id) {
         return returnValue;
     }
 

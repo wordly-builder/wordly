@@ -1,5 +1,4 @@
 <script>
-	import { signIn, signOut } from "@auth/sveltekit/client";
 	import { page } from "$app/stores";
 	import logo from '$lib/images/logo.svg';
 	import  { onMount } from 'svelte';
@@ -40,6 +39,13 @@
 		}
 	});
 
+	function signIn() {
+		document.location.href = '/login';
+	}
+
+	function signOut() {
+
+	}
 </script>
 
 <svelte:head>

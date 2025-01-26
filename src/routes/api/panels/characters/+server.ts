@@ -2,12 +2,13 @@ import {getProfileFromSession} from "../../../../lib/helpers/getProfileFromSessi
 import {mongodb} from "../../../../lib/database/mongodb/db";
 import {error, json} from "@sveltejs/kit";
 
-export async function POST({ request }: { request: Request }) {
+export async function POST({ request }: any) {
     const {universeId, session} = await request.json();
-    const profile = await getProfileFromSession(session);
+    const user = request.locals.user;
     const universe = await mongodb.universe.getById(universeId);
 
-    if (!profile) {
+    console.log('user', user);
+    if (!user) {
         throw error(401, 'Unauthorized');
     }
 
@@ -15,7 +16,7 @@ export async function POST({ request }: { request: Request }) {
         throw error(404, 'Universe not found');
     }
 
-    if (universe.owner !== profile.id) {
+    if (universe.owner !== user.id) {
         throw error(401, 'Unauthorized');
     }
 

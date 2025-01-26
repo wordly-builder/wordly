@@ -1,6 +1,7 @@
 import type {LayoutServerLoad} from "../../../../../../.svelte-kit/types/src/routes/$types";
 import {getProfileFromSession} from "../../../../../lib/helpers/getProfileFromSession";
 import {mongodb} from "../../../../../lib/database/mongodb/db";
+import type {User} from "../../../../../lib/database/postgres/schemas/auth";
 
 export const load: LayoutServerLoad = async (event) => {
     let returnValue : {charactersPanel: any, characters: any, charactersTemplates: any} = {
@@ -9,9 +10,8 @@ export const load: LayoutServerLoad = async (event) => {
         charactersTemplates: null
     }
 
-    const {session, universe} = await event.parent() as {session: any, universe: any};
-    const profile = await getProfileFromSession(session);
-    if (!profile || !universe) {
+    const {session, user, universe} = await event.parent() as {session: any, universe: any, user: User};
+    if (!user || !universe) {
         return returnValue;
     }
 

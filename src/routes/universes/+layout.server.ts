@@ -9,27 +9,12 @@ export const load: LayoutServerLoad = async (event) => {
         universes: null
     }
 
-    const {session} = await event.parent();
-
-    if (env.FORCE_LOGIN) {
-        const force_profile = await getProfileFromSession(session)
-        if (force_profile == null) {
-            await postgres.profiles.create({
-                googleId: "none",
-                githubId: "none",
-                name: "admin",
-                email: "admin@outlook.com",
-                image: "https://i.imgur.com/eh3WREx.png",
-            });
-        }
-    }
-
-    const profile = await getProfileFromSession(session);
-    if (!profile) {
+    const {session, user} = await event.parent();
+    if (!user || !session) {
         return returnValue;
     }
 
-    const universes = await mongodb.universe.getByOwner(profile.id);
+    const universes = await mongodb.universe.getByOwner(user.id);
 
     returnValue.universes = [];
     for (let universe of universes) {

@@ -5,13 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94445ea3-4631-48f3-b8e4-4ce76812edd4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/database/cookies/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/database/mail/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/database/postgres/requests/user.requests.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/api/login/+server.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/api/logout/+server.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/api/register/+server.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/login/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/register/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo_no_slogan.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.drizzle/0000_perfect_tana_nile.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.drizzle/meta/0000_snapshot.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.drizzle/meta/_journal.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/generics/forms/TextField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/generics/forms/TextField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/requests/auth.requests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/requests/auth.requests.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/requests/profiles.requests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/schemas/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/schemas/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/schemas/profiles.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/helpers/getProfileFromSession.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/helpers/getProfileFromSession.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/panels/characters/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/panels/characters/+server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/panels/characters/characters/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/panels/characters/characters/+server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/panels/characters/templates/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/panels/characters/templates/+server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/universes/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/universes/+server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/universes/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/universes/+layout.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/universes/[id]/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/universes/[id]/+layout.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/universes/[id]/panels/characters/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/universes/[id]/panels/characters/+layout.server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -24,22 +68,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Tempo/Documents/GitRepo/other/wordly-wiki&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Tempo/Documents/GitRepo/other/wordly/docker-compose.yml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\prettier",
+    "ts.external.directory.path": "C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tempo\Documents\GitRepo\other\wordly\src\routes\api\login" />
+      <recent name="C:\Users\Tempo\Documents\GitRepo\other\wordly\src\routes\api\logout" />
+      <recent name="C:\Users\Tempo\Documents\GitRepo\other\wordly\static" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.Run">
+    <configuration name="Run" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="commandLineOptions" value="--build" />
+          <option name="sourceFilePath" value="docker-compose.yml" />
+          <option name="upForceRecreate" value="true" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.Run" />
+      <item itemvalue="npm.dev" />
+    </list>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -52,6 +130,10 @@
       <workItem from="1731860846127" duration="15143000" />
       <workItem from="1731942475241" duration="3788000" />
       <workItem from="1732005106176" duration="12997000" />
+      <workItem from="1732136778941" duration="10150000" />
+      <workItem from="1732202229783" duration="669000" />
+      <workItem from="1733604816677" duration="427000" />
+      <workItem from="1737903530399" duration="18080000" />
     </task>
     <servers />
   </component>

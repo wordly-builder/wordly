@@ -10,10 +10,10 @@ import {newCharacter} from "../../../../../lib/database/mongodb/models/character
 
 export async function POST(req: any): Promise<Response> {
     const {panelId} = await req.request.json();
-    const session = await req.locals.auth();
-    const profile = await getProfileFromSession(session);
+    const user = await req.locals.user;
 
-    if (!profile) {
+    console.log('user', user);
+    if (!user) {
         throw error(401, 'Unauthorized');
     }
 
@@ -23,7 +23,7 @@ export async function POST(req: any): Promise<Response> {
         throw error(404, 'Panel not found');
     }
 
-    const universes = await mongodb.universe.getByOwner(profile.id);
+    const universes = await mongodb.universe.getByOwner(user.id);
     const currentUniverse = await mongodb.universe.getById(currentPanel.owner.toString());
 
     if (!currentUniverse || !universes.find((universe: any) => universe._id.toString() === currentUniverse._id.toString())) {

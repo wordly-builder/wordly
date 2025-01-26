@@ -5,11 +5,13 @@
     export  let error = false;
     export let style = "";
     export let labelStyle = "";
+
+    export let type = "text";
 </script>
 
 <div>
     <label class={error ? "error" : ""} style="{labelStyle}" for="input">{label}</label>
-    <input id="input" type="text" bind:value={value} on:change={onChange} class={error ? "error" : ""} style={style} />
+    <input id="input" bind:value={value} on:change={onChange} class={error ? "error" : ""} style={style} {... {type}} />
 </div>
 
 <style>
