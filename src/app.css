@@ -1,1 +1,37 @@
 @import 'tailwindcss';
+
+@theme {
+    --color-*: initial;
+    --color-white: #fff;
+    --color-black: #000;
+    --color-background: #f0f0f0;
+    --color-dark-background: #1a1a1a;
+    --color-elevation-1: rgb(204, 204, 204);
+    --color-elevation-2: rgb(153, 153, 153);
+    --color-elevation-3: rgb(102, 102, 102);
+    --color-elevation-4: rgb(51, 51, 51);
+    --color-elevation-5: rgb(0, 0, 0);
+    --color-dark-elevation-1: rgb(60, 60, 60);
+    --color-dark-elevation-2: rgb(80, 80, 80);
+    --color-dark-elevation-3: rgb(100, 100, 100);
+    --color-dark-elevation-4: rgb(120, 120, 120);
+    --color-dark-elevation-5: rgb(140, 140, 140);
+    --color-primary: #49AB3C;
+    --color-primary-hover: #3a8f2e;
+    --color-secondary: #5D94D2;
+    --color-secondary-hover: #4a7bb0;
+    --color-red: #FF4C4C;
+}
+
+html {
+    color-scheme: light dark;
+    background-color: var(--color-background);
+    color: var(--color-black);
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        background-color: var(--color-dark-background);
+        color: var(--color-white);
+    }
+}

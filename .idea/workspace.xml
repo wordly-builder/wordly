@@ -5,45 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94445ea3-4631-48f3-b8e4-4ce76812edd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/database/cookies/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/database/mail/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/database/postgres/requests/user.requests.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/api/login/+server.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/api/logout/+server.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/api/register/+server.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/login/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/register/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Header.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/features/characters.feature.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/features/feature.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/features/features.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/features/universes.feature.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/features/worlds.feature.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/pages/new/components/Feature.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service-worker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/features/icon_characters_black.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/features/icon_characters_white.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/features/icon_universes_black.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/features/icon_universes_white.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/features/icon_worlds_black.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/features/icon_worlds_white.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/project_placeholder.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/logo_no_slogan.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.drizzle/0000_perfect_tana_nile.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.drizzle/meta/0000_snapshot.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.drizzle/meta/_journal.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo_full_black.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/logo_full_white.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/generics/forms/TextField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/generics/forms/TextField.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/requests/auth.requests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/requests/auth.requests.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/requests/profiles.requests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/schemas/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/database/postgres/schemas/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/database/postgres/schemas/profiles.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/helpers/getProfileFromSession.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/helpers/getProfileFromSession.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/panels/characters/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/panels/characters/+server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/panels/characters/characters/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/panels/characters/characters/+server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/panels/characters/templates/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/panels/characters/templates/+server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/universes/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/universes/+server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/universes/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/universes/+layout.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/universes/[id]/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/universes/[id]/+layout.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/universes/[id]/panels/characters/+layout.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/universes/[id]/panels/characters/+layout.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/favicon.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,16 +44,37 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Header" />
+        <option value="ProjectsPage" />
+        <option value="EditorPage" />
+        <option value="NewProjectPage" />
+        <option value="Project" />
         <option value="TypeScript File" />
+        <option value="Feature" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Pebloop&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:wordly-builder/wordly.git&quot;,
+    &quot;accountId&quot;: &quot;9e166101-a6ba-4349-8f6e-225e4c2a584d&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2oxRLX0vLrHVWmh3VfozNdDOrZg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -72,23 +84,32 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Tempo/Documents/GitRepo/other/wordly/docker-compose.yml&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactor&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Documents/git/wordly/src/lib/features&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\alexl\\Documents\\git\\wordly\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\features" />
+      <recent name="C:\Users\alexl\Documents\git\wordly\static\images\features" />
+      <recent name="C:\Users\alexl\Documents\git\wordly\static\images" />
+      <recent name="C:\Users\alexl\Documents\git\wordly\static" />
       <recent name="C:\Users\Tempo\Documents\GitRepo\other\wordly\src\routes\api\login" />
-      <recent name="C:\Users\Tempo\Documents\GitRepo\other\wordly\src\routes\api\logout" />
-      <recent name="C:\Users\Tempo\Documents\GitRepo\other\wordly\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alexl\Documents\git\wordly\static\images\features" />
+      <recent name="C:\Users\alexl\Documents\git\wordly" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -118,6 +139,13 @@
       <item itemvalue="npm.dev" />
     </list>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -134,6 +162,8 @@
       <workItem from="1732202229783" duration="669000" />
       <workItem from="1733604816677" duration="427000" />
       <workItem from="1737903530399" duration="18080000" />
+      <workItem from="1753435910005" duration="19683000" />
+      <workItem from="1753477617832" duration="2704000" />
     </task>
     <servers />
   </component>

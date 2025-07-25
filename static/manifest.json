@@ -1,0 +1,13 @@
+{
+  "name": "Wordly",
+  "short_name": "Wordly",
+  "description": "A world building app, free and open source.",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any"
+    }
+  ],
+  "display": "standalone"
+}
