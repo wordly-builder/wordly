@@ -1,77 +1,38 @@
-# Wordly
+# sv
 
-Wordly is a web application where users can create and share their own worlds.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-Create a world, add charactrers, map, species, and more.
-Share your world with others, print your characters sheets and have your own wiki.
+## Creating a project
 
-(Wordly is still in early development, and is not yet ready for usage.)
+If you're seeing this, you've probably already done this step. Congrats!
 
+```bash
+# create a new project in the current directory
+npx sv create
 
-## Screenshots
+# create a new project in my-app
+npx sv create my-app
+```
 
-<img src="./doc/screenshot_0.png">
-<img src="./doc/screenshot_1.png">
+## Developing
 
-## Installation
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-### with pnpm
+```bash
+npm run dev
 
-1. Clone the repository
-2. Install pnpm with `npm install -g pnpm`
-3. Install the dependencies with `pnpm install`
-4. Install [mongodb](https://www.mongodb.com/)
-5. Install [minio](https://min.io/)
-6. Install a [supabase instance](https://supabase.io/)
-7. Create a [Google Cloud oauth2 credentials](https://console.cloud.google.com/apis/credentials/) (for deployment)
-8. Copy the `.env.example` file to `.env` and fill in the required values :
-    - `AUTH_SECRET`: a random base64 string
-    - `GOOGLE_ID`: the client id of your Google Cloud oauth2 credentials (for deployment)
-    - `GOOGLE_SECRET`: the client secret of your Google Cloud oauth2 credentials (for deployment)
-    - `MINIO_ACCESS_KEY`: the access key of your minio instance
-    - `MINIO_SECRET_KEY`: the secret key of your minio instance
-    - `FORCE_LOGIN` : `true` to force login and access to the app without oauth2 services (for local development)
-    - `PROFILE_ID` : the id of the profile in the supabase instance (for local development)
-9. Run the app with `pnpm dev`
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-### with docker-compose
+## Building
 
-1. Clone the repository
-2. Install [docker-compose](https://docs.docker.com/compose/install/)
-3. Create a [Google Cloud oauth2 credentials](https://console.cloud.google.com/apis/credentials/) (for deployment)
-4. Copy the `.env.example` file to `.env` and fill in the required values :
-    - `AUTH_SECRET`: a random base64 string
-    - `GOOGLE_ID`: the client id of your Google Cloud oauth2 credentials (for deployment)
-    - `GOOGLE_SECRET`: the client secret of your Google Cloud oauth2 credentials (for deployment)
-    - `MINIO_ACCESS_KEY`: the access key of your minio instance
-    - `MINIO_SECRET_KEY`: the secret key of your minio instance
-    - `FORCE_LOGIN` : `true` to force login and access to the app without oauth2 services (for local development)
-    - `PROFILE_ID` : the id of the profile in the supabase instance (for local development)
-5. Run the app with `docker-compose up -d` or `docker-compose up -d --build` if you want to rebuild the images (for deployment)
+To create a production version of your app:
 
-* The app will be available at `http://localhost:3000`
+```bash
+npm run build
+```
 
-## Usage
+You can preview the production build with `npm run preview`.
 
-Checkout our user guide (coming soon)
-
-## Support
-
-If you have any questions or issues, please open an issue on the repository.
-
-## Roadmap
-
-Our roadmap is available on (coming soon)
-
-## Contributing
-
-If you want to contribute, please open a pull request on the repository.
-Technical documentation will be available soon.
-
-## Authors and acknowledgment
-
-- [Pebloop](https://github.com/Pebloop) : Owner and main developer
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
