@@ -1,21 +1,37 @@
 <script lang="ts">
     import Project from "$lib/pages/projects/components/Project.svelte";
+    import type { Project as Prj } from '$lib/types/project';
 
-    let props = $props();
-    let { projects, navigateTo } = props;
+    interface Props {
+        projects: Prj[];
+        navigateTo: (page: string) => void;
+        opfsRoot: FileSystemDirectoryHandle | null;
+    }
+
+    let props: Props = $props();
+    let { projects, navigateTo, opfsRoot } = props;
+
+
 </script>
 
-<div class="projects-page flex h-full w-full">
+<div class="projects-page flex flex-col h-full w-full">
     {#if projects.length > 0}
         <h1>Projects</h1>
-        <ul>
-            <li>
-                <button onclick={() => navigateTo("NEW")}>New Project</button>
-            </li>
+        <div class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+            <div class="flex">
+                <button onclick={() => navigateTo("NEW")} class="w-full bg-elevation-1 dark:bg-dark-elevation-1 rounded-2xl cursor-pointer hover:bg-elevation-2 dark:hover:bg-dark-elevation-2 transition-colors">
+                    <div class="aspect-square w-full flex items-center justify-center">
+                        <p class="text-center text-6xl">+</p>
+                    </div>
+                    <p class="text-center text-lg font-semibold mt-4 pb-2">Create New Project</p>
+                </button>
+            </div>
             {#each projects as project}
-                <li><Project {project} /></li>
+                <div class="flex">
+                    <Project {project} {opfsRoot}/>
+                </div>
             {/each}
-        </ul>
+        </div>
     {:else}
         <div class="flex flex-col items-center justify-center h-full w-full">
             <p class="pb-2">No project found</p>

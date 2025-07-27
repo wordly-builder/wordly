@@ -3,9 +3,18 @@
     import Feature from "$lib/pages/new/components/Feature.svelte";
     import { SvelteMap } from 'svelte/reactivity';
 
+    interface Props {
+        navigateTo: (page: string) => void;
+        localDB: IDBOpenDBRequest | null;
+        opfsRoot: FileSystemDirectoryHandle | null;
+    }
+
     let props = $props();
-    let { navigateTo } = props;
-    let enabledFeatures = $state(new SvelteMap<string, boolean>());
+    let { navigateTo, localDB, opfsRoot } : Props = props;
+    let enabledFeatures = new SvelteMap<string, boolean>();
+
+    let name = $state("");
+    let picture = $state<File | Blob | null>(null);
 
     // Initialize enabled features with all features set to false
     features.forEach(feature => {
@@ -17,8 +26,55 @@
         const preview = document.getElementById('project-picture-preview') as HTMLImageElement;
         if (input.files && input.files[0]) {
             preview.src = URL.createObjectURL(input.files[0]);
+            picture = input.files[0];
         }
     }
+
+    async function createProject() {
+        while (indexedDB === null || opfsRoot === null) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+
+        if (!name.trim()) {
+            alert("Project name cannot be empty.");
+            return;
+        }
+
+        let projectUUID = crypto.randomUUID();
+
+        let projectDir = await opfsRoot.getDirectoryHandle(projectUUID, { create: true });
+        let pictureHandle = await projectDir.getFileHandle("picture.png", { create: true });
+        let writable = await pictureHandle.createWritable();
+        if (!picture) {
+            let defaultImage = await fetch("images/project_placeholder.png");
+            picture = await defaultImage.blob();
+        }
+        await writable.write(picture);
+        await writable.close();
+
+        let project = {
+            id: projectUUID,
+            name: name.trim(),
+            features: Array.from(enabledFeatures.entries())
+                .filter(([_, value]) => value)
+                .map(([key, _]) => key)
+        };
+
+        // Save project to IndexedDB
+        let db = localDB!.result;
+        let transaction = db.transaction("projects", "readwrite");
+        let store = transaction.objectStore("projects");
+        let request = store.add(project);
+        request.onsuccess = () => {
+            document.location.href = `/?project=${project.id}`;
+        };
+        request.onerror = (event) => {
+            console.error("Error saving project:", event);
+            alert("Failed to create project. Please try again.");
+        };
+    }
+
+
 </script>
 
 <div class="new-project-page flex flex-col h-full w-full items-center justify-start">
@@ -33,7 +89,8 @@
     <div class="flex flex-row items-start justify-between w-full">
         <div class="flex flex-col items-start justify-start w-1/3 m-2 bg-elevation-1 dark:bg-dark-elevation-1 p-2 rounded-xl">
             <label for="project-name" class="mb-2">Name</label>
-            <input id="project-name" type="text" class="border border-gray-300 p-2 rounded w-full mb-4" placeholder="Enter project name" />
+            <input id="project-name" type="text" class="border border-gray-300 p-2 rounded w-full mb-4" placeholder="Enter project name"
+                    bind:value={name} />
 
             <label for="project-description" class="mb-2">Picture</label>
             <input id="project-picture" type="file" accept="image/*" class="bg-secondary hover:bg-secondary-hover cursor-pointer p-2 rounded w-full mb-4"
@@ -69,7 +126,7 @@
         </div>
     </div>
     <div class="flex flex-row items-center justify-start w-full m-2">
-        <button class="bg-primary text-white p-2 rounded hover:bg-primary-hover cursor-pointer">
+        <button class="bg-primary text-white p-2 rounded hover:bg-primary-hover cursor-pointer" onclick={createProject}>
             Create Project
         </button>
     </div>

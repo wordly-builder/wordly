@@ -4,18 +4,32 @@
     import ProjectsPage from "$lib/pages/projects/ProjectsPage.svelte";
     import EditorPage from "$lib/pages/editor/EditorPage.svelte";
     import NewProjectPage from "$lib/pages/new/NewProjectPage.svelte";
+    import type { Project } from '$lib/types/project';
 
-    let projects: any[] = $state([]);
+    let projectId = $state<string | null>(null);
+    let projects: Project[] | null = $state(null);
     let page: string = $state("PROJECTS");
+    let localDB: IDBOpenDBRequest | null = $state(null);
+    let opfsRoot: FileSystemDirectoryHandle | null = $state(null);
 
-    onMount(() => {
-        let localDB = indexedDB.open("wordly", 1);
+    onMount(async () => {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        projectId = urlParams.get("project");
+        if (projectId) {
+            page = "EDITOR";
+        } else {
+            page = "PROJECTS";
+        }
+
+        opfsRoot = await navigator.storage.getDirectory();
+        localDB = indexedDB.open("wordly", 3);
 
         localDB.addEventListener("upgradeneeded", (event) => {
             const db = event.target!.result;
 
             if (!db.objectStoreNames.contains("projects")) {
-                db.createObjectStore("projects", {keyPath: "project"});
+                db.createObjectStore("projects", { keyPath: "id" });
             }
 
         });
@@ -28,8 +42,10 @@
             const request = store.getAll();
             request.onsuccess = () => {
                 projects = request.result;
+                console.log("Projects loaded:", projects);
             };
         });
+
     });
 
     function navigateTo(newPage: string) {
@@ -39,10 +55,12 @@
 </script>
 
 <div class="app-container">
-    {#if page === "PROJECTS"}
-        <ProjectsPage {projects} navigateTo={navigateTo}/>
+    {#if !localDB || !opfsRoot || projects === null}
+        <h1>Loading...</h1>
+    {:else if page === "PROJECTS"}
+        <ProjectsPage {projects} navigateTo={navigateTo} {opfsRoot}/>
     {:else if page === "NEW"}
-        <NewProjectPage navigateTo={navigateTo}/>
+        <NewProjectPage navigateTo={navigateTo} {localDB} {opfsRoot}/>
     {:else if page === "EDITOR"}
         <EditorPage/>
     {:else}

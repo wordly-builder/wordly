@@ -1,5 +1,7 @@
 <header class="bg-elevation-2 text-black dark:bg-dark-elevation-2 dark:text-white p-2">
-    <div class="logo bg-no-repeat bg-center bg-contain h-10 w-24"></div>
+    <a href="/" onclick={() => location.href = "/"} aria-label="Home">
+        <div class="logo bg-no-repeat bg-center bg-contain h-10 w-24"></div>
+    </a>
 </header>
 
 <style>

@@ -5,36 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94445ea3-4631-48f3-b8e4-4ce76812edd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/Header.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/features/characters.feature.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/features/feature.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/features/features.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/features/universes.feature.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/features/worlds.feature.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/new/components/Feature.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service-worker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/features/icon_characters_black.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/features/icon_characters_white.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/features/icon_universes_black.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/features/icon_universes_white.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/features/icon_worlds_black.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/features/icon_worlds_white.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/project_placeholder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/logo_full_black.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/logo_full_white.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/project.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Header.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/favicon.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +26,8 @@
         <option value="EditorPage" />
         <option value="NewProjectPage" />
         <option value="Project" />
-        <option value="TypeScript File" />
         <option value="Feature" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -94,7 +71,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
     &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Tempo\\Documents\\GitRepo\\other\\wordly\\node_modules\\prettier&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\alexl\\Documents\\git\\wordly\\node_modules\\prettier&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\alexl\\Documents\\git\\wordly\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -163,7 +140,7 @@
       <workItem from="1733604816677" duration="427000" />
       <workItem from="1737903530399" duration="18080000" />
       <workItem from="1753435910005" duration="19683000" />
-      <workItem from="1753477617832" duration="2704000" />
+      <workItem from="1753477617832" duration="18134000" />
     </task>
     <servers />
   </component>
