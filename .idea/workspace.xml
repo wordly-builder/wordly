@@ -5,22 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94445ea3-4631-48f3-b8e4-4ce76812edd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/no_panel/NoPanelPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/SettingsPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/universe/UniversePage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/world/WorldPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/icons/icon_settings_black.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/icons/icon_settings_white.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/components/DisabledFeature.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/components/EnabledFeature.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/features/characters.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/features/characters.feature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/features/feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/features/feature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/features/universes.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/features/universes.feature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/features/worlds.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/features/worlds.feature.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/SettingsPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/SettingsPage.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/types/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/project.metadata.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +73,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "refactor",
-    "last_opened_file_path": "C:/Users/alexl/Documents/git/wordly/static/images/icons",
+    "last_opened_file_path": "C:/Users/alexl/Documents/git/wordly/src/lib/pages/editor/pages/settings/components",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -92,11 +87,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\pages\editor\pages\settings\components" />
       <recent name="C:\Users\alexl\Documents\git\wordly\static\images\icons" />
       <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\features" />
       <recent name="C:\Users\alexl\Documents\git\wordly\static\images\features" />
       <recent name="C:\Users\alexl\Documents\git\wordly\static\images" />
-      <recent name="C:\Users\alexl\Documents\git\wordly\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alexl\Documents\git\wordly\static\images\features" />
@@ -155,7 +150,7 @@
       <workItem from="1737903530399" duration="18080000" />
       <workItem from="1753435910005" duration="19683000" />
       <workItem from="1753477617832" duration="18789000" />
-      <workItem from="1753676305822" duration="32101000" />
+      <workItem from="1753676305822" duration="40539000" />
     </task>
     <servers />
   </component>

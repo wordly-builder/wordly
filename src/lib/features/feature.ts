@@ -1,3 +1,5 @@
+import type { LoroDoc } from 'loro-crdt';
+
 export interface Feature {
     /**
      * Unique identifier for the feature.
@@ -28,5 +30,15 @@ export interface Feature {
      * List the features required by this feature.
      */
     requiredFeatures: string[];
+
+    /**
+     * Function executed when the feature is enabled.
+     */
+    onEnable: (loroDoc: LoroDoc) => void;
+
+    /**
+     * Function executed when the feature is disabled.
+     */
+    onDisable: (loroDoc: LoroDoc) => void;
 
 }

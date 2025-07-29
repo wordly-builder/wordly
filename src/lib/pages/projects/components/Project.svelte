@@ -34,7 +34,7 @@
             <p>Loading...</p>
         </div>
     {:then imageUrl}
-        <img src={imageUrl} alt="Project Image" class="w-full aspect-square object-cover" />
+        <img src={imageUrl} alt="Project Image" class="w-full aspect-square object-cover rounded-t-2xl" />
     {/await}
     <h2 class="text-center text-lg font-semibold mt-4 pb-2">{project.name}</h2>
 </button>

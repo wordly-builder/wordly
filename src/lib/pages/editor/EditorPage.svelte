@@ -57,9 +57,20 @@
 	}
 
 	let page: string = $state("PROJECT");
+	let previousPage: string | null = $state(null);
 
 	function navigateTo(newPage: string) {
+		previousPage = page;
 		page = newPage;
+	}
+
+	function back() {
+		if (previousPage) {
+			page = previousPage;
+			previousPage = null;
+		} else {
+			window.location.href = "/";
+		}
 	}
 
 </script>
@@ -69,7 +80,7 @@
 {:else if page === "WORLD"}
 	<WorldPage />
 {:else if page === "SETTINGS"}
-	<SettingsPage />
+	<SettingsPage {back} {projectMetadata} {opfsRoot} {db} />
 {:else if page === "NO_PANEL"}
 	<NoPanelPage {navigateTo} />
 {/if}

@@ -6,5 +6,11 @@ export const charactersFeature: Feature = {
     description: "Create and manage characters for your project.",
     iconWhite: "images/features/icon_characters_white.svg",
     iconBlack: "images/features/icon_characters_black.svg",
-    requiredFeatures: []
+    requiredFeatures: [],
+    onEnable: (loroDoc) => {
+        loroDoc.getMap("characters");
+    },
+    onDisable: (loroDoc) => {
+        loroDoc.getMap("characters").clear();
+    }
 };

@@ -6,5 +6,11 @@ export const universesFeature: Feature = {
     description: "Create and manage multiple universes for your project.",
     iconWhite: "images/features/icon_universes_white.svg",
     iconBlack: "images/features/icon_universes_black.svg",
-    requiredFeatures: ["WORLDS"]
+    requiredFeatures: ["WORLDS"],
+    onEnable: (loroDoc) => {
+        loroDoc.getMap("universes");
+    },
+    onDisable: (loroDoc) => {
+        loroDoc.getMap("universes").clear();
+    }
 };
