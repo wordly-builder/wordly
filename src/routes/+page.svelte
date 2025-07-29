@@ -1,18 +1,21 @@
 <script lang="ts">
 
     import {onMount} from "svelte";
+    import { PGlite } from '@electric-sql/pglite'
     import ProjectsPage from "$lib/pages/projects/ProjectsPage.svelte";
     import EditorPage from "$lib/pages/editor/EditorPage.svelte";
     import NewProjectPage from "$lib/pages/new/NewProjectPage.svelte";
-    import type { Project } from '$lib/types/project';
+    import type { ProjectMetadata } from '$lib/types/project.metadata';
 
     let projectId = $state<string | null>(null);
-    let projects: Project[] | null = $state(null);
+    let projects: ProjectMetadata[] | null = $state(null);
     let page: string = $state("PROJECTS");
-    let localDB: IDBOpenDBRequest | null = $state(null);
+    let db: PGlite | null = $state(null);
     let opfsRoot: FileSystemDirectoryHandle | null = $state(null);
 
     onMount(async () => {
+        db = new PGlite('idb://wordly');
+        opfsRoot = await navigator.storage.getDirectory();
 
         const urlParams = new URLSearchParams(window.location.search);
         projectId = urlParams.get("project");
@@ -22,30 +25,14 @@
             page = "PROJECTS";
         }
 
-        opfsRoot = await navigator.storage.getDirectory();
-        localDB = indexedDB.open("wordly", 3);
+        await db.exec(`
+            CREATE TABLE IF NOT EXISTS projects (
+                id TEXT PRIMARY KEY,
+                name TEXT NOT NULL
+            );`);
 
-        localDB.addEventListener("upgradeneeded", (event) => {
-            const db = event.target!.result;
-
-            if (!db.objectStoreNames.contains("projects")) {
-                db.createObjectStore("projects", { keyPath: "id" });
-            }
-
-        });
-
-        localDB.addEventListener("success", (event) => {
-            const db = event.target!.result;
-
-            const transaction = db.transaction("projects", "readonly");
-            const store = transaction.objectStore("projects");
-            const request = store.getAll();
-            request.onsuccess = () => {
-                projects = request.result;
-                console.log("Projects loaded:", projects);
-            };
-        });
-
+        let projectsRes = await db.query<ProjectMetadata>('SELECT * FROM projects');
+        projects = projectsRes.rows;
     });
 
     function navigateTo(newPage: string) {
@@ -55,14 +42,14 @@
 </script>
 
 <div class="app-container">
-    {#if !localDB || !opfsRoot || projects === null}
+    {#if !db || !opfsRoot || projects === null}
         <h1>Loading...</h1>
     {:else if page === "PROJECTS"}
         <ProjectsPage {projects} navigateTo={navigateTo} {opfsRoot}/>
     {:else if page === "NEW"}
-        <NewProjectPage navigateTo={navigateTo} {localDB} {opfsRoot}/>
+        <NewProjectPage navigateTo={navigateTo} {db} {opfsRoot}/>
     {:else if page === "EDITOR"}
-        <EditorPage/>
+        <EditorPage {projectId} {db} {opfsRoot}/>
     {:else}
         <h1>Page Not Found</h1>
     {/if}

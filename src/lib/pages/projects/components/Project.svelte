@@ -1,6 +1,6 @@
 <script lang="ts">
 
-    import type { Project } from '$lib/types/project';
+    import type { Project } from '$lib/types/project.metadata';
 
     interface Props {
         project: Project;

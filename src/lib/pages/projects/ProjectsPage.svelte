@@ -1,9 +1,9 @@
 <script lang="ts">
     import Project from "$lib/pages/projects/components/Project.svelte";
-    import type { Project as Prj } from '$lib/types/project';
+    import type { ProjectMetadata } from '$lib/types/project.metadata';
 
     interface Props {
-        projects: Prj[];
+        projects: ProjectMetadata[];
         navigateTo: (page: string) => void;
         opfsRoot: FileSystemDirectoryHandle | null;
     }

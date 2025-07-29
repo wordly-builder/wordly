@@ -1,4 +1,4 @@
-export interface Project {
+export interface ProjectMetadata {
 		/**
 		 * Unique identifier for the project.
 		 */
@@ -8,9 +8,4 @@ export interface Project {
 		 * Name of the project.
 		 */
 		name: string;
-
-		/**
-		 * List of features associated with this project.
-		 */
-		features: string[];
 }

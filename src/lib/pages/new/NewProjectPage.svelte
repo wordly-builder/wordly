@@ -2,15 +2,17 @@
     import { features } from "$lib/features/features";
     import Feature from "$lib/pages/new/components/Feature.svelte";
     import { SvelteMap } from 'svelte/reactivity';
+    import { PGlite } from '@electric-sql/pglite';
+    import { LoroDoc } from 'loro-crdt';
 
     interface Props {
         navigateTo: (page: string) => void;
-        localDB: IDBOpenDBRequest | null;
+        db: PGlite;
         opfsRoot: FileSystemDirectoryHandle | null;
     }
 
     let props = $props();
-    let { navigateTo, localDB, opfsRoot } : Props = props;
+    let { navigateTo, db, opfsRoot } : Props = props;
     let enabledFeatures = new SvelteMap<string, boolean>();
 
     let name = $state("");
@@ -52,26 +54,22 @@
         await writable.write(picture);
         await writable.close();
 
-        let project = {
-            id: projectUUID,
-            name: name.trim(),
-            features: Array.from(enabledFeatures.entries())
-                .filter(([_, value]) => value)
-                .map(([key, _]) => key)
-        };
+
+        let file = new LoroDoc();
+        let featuresMap = file.getMap("features");
+        for (const [featureId, isEnabled] of enabledFeatures.entries()) {
+            featuresMap.set(featureId, isEnabled);
+        }
+
+        let fileHandles = await projectDir.getFileHandle("file.wordly", { create: true });
+        let fileWritable = await fileHandles.createWritable();
+        await fileWritable.write(file.export({mode: "snapshot"}));
+        await fileWritable.close();
 
         // Save project to IndexedDB
-        let db = localDB!.result;
-        let transaction = db.transaction("projects", "readwrite");
-        let store = transaction.objectStore("projects");
-        let request = store.add(project);
-        request.onsuccess = () => {
-            document.location.href = `/?project=${project.id}`;
-        };
-        request.onerror = (event) => {
-            console.error("Error saving project:", event);
-            alert("Failed to create project. Please try again.");
-        };
+        await db.exec(`INSERT INTO projects (id, name)
+        VALUES ('${projectUUID}', '${name.trim()}');`);
+        document.location.href = `/?project=${projectUUID}`;
     }
 
 
