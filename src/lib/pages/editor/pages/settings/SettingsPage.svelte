@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import type { PGlite } from '@electric-sql/pglite';
 	import { type Container, LoroDoc, type Value } from 'loro-crdt';
-	import { features as featuresData } from '$lib/features/features';
+	import { features as featuresData } from '$lib/types/features/features';
 	import EnabledFeature from '$lib/pages/editor/pages/settings/components/EnabledFeature.svelte';
 	import DisabledFeature from '$lib/pages/editor/pages/settings/components/DisabledFeature.svelte';
 

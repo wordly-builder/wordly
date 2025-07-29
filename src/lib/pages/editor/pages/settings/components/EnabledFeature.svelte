@@ -1,8 +1,8 @@
 <script lang="ts">
     import type {Feature} from "$lib/features/feature";
-    import { features } from '$lib/features/features';
     import type { LoroDoc } from 'loro-crdt';
     import type { ProjectMetadata } from '$lib/types/project.metadata';
+    import { features } from '$lib/types/features/features';
 
     interface Props {
         feature: Feature,
@@ -27,7 +27,7 @@
         }
 
         // Check if the feature is required by other features
-        const requiredBy = features.filter(f => f.requiredFeatures.includes(feature.id));
+        const requiredBy = features.filter(f => f.requiredFeatures.includes(feature.id) && project.getMap("features").get(f.id));
         if (requiredBy.length > 0) {
             alert(`The feature "${feature.name}" is required by the following features: ${requiredBy.map(f => f.name).join(', ')}. Please disable them first.`);
             return;
@@ -50,7 +50,7 @@
     }
 </script>
 
-<div class="flex flex-row justify-between items-center">
+<div class="flex flex-row justify-between items-center mt-1 mb-1">
         <div class="flex items-center">
             <img src={icon}
                  alt={feature.name}

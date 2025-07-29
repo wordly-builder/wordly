@@ -14,10 +14,10 @@
 
 </script>
 
-<div class="projects-page flex flex-col h-full w-full">
+<div class="flex flex-col h-full w-full p-4">
     {#if projects.length > 0}
-        <h1>Projects</h1>
-        <div class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+        <h1 class="mb-4">Projects</h1>
+        <div class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             <div class="flex">
                 <button onclick={() => navigateTo("NEW")} class="w-full bg-elevation-1 dark:bg-dark-elevation-1 rounded-2xl cursor-pointer hover:bg-elevation-2 dark:hover:bg-dark-elevation-2 transition-colors">
                     <div class="aspect-square w-full flex items-center justify-center">

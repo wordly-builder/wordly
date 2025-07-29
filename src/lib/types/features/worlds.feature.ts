@@ -1,4 +1,4 @@
-import type {Feature} from "$lib/features/feature";
+import type { Feature } from '$lib/types/feature';
 
 export const worldsFeature: Feature = {
     id: "WORLDS",

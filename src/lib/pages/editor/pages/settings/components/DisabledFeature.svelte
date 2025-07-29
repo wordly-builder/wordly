@@ -1,8 +1,8 @@
 <script lang="ts">
     import type {Feature} from "$lib/features/feature";
     import type { LoroDoc } from 'loro-crdt';
-    import { features } from '$lib/features/features';
     import type { ProjectMetadata } from '$lib/types/project.metadata';
+    import { features } from '$lib/types/features/features';
 
     interface Props {
       feature: Feature,

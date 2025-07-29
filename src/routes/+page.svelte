@@ -57,7 +57,6 @@
 
 <style>
     .app-container {
-        padding: 1rem;
         margin: 0 auto;
         width: 100vw;
         height: calc(100vh - (var(--spacing) * 14));

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { features } from "$lib/features/features";
     import Feature from "$lib/pages/new/components/Feature.svelte";
     import { SvelteMap } from 'svelte/reactivity';
     import { PGlite } from '@electric-sql/pglite';
     import { LoroDoc } from 'loro-crdt';
+    import { features } from '$lib/types/features/features';
 
     interface Props {
         navigateTo: (page: string) => void;
@@ -75,7 +75,7 @@
 
 </script>
 
-<div class="new-project-page flex flex-col h-full w-full items-center justify-start">
+<div class="new-project-page flex flex-col h-full w-full items-center justify-start p-4">
     <div class="flex flex-row items-start justify-between w-full">
         <button class="bg-secondary text-white p-2 rounded hover:bg-secondary-hover cursor-pointer mb-4" onclick={() => navigateTo("PROJECTS")}>
             &lsaquo; Back
@@ -85,7 +85,7 @@
     </div>
 
     <div class="flex flex-row items-start justify-between w-full">
-        <div class="flex flex-col items-start justify-start w-1/3 m-2 bg-elevation-1 dark:bg-dark-elevation-1 p-2 rounded-xl">
+        <div class="flex flex-col items-start justify-start w-1/3 mr-2 bg-elevation-1 dark:bg-dark-elevation-1 p-2 rounded-xl">
             <label for="project-name" class="mb-2">Name</label>
             <input id="project-name" type="text" class="border border-gray-300 p-2 rounded w-full mb-4" placeholder="Enter project name"
                     bind:value={name} />
@@ -96,7 +96,7 @@
             <img src="images/project_placeholder.png" alt="Project picture" class="w-full aspect-square object-cover rounded" id="project-picture-preview" />
         </div>
 
-        <div class="w-2/3 bg-elevation-1 dark:bg-dark-elevation-1 p-2 rounded-xl m-2">
+        <div class="w-2/3 bg-elevation-1 dark:bg-dark-elevation-1 p-2 rounded-xl ml-2">
             <p class="mb-2">Features</p>
             {#each features as feature}
                 <Feature {feature}  bind:checked={
@@ -123,7 +123,7 @@
 
         </div>
     </div>
-    <div class="flex flex-row items-center justify-start w-full m-2">
+    <div class="flex flex-row items-center justify-start w-full m-2 mt-4">
         <button class="bg-primary text-white p-2 rounded hover:bg-primary-hover cursor-pointer" onclick={createProject}>
             Create Project
         </button>

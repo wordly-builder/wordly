@@ -1,12 +1,14 @@
 <script lang="ts">
-	import UniversePage from '$lib/pages/editor/pages/universe/UniversePage.svelte';
-	import WorldPage from '$lib/pages/editor/pages/world/WorldPage.svelte';
 	import SettingsPage from '$lib/pages/editor/pages/settings/SettingsPage.svelte';
 	import type { ProjectMetadata } from '$lib/types/project.metadata';
 	import { onMount } from 'svelte';
 	import NoPanelPage from '$lib/pages/editor/pages/no_panel/NoPanelPage.svelte';
 	import type { PGlite } from '@electric-sql/pglite';
 	import { LoroDoc } from 'loro-crdt';
+	import { features } from '$lib/types/features/features';
+	import PanelPage from '$lib/pages/editor/pages/panel/PanelPage.svelte';
+	import { panels } from '$lib/types/panels/panels';
+	import Empty from '$lib/pages/editor/pages/panel/Empty.svelte';
 
 	interface Props {
 		projectId: string | null;
@@ -16,6 +18,8 @@
 	let {projectId, db, opfsRoot}: Props = $props();
 	let projectMetadata: ProjectMetadata | null = $state(null);
 	let project = $state<LoroDoc | null>(null);
+	let page: string = $state("EMPTY");
+	let previousPage: string | null = $state(null);
 
 	onMount(async () => {
 		await loadProject();
@@ -28,15 +32,17 @@
 			// Import the project file into a LoroDoc instance
 			project = new LoroDoc();
 			project.import(await projectFile.bytes());
-			const featuresMap = project.getMap("features");
 
-			if (featuresMap.get("UNIVERSES")) {
-				page = "UNIVERSES";
-			} else if (featuresMap.get("WORLDS")) {
-				page = "WORLDS";
-			} else {
-				page = "NO_PANEL";
+			// read the features map from the project
+			const featuresMap = project.getMap("features");
+			for (const [featureId, isEnabled] of featuresMap.entries()) {
+				if (isEnabled) {
+					features.find(f => f.id === featureId)?.onEnable(project);
+				}
 			}
+
+			// Set the initial page to the first editor page
+			page = getFirstEditorPage()
 
 		} else {
 			window.location.href = "/";
@@ -56,8 +62,28 @@
 		}
 	}
 
-	let page: string = $state("PROJECT");
-	let previousPage: string | null = $state(null);
+	function getFirstEditorPage() {
+		let page = "NO_PANEL";
+
+		if (panels.length > 0) {
+			page = panels[0].id;
+		}
+
+		return page;
+	}
+
+	function ensureEditorPage(page: string) {
+		if (!page || page === "NO_PANEL") {
+			return getFirstEditorPage();
+		}
+
+		if (!panels.find(p => p.id === page)) {
+			console.warn(`Panel with id ${page} does not exist. Defaulting to first panel.`);
+			return getFirstEditorPage();
+		}
+
+		return page;
+	}
 
 	function navigateTo(newPage: string) {
 		previousPage = page;
@@ -68,6 +94,7 @@
 		if (previousPage) {
 			page = previousPage;
 			previousPage = null;
+			page = ensureEditorPage(page)
 		} else {
 			window.location.href = "/";
 		}
@@ -75,12 +102,12 @@
 
 </script>
 
-{#if page === "UNIVERSE"}
-	<UniversePage />
-{:else if page === "WORLD"}
-	<WorldPage />
-{:else if page === "SETTINGS"}
+{#if page === "SETTINGS"}
 	<SettingsPage {back} {projectMetadata} {opfsRoot} {db} />
 {:else if page === "NO_PANEL"}
 	<NoPanelPage {navigateTo} />
+{:else if page === "EMPTY"}
+	<Empty />
+{:else}
+	<PanelPage bind:page={page} {navigateTo}/>
 {/if}
