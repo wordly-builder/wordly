@@ -1,6 +1,6 @@
 import type { Feature } from '$lib/types/feature';
 import { registerPanel, unregisterPanel } from '$lib/types/panels/panels';
-import CharactersPanel from '$lib/types/features/panels/CharactersPanel.svelte';
+import CharactersPanel from '$lib/types/features/panels/character/CharactersPanel.svelte';
 
 export const charactersFeature: Feature = {
     id: "CHARACTERS",

@@ -9,5 +9,7 @@ export const conceptComponent: ComponentMetadata = {
 			name: 'name',
 			type: 'STRING',
 		},
-	]
+	],
+	inlineDisplay: undefined,
+	inlineDisplayEditable: undefined
 }

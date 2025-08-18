@@ -1,4 +1,6 @@
 import type { Feature } from '$lib/types/feature';
+import { registerPanel } from '$lib/types/panels/panels';
+import WorldsPanel from '$lib/types/features/panels/WorldsPanel.svelte';
 
 export const worldsFeature: Feature = {
     id: "WORLDS",
@@ -8,9 +10,15 @@ export const worldsFeature: Feature = {
     iconBlack: "images/features/icon_worlds_black.svg",
     requiredFeatures: [],
     onEnable: (loroDoc) => {
-        loroDoc.getMap("worlds");
+        registerPanel({
+            id: "WORLDS",
+            name: "Worlds",
+            iconWhite: "images/features/icon_worlds_white.svg",
+            iconBlack: "images/features/icon_worlds_black.svg",
+            display: WorldsPanel
+        })
     },
     onDisable: (loroDoc) => {
-        loroDoc.getMap("worlds").clear();
+
     }
 };

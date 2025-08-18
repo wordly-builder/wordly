@@ -1,8 +1,13 @@
 import type { ComponentMetadata } from '$lib/types/component.metadata';
 import { conceptComponent } from '$lib/types/components/concept.component';
+import { textComponent } from '$lib/types/components/text.component';
+import type { Component } from '$lib/types/component';
+import { numberComponent } from '$lib/types/components/number.component';
 
 export const components: ComponentMetadata[] = [
-	conceptComponent
+	conceptComponent,
+	textComponent,
+	numberComponent,
 ]
 
 export function registerComponent(component: ComponentMetadata) {
@@ -23,4 +28,20 @@ export function unregisterComponent(id: string) {
 		return
 	}
 	components.splice(index, 1);
+}
+
+export function instantiateComponent(id: string): Component | undefined {
+	const component = getComponentById(id);
+	if (!component) {
+		console.warn(`Component with id ${id} does not exist`);
+		return undefined;
+	}
+	return {
+		id: crypto.randomUUID(),
+		meta: component,
+		fields: component.fields.map(field => ({
+			meta: field,
+			value: null
+		})),
+	};
 }

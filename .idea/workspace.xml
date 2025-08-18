@@ -5,33 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94445ea3-4631-48f3-b8e4-4ce76812edd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/panel/PanelPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/component.field.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/component.metadata.field.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/component.metadata.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/components/components.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/components/concept.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/entity.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/features/panels/CharactersPanel.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/features/panels/UniversesPanel.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/panel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/types/panels/panels.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/components/display/inline/InlineTextComponent.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/components/display/inline/editable/InlineEditableNumberComponent.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/components/display/inline/editable/InlineEditableTextComponent.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/components/number.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/components/text.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/features/panels/WorldsPanel.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/features/panels/character/CharacterCard.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/features/panels/character/CharactersHomePage.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/types/features/panels/character/NewCharacterPage.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/character_placeholder.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/features/characters.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/characters.feature.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/features/feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/feature.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/features/features.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/features.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/features/universes.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/universes.feature.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/features/worlds.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/worlds.feature.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/SettingsPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/SettingsPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/components/DisabledFeature.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/components/DisabledFeature.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/components/EnabledFeature.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/settings/components/EnabledFeature.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/pages/universe/UniversePage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/components/LeftBar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/pages/world/WorldPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/pages/panel/Empty.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/component.metadata.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/component.metadata.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/components/components.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/components/components.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/components/concept.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/components/concept.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/features/characters.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/characters.feature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/features/panels/CharactersPanel.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/panels/character/CharactersPanel.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/features/worlds.feature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/worlds.feature.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,10 +44,14 @@
         <option value="NoPanelPage" />
         <option value="CharactersPage" />
         <option value="LeftBar" />
-        <option value="TypeScript File" />
         <option value="CharacterPane" />
         <option value="PanelPage" />
         <option value="Empty" />
+        <option value="Home" />
+        <option value="NewCharacterPage" />
+        <option value="CharacterCard" />
+        <option value="TypeScript File" />
+        <option value="InlineTextComponent" />
       </list>
     </option>
   </component>
@@ -87,38 +81,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "refactor",
-    "last_opened_file_path": "C:/Users/alexl/Documents/git/wordly/src/lib/types/features/panels",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
-    "npm.dev.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\alexl\\Documents\\git\\wordly\\node_modules\\prettier",
-    "ts.external.directory.path": "C:\\Users\\alexl\\Documents\\git\\wordly\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactor&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Documents/git/wordly/src/lib/types/components/display/inline/editable&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\alexl\\Documents\\git\\wordly\\node_modules\\prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\alexl\\Documents\\git\\wordly\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\types\components\display\inline\editable" />
+      <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\types\components" />
       <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\types\features\panels" />
       <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\pages\editor\pages\settings\components" />
       <recent name="C:\Users\alexl\Documents\git\wordly\static\images\icons" />
-      <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\features" />
-      <recent name="C:\Users\alexl\Documents\git\wordly\static\images\features" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alexl\Documents\git\wordly\static\images" />
+      <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\types\features\panels\character" />
       <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\types\features\panels" />
       <recent name="C:\Users\alexl\Documents\git\wordly\src\lib\types" />
       <recent name="C:\Users\alexl\Documents\git\wordly\static\images\features" />
-      <recent name="C:\Users\alexl\Documents\git\wordly" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -174,7 +169,8 @@
       <workItem from="1753435910005" duration="19683000" />
       <workItem from="1753477617832" duration="18789000" />
       <workItem from="1753676305822" duration="46581000" />
-      <workItem from="1753794154789" duration="13466000" />
+      <workItem from="1753794154789" duration="57258000" />
+      <workItem from="1754344935550" duration="8843000" />
     </task>
     <servers />
   </component>
