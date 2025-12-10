@@ -9,20 +9,28 @@
 	import PanelPage from '$lib/pages/editor/pages/panel/PanelPage.svelte';
 	import { panels } from '$lib/types/panels/panels';
 	import Empty from '$lib/pages/editor/pages/panel/Empty.svelte';
+	import { dbState } from '$lib/states/db.state.svelte';
+	import { opfsState } from '$lib/states/opfs.state.svelte';
 
 	interface Props {
 		projectId: string | null;
-		db: PGlite;
-		opfsRoot: FileSystemDirectoryHandle;
 	}
-	let {projectId, db, opfsRoot}: Props = $props();
+	let {projectId}: Props = $props();
 	let projectMetadata: ProjectMetadata | null = $state(null);
 	let project = $state<LoroDoc | null>(null);
 	let page: string = $state("EMPTY");
 	let previousPage: string | null = $state(null);
 
+	let db: PGlite | null = dbState.db;
+	let opfsRoot: FileSystemDirectoryHandle | null = opfsState.root;
+
 	onMount(async () => {
 		await loadProject();
+
+		if (!opfsRoot) {
+			alert("OPFS not initialized.");
+			return;
+		}
 
 		if (projectMetadata) {
 			const projectDir = await opfsRoot.getDirectoryHandle(projectId!, { create: false });
@@ -51,6 +59,11 @@
 
 	// Load the project data from the local database
 	async function loadProject() {
+		if (!db) {
+			alert("Database not initialized.");
+			return;
+		}
+
 		if (projectId) {
 			const projectRes = await db.query<ProjectMetadata>(
 				`SELECT * FROM projects WHERE id = '${projectId}';`);

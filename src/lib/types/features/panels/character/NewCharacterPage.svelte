@@ -60,7 +60,7 @@
 						 onchange="{handleChangePicture}" />
 			<img src="images/character_placeholder.png" alt="Character" class="w-full aspect-square object-cover rounded" id="character-picture-preview" />
 
-			<button class="bg-primary w-full text-white p-2 rounded hover:bg-primary-hover cursor-pointer" onclick="{createCharacter}">
+			<button class="bg-primary w-full text-white mt-4 p-2 rounded hover:bg-primary-hover cursor-pointer" onclick="{createCharacter}">
 				Save
 			</button>
 		</div>

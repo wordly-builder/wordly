@@ -5,11 +5,10 @@
     interface Props {
         projects: ProjectMetadata[];
         navigateTo: (page: string) => void;
-        opfsRoot: FileSystemDirectoryHandle | null;
     }
 
     let props: Props = $props();
-    let { projects, navigateTo, opfsRoot } = props;
+    let { projects, navigateTo } = props;
 
 
 </script>
@@ -28,7 +27,7 @@
             </div>
             {#each projects as project}
                 <div class="flex">
-                    <Project {project} {opfsRoot}/>
+                    <Project {project}/>
                 </div>
             {/each}
         </div>

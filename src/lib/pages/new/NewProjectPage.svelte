@@ -4,16 +4,18 @@
     import { PGlite } from '@electric-sql/pglite';
     import { LoroDoc } from 'loro-crdt';
     import { features } from '$lib/types/features/features';
+		import { dbState } from '$lib/states/db.state.svelte';
+		import { opfsState } from '$lib/states/opfs.state.svelte';
 
     interface Props {
         navigateTo: (page: string) => void;
-        db: PGlite;
-        opfsRoot: FileSystemDirectoryHandle | null;
     }
 
     let props = $props();
-    let { navigateTo, db, opfsRoot } : Props = props;
+    let { navigateTo } : Props = props;
     let enabledFeatures = new SvelteMap<string, boolean>();
+		let db: PGlite | null = dbState.db;
+		let opfsRoot: FileSystemDirectoryHandle | null = opfsState.root;
 
     let name = $state("");
     let picture = $state<File | Blob | null>(null);
@@ -36,6 +38,11 @@
         while (indexedDB === null || opfsRoot === null) {
             await new Promise(resolve => setTimeout(resolve, 100));
         }
+
+				if (!db) {
+					alert("Database not initialized.");
+					return;
+				}
 
         if (!name.trim()) {
             alert("Project name cannot be empty.");

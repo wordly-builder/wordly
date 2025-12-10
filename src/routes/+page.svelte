@@ -6,6 +6,8 @@
     import EditorPage from "$lib/pages/editor/EditorPage.svelte";
     import NewProjectPage from "$lib/pages/new/NewProjectPage.svelte";
     import type { ProjectMetadata } from '$lib/types/project.metadata';
+		import { dbState } from '$lib/states/db.state.svelte';
+		import { opfsState } from '$lib/states/opfs.state.svelte';
 
     let projectId = $state<string | null>(null);
     let projects: ProjectMetadata[] | null = $state(null);
@@ -15,7 +17,9 @@
 
     onMount(async () => {
         db = new PGlite('idb://wordly');
+				dbState.db = db;
         opfsRoot = await navigator.storage.getDirectory();
+				opfsState.root = opfsRoot;
 
         const urlParams = new URLSearchParams(window.location.search);
         projectId = urlParams.get("project");
@@ -45,11 +49,11 @@
     {#if !db || !opfsRoot || projects === null}
         <h1>Loading...</h1>
     {:else if page === "PROJECTS"}
-        <ProjectsPage {projects} navigateTo={navigateTo} {opfsRoot}/>
+        <ProjectsPage {projects} navigateTo={navigateTo}/>
     {:else if page === "NEW"}
-        <NewProjectPage navigateTo={navigateTo} {db} {opfsRoot}/>
+        <NewProjectPage navigateTo={navigateTo}/>
     {:else if page === "EDITOR"}
-        <EditorPage {projectId} {db} {opfsRoot}/>
+        <EditorPage {projectId}/>
     {:else}
         <h1>Page Not Found</h1>
     {/if}

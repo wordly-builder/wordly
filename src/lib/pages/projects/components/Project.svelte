@@ -1,14 +1,15 @@
 <script lang="ts">
 
     import type { Project } from '$lib/types/project.metadata';
+		import { opfsState } from '$lib/states/opfs.state.svelte';
 
     interface Props {
         project: Project;
-        opfsRoot: FileSystemDirectoryHandle | null;
     }
 
     let props: Props = $props();
-    let { project, opfsRoot } = props;
+    let { project} = props;
+		let opfsRoot = opfsState.root;
 
     async function getProjectImage(): string {
         while (!opfsRoot) {
