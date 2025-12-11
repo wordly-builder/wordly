@@ -12,4 +12,7 @@ let page = $state("HOME")
 	<CharactersHomePage {navigateTo} bind:page={page} />
 {:else if page === "NEW"}
 	<NewCharacterPage bind:page={page} />
+{:else if page.startsWith("CARD_")}
+	<!-- CharacterCardPage component would go here -->
+	<p>Character Card Page for {page}</p>
 {/if}

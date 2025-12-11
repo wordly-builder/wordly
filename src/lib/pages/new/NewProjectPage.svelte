@@ -6,6 +6,7 @@
     import { features } from '$lib/types/features/features';
 		import { dbState } from '$lib/states/db.state.svelte';
 		import { opfsState } from '$lib/states/opfs.state.svelte';
+		import { projectState } from '$lib/states/project.state.svelte';
 
     interface Props {
         navigateTo: (page: string) => void;
@@ -76,6 +77,9 @@
         // Save project to IndexedDB
         await db.exec(`INSERT INTO projects (id, name)
         VALUES ('${projectUUID}', '${name.trim()}');`);
+
+				// Navigate to the newly created project
+				projectState.id = projectUUID;
         document.location.href = `/?project=${projectUUID}`;
     }
 

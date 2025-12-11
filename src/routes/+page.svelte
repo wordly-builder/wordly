@@ -8,6 +8,7 @@
     import type { ProjectMetadata } from '$lib/types/project.metadata';
 		import { dbState } from '$lib/states/db.state.svelte';
 		import { opfsState } from '$lib/states/opfs.state.svelte';
+		import { projectState } from '$lib/states/project.state.svelte';
 
     let projectId = $state<string | null>(null);
     let projects: ProjectMetadata[] | null = $state(null);
@@ -23,6 +24,7 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         projectId = urlParams.get("project");
+				projectState.id = projectId;
         if (projectId) {
             page = "EDITOR";
         } else {
@@ -53,7 +55,7 @@
     {:else if page === "NEW"}
         <NewProjectPage navigateTo={navigateTo}/>
     {:else if page === "EDITOR"}
-        <EditorPage {projectId}/>
+        <EditorPage />
     {:else}
         <h1>Page Not Found</h1>
     {/if}

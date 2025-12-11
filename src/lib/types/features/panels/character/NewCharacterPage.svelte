@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { components, instantiateComponent } from '$lib/types/components/components';
 	import type { Component } from '$lib/types/component';
+	import { opfsState } from '$lib/states/opfs.state.svelte';
+	import { projectState } from '$lib/states/project.state.svelte';
+	import { LoroDoc } from 'loro-crdt';
 
 	interface Props {
 		page: string;
@@ -17,6 +20,9 @@
 	let name = $state("");
 	let picture = $state<File | Blob | null>(null);
 	let details: Detail[] = $state([]);
+
+	let opfsRoot: FileSystemDirectoryHandle | null = opfsState.root;
+	let projectId: string | null = projectState.id;
 
 	// current detail values
 	let detailName = $state("");
@@ -36,8 +42,64 @@
 		}
 	}
 
-	function createCharacter() {
+	async function createCharacter() {
 
+		while (indexedDB === null || opfsRoot === null) {
+			await new Promise(resolve => setTimeout(resolve, 100));
+		}
+
+		if (!projectId) {
+			alert("No project selected.");
+			return;
+		}
+
+		if (!name.trim()) {
+			alert("Character name cannot be empty.");
+			return;
+		}
+
+		let characterUUID = crypto.randomUUID();
+		let projectDir = await opfsRoot.getDirectoryHandle(projectId, { create: false });
+		let characterDir = await projectDir.getDirectoryHandle("characters", { create: true });
+		let newCharacterDir = await characterDir.getDirectoryHandle(characterUUID, { create: true });
+		let pictureHandle = await newCharacterDir.getFileHandle("picture.png", { create: true });
+
+		// Save character picture
+		let writable = await pictureHandle.createWritable();
+		if (!picture) {
+			let defaultImage = await fetch("images/character_placeholder.png");
+			picture = await defaultImage.blob();
+		}
+		await writable.write(picture);
+		await writable.close();
+
+		// Save character details
+		let projectHandle = await projectDir.getFileHandle("file.wordly", { create: false });
+		let projectReadable = await projectHandle.getFile()
+		let arrayBuffer = await projectReadable.arrayBuffer();
+		let project: LoroDoc = LoroDoc.fromSnapshot(new Uint8Array(arrayBuffer));
+		let charactersMap = project.getMap("characters");
+
+		let newCharacterDetails = new Map<string, any>();
+		for (const detail of details) {
+			let fieldsMap = new Map<string, any>();
+			for (const value of detail.value.fields) {
+				fieldsMap.set(value.meta.name, value.value);
+			}
+			newCharacterDetails.set(detail.name, fieldsMap);
+		}
+		let newCharacterMap = new Map<string, any>();
+		newCharacterMap.set("name", name);
+		newCharacterMap.set("details", newCharacterDetails);
+
+		charactersMap.set(characterUUID, newCharacterMap);
+
+		let writableProject = await projectHandle.createWritable();
+		let exported = project.export({mode: "snapshot"});
+		await writableProject.write(exported);
+		await writableProject.close();
+
+		page = "HOME";
 	}
 </script>
 

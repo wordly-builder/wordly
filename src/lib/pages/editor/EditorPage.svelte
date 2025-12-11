@@ -11,11 +11,8 @@
 	import Empty from '$lib/pages/editor/pages/panel/Empty.svelte';
 	import { dbState } from '$lib/states/db.state.svelte';
 	import { opfsState } from '$lib/states/opfs.state.svelte';
+	import { projectState } from '$lib/states/project.state.svelte';
 
-	interface Props {
-		projectId: string | null;
-	}
-	let {projectId}: Props = $props();
 	let projectMetadata: ProjectMetadata | null = $state(null);
 	let project = $state<LoroDoc | null>(null);
 	let page: string = $state("EMPTY");
@@ -23,6 +20,7 @@
 
 	let db: PGlite | null = dbState.db;
 	let opfsRoot: FileSystemDirectoryHandle | null = opfsState.root;
+	let projectId: string | null = projectState.id;
 
 	onMount(async () => {
 		await loadProject();

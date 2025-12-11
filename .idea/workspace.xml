@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94445ea3-4631-48f3-b8e4-4ce76812edd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/states/db.state.svelte.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/states/opfs.state.svelte.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/states/project.state.svelte.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/editor/EditorPage.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/new/NewProjectPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/projects/ProjectsPage.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/projects/components/Project.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/features/panels/character/CharactersHomePage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/panels/character/CharactersHomePage.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/features/panels/character/CharactersPanel.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/panels/character/CharactersPanel.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/types/features/panels/character/NewCharacterPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/features/panels/character/NewCharacterPage.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
     </list>
@@ -78,6 +77,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "refactor",
@@ -169,7 +169,7 @@
       <workItem from="1753676305822" duration="46581000" />
       <workItem from="1753794154789" duration="57258000" />
       <workItem from="1754344935550" duration="8843000" />
-      <workItem from="1765402346876" duration="3026000" />
+      <workItem from="1765402346876" duration="8186000" />
     </task>
     <servers />
   </component>
